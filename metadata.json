@@ -1,0 +1,6 @@
+{
+  "name": "IPIP-NEO-120 Free Personality Test",
+  "description": "Scientific, production-ready IPIP-NEO-120 Big Five personality assessment with 30 facets based on Johnson (2014). Mobile-first, auto-scoring, radar chart, PDF download, and test-retest study protocol.",
+  "request_frame_permissions": [],
+  "prompt": "IPIP-NEO-120 Free Personality Test"
+}

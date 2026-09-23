@@ -1,0 +1,9 @@
+name = "ipip-neo-120-test"
+compatibility_date = "2024-09-23"
+
+pages_build_output_dir = "./dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "psikotest-db"
+database_id = "80fc899c-d6c6-47e8-8be9-0db0ee513671"
