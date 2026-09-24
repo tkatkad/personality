@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useTestStore } from '../stores/testStore';
-import { IPIP_120_ITEMS, DOMAIN_METADATA } from '../data/ipip-neo-120';
+import { IPIP_120_ITEMS, DOMAIN_METADATA, getItemText } from '../data/ipip-neo-120';
 import { LikertScale } from '../components/LikertScale';
 import { ProgressBar } from '../components/ProgressBar';
 import { SEO } from '../components/SEO';
@@ -119,7 +119,9 @@ export const TestPage: React.FC = () => {
       navigate(`/result/${result.id}`);
     } else {
       alert(
-        language === 'en'
+        language === 'es'
+          ? 'Por favor responda las 120 preguntas antes de finalizar el test.'
+          : language === 'en'
           ? 'Please answer all 120 items before completing the test.'
           : 'Harap jawab seluruh 120 item sebelum menyelesaikan tes.'
       );
@@ -150,10 +152,16 @@ export const TestPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm">
         <div className="space-y-1">
           <h1 className="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">
-            {language === 'en' ? 'IPIP-NEO-120 Assessment' : 'Tes Kepribadian IPIP-NEO-120'}
+            {language === 'es'
+              ? 'Evaluación IPIP-NEO-120'
+              : language === 'en'
+              ? 'IPIP-NEO-120 Assessment'
+              : 'Tes Kepribadian IPIP-NEO-120'}
           </h1>
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-            {language === 'en'
+            {language === 'es'
+              ? 'Evalúe con qué precisión le describe cada afirmación.'
+              : language === 'en'
               ? 'Rate how accurately each statement describes you.'
               : 'Pilih seberapa akurat setiap pernyataan menggambarkan diri Anda.'}
           </p>
@@ -162,7 +170,7 @@ export const TestPage: React.FC = () => {
         {/* View mode toggle (1 item vs 3 items per view) */}
         <div className="flex items-center gap-2.5">
           <span className="text-xs text-slate-500 hidden sm:inline">
-            {language === 'en' ? 'View mode:' : 'Tampilan:'}
+            {language === 'es' ? 'Vista:' : language === 'en' ? 'View mode:' : 'Tampilan:'}
           </span>
           <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
             <button
@@ -173,7 +181,7 @@ export const TestPage: React.FC = () => {
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
               }`}
             >
-              1 {language === 'en' ? 'Item' : 'Soal'}
+              1 {language === 'es' ? 'Pregunta' : language === 'en' ? 'Item' : 'Soal'}
             </button>
             <button
               onClick={() => setPageSize(3)}
@@ -183,7 +191,7 @@ export const TestPage: React.FC = () => {
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
               }`}
             >
-              3 {language === 'en' ? 'Items' : 'Soal'}
+              3 {language === 'es' ? 'Preguntas' : language === 'en' ? 'Items' : 'Soal'}
             </button>
           </div>
         </div>
@@ -210,14 +218,14 @@ export const TestPage: React.FC = () => {
                     #{item.id}
                   </span>
                   <span className="text-xs font-semibold text-slate-400">
-                    Item {item.id} / 120
+                    {language === 'es' ? `Pregunta ${item.id} de 120` : `Item ${item.id} / 120`}
                   </span>
                 </div>
 
                 {itemAnswer && (
                   <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-200/60 dark:border-emerald-900/60">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    {language === 'en' ? 'Answered' : 'Terjawab'}
+                    {language === 'es' ? 'Respondida' : language === 'en' ? 'Answered' : 'Terjawab'}
                   </span>
                 )}
               </div>
@@ -225,13 +233,8 @@ export const TestPage: React.FC = () => {
               {/* Question Text */}
               <div className="py-2 space-y-1.5">
                 <p className="font-display font-semibold text-lg sm:text-xl text-slate-900 dark:text-white leading-relaxed sm:leading-relaxed">
-                  "{language === 'en' ? item.textEn : item.textId}"
+                  "{getItemText(item, language)}"
                 </p>
-                {language === 'en' && item.textId && (
-                  <p className="text-xs text-slate-400 dark:text-slate-500 italic">
-                    Indonesian: {item.textId}
-                  </p>
-                )}
               </div>
 
               {/* Likert Scale */}
@@ -259,7 +262,7 @@ export const TestPage: React.FC = () => {
             className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
-            <span>{language === 'en' ? 'Previous' : 'Sebelumnya'}</span>
+            <span>{language === 'es' ? 'Anterior' : language === 'en' ? 'Previous' : 'Sebelumnya'}</span>
           </button>
 
           <button
@@ -267,7 +270,7 @@ export const TestPage: React.FC = () => {
             disabled={currentQuestionIndex + pageSize >= totalItems}
             className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm transition-colors"
           >
-            <span>{language === 'en' ? 'Next' : 'Selanjutnya'}</span>
+            <span>{language === 'es' ? 'Siguiente' : language === 'en' ? 'Next' : 'Selanjutnya'}</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
@@ -277,7 +280,9 @@ export const TestPage: React.FC = () => {
             onClick={() => {
               saveForLater();
               alert(
-                language === 'en'
+                language === 'es'
+                  ? '¡Su progreso ha sido guardado localmente! Puede regresar en cualquier momento.'
+                  : language === 'en'
                   ? 'Your progress has been saved locally! You can return anytime.'
                   : 'Progres jawaban Anda telah tersimpan di browser! Anda dapat melanjutkan kapan saja.'
               );
@@ -285,7 +290,7 @@ export const TestPage: React.FC = () => {
             className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-xs sm:text-sm transition-colors"
           >
             <Save className="w-4 h-4 text-slate-500" />
-            <span>{language === 'en' ? 'Save & Continue' : 'Simpan Progres'}</span>
+            <span>{language === 'es' ? 'Guardar Progreso' : language === 'en' ? 'Save & Continue' : 'Simpan Progres'}</span>
           </button>
 
           {/* Submit Button */}
@@ -301,9 +306,13 @@ export const TestPage: React.FC = () => {
             <CheckCircle className="w-4 h-4" />
             <span>
               {isSubmitting
-                ? language === 'en'
+                ? language === 'es'
+                  ? 'Calculando Puntuaciones...'
+                  : language === 'en'
                   ? 'Calculating Scores...'
                   : 'Menghitung Skor...'
+                : language === 'es'
+                ? 'Finalizar y Ver Informe'
                 : language === 'en'
                 ? 'Submit & View Report'
                 : 'Selesaikan & Lihat Hasil'}
@@ -319,7 +328,13 @@ export const TestPage: React.FC = () => {
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2 font-display font-bold text-slate-900 dark:text-white text-base">
                 <ListFilter className="w-5 h-5 text-indigo-600" />
-                <span>{language === 'en' ? 'Item Overview Map' : 'Peta Jawaban 120 Soal'}</span>
+                <span>
+                  {language === 'es'
+                    ? 'Mapa de Respuestas (120 Preguntas)'
+                    : language === 'en'
+                    ? 'Item Overview Map'
+                    : 'Peta Jawaban 120 Soal'}
+                </span>
               </div>
               <button
                 onClick={() => setDrawerOpen(false)}
@@ -330,7 +345,9 @@ export const TestPage: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-500">
-              {language === 'en'
+              {language === 'es'
+                ? 'Haga clic en cualquier número de pregunta para ir directamente a ella.'
+                : language === 'en'
                 ? 'Click any item number to jump directly to that question.'
                 : 'Klik nomor soal untuk melompat langsung ke pertanyaan tersebut.'}
             </p>

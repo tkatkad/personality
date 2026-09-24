@@ -568,14 +568,14 @@ export const ResultsPage: React.FC = () => {
                   </div>
                   <h2 className="font-display font-bold text-xl text-white">
                     {language === 'es'
-                      ? 'Proyección de Profesiología y Lapangan Kerja Masa Depan'
+                      ? 'Proyección de Profesiones Futuras y Roles de Carrera (Horizonte a 10 Años)'
                       : language === 'en'
                       ? 'Emerging Future Professions & Career Roles (10-Year Horizon)'
                       : 'Proyeksi Profesi Masa Depan & Lapangan Kerja (10 Tahun Ke Depan)'}
                   </h2>
                   <p className="text-sm text-slate-300 pt-1">
                     {language === 'es'
-                      ? 'Nuevas profesiones que surgirán por la aceleración tecnológica y cambios globales adaptadas a tu kepribadian.'
+                      ? 'Nuevas profesiones emergentes impulsadas por la adopción de IA, la sostenibilidad y la economía digital adaptadas a tu perfil Big Five.'
                       : language === 'en'
                       ? 'Concrete emerging jobs driven by AI adoption, sustainability, and digital economy tailored to your Big Five profile.'
                       : 'Contoh konkret profesi masa depan yang akan tumbuh pesat akibat perkembangan AI, otomatisasi, dan transformasi digital yang sangat cocok dengan karakteristik kepribadian Anda.'}
@@ -602,7 +602,7 @@ export const ResultsPage: React.FC = () => {
 
                     <div className="pt-2 border-t border-slate-700/60 flex items-center gap-2 flex-wrap">
                       <span className="text-xs sm:text-sm font-bold text-indigo-300 shrink-0">
-                        {language === 'es' ? 'Keahlian:' : language === 'en' ? 'Key Skills:' : 'Keahlian Kunci:'}
+                        {language === 'es' ? 'Habilidades Clave:' : language === 'en' ? 'Key Skills:' : 'Keahlian Kunci:'}
                       </span>
                       <div className="flex items-center gap-1.5 flex-wrap">
                         {role.keySkills.map((sk, skIdx) => (
@@ -674,7 +674,7 @@ export const ResultsPage: React.FC = () => {
                             : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                         }`}
                       >
-                        {levelLabel} {language === 'en' ? 'Score' : 'Skor'}
+                        {levelLabel} {language === 'es' ? 'Nivel' : language === 'en' ? 'Score' : 'Skor'}
                       </span>
                     </div>
                   </div>

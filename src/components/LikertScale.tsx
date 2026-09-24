@@ -18,11 +18,11 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
   const { language } = useTestStore();
 
   const options = [
-    { val: 1, labelEn: 'Very Inaccurate', labelId: 'Sangat Tidak Akurat', short: '1' },
-    { val: 2, labelEn: 'Moderately Inaccurate', labelId: 'Cukup Tidak Akurat', short: '2' },
-    { val: 3, labelEn: 'Neither', labelId: 'Netral', short: '3' },
-    { val: 4, labelEn: 'Moderately Accurate', labelId: 'Cukup Akurat', short: '4' },
-    { val: 5, labelEn: 'Very Accurate', labelId: 'Sangat Akurat', short: '5' },
+    { val: 1, labelEn: 'Very Inaccurate', labelId: 'Sangat Tidak Akurat', labelEs: 'Muy Inexacto', short: '1' },
+    { val: 2, labelEn: 'Moderately Inaccurate', labelId: 'Cukup Tidak Akurat', labelEs: 'Moderadamente Inexacto', short: '2' },
+    { val: 3, labelEn: 'Neither', labelId: 'Netral', labelEs: 'Ni de acuerdo ni en desacuerdo', short: '3' },
+    { val: 4, labelEn: 'Moderately Accurate', labelId: 'Cukup Akurat', labelEs: 'Moderadamente Exacto', short: '4' },
+    { val: 5, labelEn: 'Very Accurate', labelId: 'Sangat Akurat', labelEs: 'Muy Exacto', short: '5' },
   ];
 
   const handleSelect = (val: number) => {
@@ -73,7 +73,7 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
                   {opt.val}
                 </span>
                 <span className="text-sm sm:text-base font-semibold leading-snug">
-                  {language === 'en' ? opt.labelEn : opt.labelId}
+                  {language === 'es' ? opt.labelEs : language === 'en' ? opt.labelEn : opt.labelId}
                 </span>
               </div>
             </button>
@@ -81,7 +81,17 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
         })}
       </div>
       <div className="text-xs sm:text-sm text-center text-slate-500 dark:text-slate-400 pt-1.5 hidden sm:block">
-        Tip: Press numbers <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-xs">1</kbd>–<kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-xs">5</kbd> on your keyboard to quickly answer.
+        {language === 'es'
+          ? 'Consejo: Presione los números '
+          : language === 'en'
+          ? 'Tip: Press numbers '
+          : 'Petunjuk: Tekan angka '}
+        <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-xs">1</kbd>–<kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-xs">5</kbd>
+        {language === 'es'
+          ? ' en su teclado para responder rápidamente.'
+          : language === 'en'
+          ? ' on your keyboard to quickly answer.'
+          : ' pada keyboard Anda untuk menjawab dengan cepat.'}
       </div>
     </div>
   );

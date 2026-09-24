@@ -17,7 +17,7 @@ export const DOMAIN_METADATA: Record<DomainKey, {
   N: {
     nameEn: 'Neuroticism',
     nameId: 'Neurotisitis (Stabilitas Emosi)',
-    nameEs: 'Neuroticismo (Estabilidad Emocional)',
+    nameEs: 'Neuroticismo',
     taglineEn: 'Tendency to experience negative emotions such as anxiety, anger, and depression.',
     taglineId: 'Kecenderungan mengalami emosi negatif seperti kecemasan, kemarahan, dan depresi.',
     taglineEs: 'Tendencia a experimentar emociones negativas como ansiedad, ira y depresión.',
@@ -59,7 +59,7 @@ export const DOMAIN_METADATA: Record<DomainKey, {
   A: {
     nameEn: 'Agreeableness',
     nameId: 'Keresponsifan Sosial (Agreeableness)',
-    nameEs: 'Amabilidad (Agreeableness)',
+    nameEs: 'Amabilidad',
     taglineEn: 'Prosocial orientation, empathy, cooperation, and concern for social harmony.',
     taglineId: 'Kepedulian sosial, empati, kerja sama, dan keinginan menjaga keharmonisan.',
     taglineEs: 'Orientación prosocial, empatía, cooperación y armonía social.',
@@ -73,7 +73,7 @@ export const DOMAIN_METADATA: Record<DomainKey, {
   C: {
     nameEn: 'Conscientiousness',
     nameId: 'Kehati-hatian (Conscientiousness)',
-    nameEs: 'Responsabilidad (Conscientiousness)',
+    nameEs: 'Responsabilidad',
     taglineEn: 'Self-discipline, organization, goal-directed behavior, and dependability.',
     taglineId: 'Kedisiplinan diri, keteraturan, komitmen tujuan, dan keandalan.',
     taglineEs: 'Autodisciplina, organización, comportamiento orientado a metas y fiabilidad.',
@@ -158,224 +158,387 @@ export function getScoreLevelLabel(level: 'Low' | 'Average' | 'High', lang: stri
 export const FACETS_METADATA: Record<string, FacetDefinition> = {
   // Neuroticism
   N1: {
-    id: 'N1', domain: 'N', nameEn: 'Anxiety', nameId: 'Kecemasan',
+    id: 'N1', domain: 'N', nameEn: 'Anxiety', nameId: 'Kecemasan', nameEs: 'Ansiedad',
     descriptionEn: 'The apprehension, dread, and nervousness experienced in stressful situations.',
     descriptionId: 'Tingkat kekhawatiran dan ketegangan emosional saat menghadapi situasi.',
+    descriptionEs: 'El grado de aprensión, temor y nerviosismo experimentado en situaciones estresantes.',
     highDescEn: 'Feels apprehensive, prone to worry and nervousness.',
     lowDescEn: 'Calm, relaxed, and composed under pressure.'
   },
   N2: {
-    id: 'N2', domain: 'N', nameEn: 'Anger / Hostility', nameId: 'Kemarahan & Resentmen',
+    id: 'N2', domain: 'N', nameEn: 'Anger / Hostility', nameId: 'Kemarahan & Resentmen', nameEs: 'Ira y Hostilidad',
     descriptionEn: 'Tendency to experience anger, bitterness, and frustration.',
     descriptionId: 'Kecenderungan merasakan kekecewaan, kejengkelan, atau kemarahan.',
+    descriptionEs: 'Tendencia a experimentar ira, amargura y frustración.',
     highDescEn: 'Easily frustrated, prone to feeling resentful.',
     lowDescEn: 'Even-tempered, hard to anger or agitate.'
   },
   N3: {
-    id: 'N3', domain: 'N', nameEn: 'Depression', nameId: 'Kecenderungan Depresif',
+    id: 'N3', domain: 'N', nameEn: 'Depression', nameId: 'Kecenderungan Depresif', nameEs: 'Depresión',
     descriptionEn: 'Tendency to feel sad, discouraged, and lacking in enthusiasm.',
     descriptionId: 'Kecenderungan merasa sedih, berkecil hati, atau kurang bersemangat.',
+    descriptionEs: 'Tendencia a sentirse triste, desanimado y con falta de entusiasmo.',
     highDescEn: 'Prone to feelings of sadness, guilt, and gloom.',
     lowDescEn: 'Rarely experiences despondency or deep sadness.'
   },
   N4: {
-    id: 'N4', domain: 'N', nameEn: 'Self-Consciousness', nameId: 'Kecanggungan Sosial',
+    id: 'N4', domain: 'N', nameEn: 'Self-Consciousness', nameId: 'Kecanggungan Sosial', nameEs: 'Timidez e Inseguridad Social',
     descriptionEn: 'Sensitivity to social evaluation and fear of awkwardness or shame.',
     descriptionId: 'Kepekaan terhadap penilaian orang lain dan ketakutan merasa canggung.',
+    descriptionEs: 'Sensibilidad a la evaluación social y temor a la torpeza o la vergüenza.',
     highDescEn: 'Self-conscious, easily embarrassed in social settings.',
     lowDescEn: 'Comfortable with self in public, poised.'
   },
   N5: {
-    id: 'N5', domain: 'N', nameEn: 'Immoderation', nameId: 'Impulsivitas / Immoderasi',
+    id: 'N5', domain: 'N', nameEn: 'Immoderation', nameId: 'Impulsivitas / Immoderasi', nameEs: 'Inmoderación e Impulsividad',
     descriptionEn: 'Difficulty resisting strong cravings, impulses, and temptations.',
     descriptionId: 'Kesulitan menahan dorongan instan atau godaan keinginan.',
+    descriptionEs: 'Dificultad para resistir antojos, impulsos y tentaciones intensas.',
     highDescEn: 'Acts on impulses, struggles with delayed gratification.',
     lowDescEn: 'Resists temptations, strong impulse control.'
   },
   N6: {
-    id: 'N6', domain: 'N', nameEn: 'Vulnerability', nameId: 'Kerapuhan Stres',
+    id: 'N6', domain: 'N', nameEn: 'Vulnerability', nameId: 'Kerapuhan Stres', nameEs: 'Vulnerabilidad al Estrés',
     descriptionEn: 'Inability to cope effectively with intense pressure or crisis.',
     descriptionId: 'Ketahanan emosional saat berada di bawah tekanan hebat.',
+    descriptionEs: 'Incapacidad para manejar de manera efectiva la presión intensa o crisis.',
     highDescEn: 'Feels overwhelmed by stress or panic in crises.',
     lowDescEn: 'Handles crises with composure and confidence.'
   },
 
   // Extraversion
   E1: {
-    id: 'E1', domain: 'E', nameEn: 'Friendliness', nameId: 'Kehangatan & Keramahan',
+    id: 'E1', domain: 'E', nameEn: 'Friendliness', nameId: 'Kehangatan & Keramahan', nameEs: 'Cordialidad y Calidez',
     descriptionEn: 'Warmth and affection toward other people.',
     descriptionId: 'Kehangatan dan perhatian tulus kepada orang lain.',
+    descriptionEs: 'Calidez, afecto y cercanía sincera hacia otras personas.',
     highDescEn: 'Genuinely likes people and expresses warmth openly.',
     lowDescEn: 'Formal, reserved, and maintains personal distance.'
   },
   E2: {
-    id: 'E2', domain: 'E', nameEn: 'Gregariousness', nameId: 'Suka Berkumpul',
+    id: 'E2', domain: 'E', nameEn: 'Gregariousness', nameId: 'Suka Berkumpul', nameEs: 'Sociabilidad y Gregarismo',
     descriptionEn: 'Preference for the company of others and active social gatherings.',
     descriptionId: 'Keinginan berada di tengah keramaian atau perkumpulan sosial.',
+    descriptionEs: 'Preferencia por la compañía de otros y eventos sociales activos.',
     highDescEn: 'Thrives in crowds, seeks social activity.',
     lowDescEn: 'Prefers small groups or solitude.'
   },
   E3: {
-    id: 'E3', domain: 'E', nameEn: 'Assertiveness', nameId: 'Ketegasan (Assertiveness)',
+    id: 'E3', domain: 'E', nameEn: 'Assertiveness', nameId: 'Ketegasan (Assertiveness)', nameEs: 'Asertividad y Liderazgo',
     descriptionEn: 'Dominance, forcefulness, and social leadership skills.',
     descriptionId: 'Keberanian menyampaikan pendapat dan memimpin diskusi.',
+    descriptionEs: 'Firmeza, capacidad de persuasión y liderazgo en grupos.',
     highDescEn: 'Speaks up, takes charge, and expresses opinions clearly.',
     lowDescEn: 'Prefers to remain in the background and listen.'
   },
   E4: {
-    id: 'E4', domain: 'E', nameEn: 'Activity Level', nameId: 'Tingkat Aktivitas',
+    id: 'E4', domain: 'E', nameEn: 'Activity Level', nameId: 'Tingkat Aktivitas', nameEs: 'Nivel de Actividad',
     descriptionEn: 'Pace of living, stamina, and energy output.',
     descriptionId: 'Kecepatan irama hidup, energi, dan kesibukan harian.',
+    descriptionEs: 'Ritmo de vida, energía y dinamismo en las actividades diarias.',
     highDescEn: 'Leads a fast-paced, energetic lifestyle.',
     lowDescEn: 'Prefers a leisurely, unhurried pace.'
   },
   E5: {
-    id: 'E5', domain: 'E', nameEn: 'Excitement-Seeking', nameId: 'Pencarian Sensasi',
+    id: 'E5', domain: 'E', nameEn: 'Excitement-Seeking', nameId: 'Pencarian Sensasi', nameEs: 'Búsqueda de Emociones',
     descriptionEn: 'Need for environmental stimulation, thrills, and adventure.',
     descriptionId: 'Kebutuhan akan pengalaman menantang dan suasana menggairahkan.',
+    descriptionEs: 'Necesidad de estimulación, emociones fuertes y aventura.',
     highDescEn: 'Loves thrills, bright lights, and novel risks.',
     lowDescEn: 'Finds loud noise and risky excitement overwhelming.'
   },
   E6: {
-    id: 'E6', domain: 'E', nameEn: 'Cheerfulness', nameId: 'Keceriaan & Optimisme',
+    id: 'E6', domain: 'E', nameEn: 'Cheerfulness', nameId: 'Keceriaan & Optimisme', nameEs: 'Alegría y Optimismo',
     descriptionEn: 'Tendency to experience positive emotions like joy, enthusiasm, and optimism.',
     descriptionId: 'Kecenderungan merasakan kegembiraan, keceriaan, dan optimisme.',
+    descriptionEs: 'Tendencia a experimentar emociones positivas como alegría y entusiasmo.',
     highDescEn: 'Radiates positivity, joyful and optimistic.',
     lowDescEn: 'Less exuberantly happy, serious disposition.'
   },
 
   // Openness
   O1: {
-    id: 'O1', domain: 'O', nameEn: 'Imagination', nameId: 'Imajinasi',
+    id: 'O1', domain: 'O', nameEn: 'Imagination', nameId: 'Imajinasi', nameEs: 'Imaginación Creativa',
     descriptionEn: 'Active fantasy life and creative mental daydreaming.',
     descriptionId: 'Daya cipta mental, imajinasi, dan daya hayal kreatif.',
+    descriptionEs: 'Vida fantasiosa activa e imaginación mental creativa.',
     highDescEn: 'Rich, vivid imagination and creative daydreaming.',
     lowDescEn: 'Focuses strictly on tangible facts and reality.'
   },
   O2: {
-    id: 'O2', domain: 'O', nameEn: 'Artistic Interests', nameId: 'Apresiasi Seni & Estetika',
+    id: 'O2', domain: 'O', nameEn: 'Artistic Interests', nameId: 'Apresiasi Seni & Estetika', nameEs: 'Interés Artístico y Estético',
     descriptionEn: 'Appreciation for art, beauty, poetry, and music.',
     descriptionId: 'Apresiasi terhadap keindahan seni, musik, dan keindahan estetika.',
+    descriptionEs: 'Aprecio profundo por el arte, la belleza, la música y la poesía.',
     highDescEn: 'Deeply moved by art, design, and nature.',
     lowDescEn: 'Uninterested in abstract art or aesthetic theories.'
   },
   O3: {
-    id: 'O3', domain: 'O', nameEn: 'Emotionality', nameId: 'Kepekaan Emosional',
+    id: 'O3', domain: 'O', nameEn: 'Emotionality', nameId: 'Kepekaan Emosional', nameEs: 'Sensibilidad Emocional',
     descriptionEn: 'Receptivity to one\'s own inner feelings and emotional nuances.',
     descriptionId: 'Kepekaan menyadari nuansa perasaan sendiri dan orang lain.',
+    descriptionEs: 'Receptividad hacia los propios sentimientos y matices emocionales.',
     highDescEn: 'Values feelings, experiences deep emotional states.',
     lowDescEn: 'Attaches low importance to subtle mood changes.'
   },
   O4: {
-    id: 'O4', domain: 'O', nameEn: 'Adventurousness', nameId: 'Ketertarikan Eksplorasi',
+    id: 'O4', domain: 'O', nameEn: 'Adventurousness', nameId: 'Ketertarikan Eksplorasi', nameEs: 'Espíritu Aventurero',
     descriptionEn: 'Willingness to try new activities, foods, and foreign places.',
     descriptionId: 'Keinginan mencoba pengalaman, rute, atau budaya baru.',
+    descriptionEs: 'Disposición a probar nuevas actividades, lugares y experiencias.',
     highDescEn: 'Enjoys novelty, variety, and exploring new paths.',
     lowDescEn: 'Prefers familiar routines, places, and habits.'
   },
   O5: {
-    id: 'O5', domain: 'O', nameEn: 'Intellect', nameId: 'Keingintahuan Intelektual',
+    id: 'O5', domain: 'O', nameEn: 'Intellect', nameId: 'Keingintahuan Intelektual', nameEs: 'Curiosidad Intelectual',
     descriptionEn: 'Interest in solving puzzles, discussing ideas, and abstract thought.',
     descriptionId: 'Minat pada konsep abstrak, diskusi ide, dan pemecahan masalah.',
+    descriptionEs: 'Interés por resolver problemas complejos, debatir ideas y pensamiento abstracto.',
     highDescEn: 'Loves complex ideas, intellectual challenges, and philosophy.',
     lowDescEn: 'Prefers practical tasks over abstract theory.'
   },
   O6: {
-    id: 'O6', domain: 'O', nameEn: 'Liberalism / Values', nameId: 'Keterbukaan Nilai',
+    id: 'O6', domain: 'O', nameEn: 'Liberalism / Values', nameId: 'Keterbukaan Nilai', nameEs: 'Apertura de Valores',
     descriptionEn: 'Readiness to reexamine social, political, and religious values.',
     descriptionId: 'Keterbukaan meninjau kembali tradisi dan norma sosial.',
+    descriptionEs: 'Disposición a reexaminar valores sociales, políticos y culturales.',
     highDescEn: 'Open-minded, questions traditional authority and rules.',
     lowDescEn: 'Prefers traditional values, authority, and status quo.'
   },
 
   // Agreeableness
   A1: {
-    id: 'A1', domain: 'A', nameEn: 'Trust', nameId: 'Kepercayaan (Trust)',
+    id: 'A1', domain: 'A', nameEn: 'Trust', nameId: 'Kepercayaan (Trust)', nameEs: 'Confianza en los Demás',
     descriptionEn: 'Belief that others are honest, well-intentioned, and trustworthy.',
     descriptionId: 'Keyakinan bahwa orang lain berniat baik dan jujur.',
+    descriptionEs: 'Creencia de que los demás son honestos y tienen buenas intenciones.',
     highDescEn: 'Assumes people are good-natured and honest.',
     lowDescEn: 'Cautious, suspicious of others\' motives.'
   },
   A2: {
-    id: 'A2', domain: 'A', nameEn: 'Morality / Straightforwardness', nameId: 'Kejujuran & Ketulusan',
+    id: 'A2', domain: 'A', nameEn: 'Morality / Straightforwardness', nameId: 'Kejujuran & Ketulusan', nameEs: 'Sinceridad y Franqueza',
     descriptionEn: 'Sincerity, frankness, and lack of deception in dealing with others.',
     descriptionId: 'Ketulusan dan ketiadaan niat manipulatif saat berinteraksi.',
+    descriptionEs: 'Sinceridad y transparencia al tratar con los demás sin manipulación.',
     highDescEn: 'Direct, honest, authentic, and candid.',
     lowDescEn: 'Pragmatic, willing to use diplomacy or stretch truth.'
   },
   A3: {
-    id: 'A3', domain: 'A', nameEn: 'Altruism', nameId: 'Altruisme & Kemurahan Hati',
+    id: 'A3', domain: 'A', nameEn: 'Altruism', nameId: 'Altruisme & Kemurahan Hati', nameEs: 'Altruismo y Generosidad',
     descriptionEn: 'Active concern for others\' welfare, generosity, and helpfulness.',
     descriptionId: 'Kepedulian aktif membantu dan meringankan beban orang lain.',
+    descriptionEs: 'Preocupación activa por el bienestar de otros y disposición a ayudar.',
     highDescEn: 'Generous, selflessly helpful to those in need.',
     lowDescEn: 'Focuses primarily on own self-interests.'
   },
   A4: {
-    id: 'A4', domain: 'A', nameEn: 'Cooperation', nameId: 'Kooperasi / Kerjasama',
+    id: 'A4', domain: 'A', nameEn: 'Cooperation', nameId: 'Kooperasi / Kerjasama', nameEs: 'Cooperación y Conciliación',
     descriptionEn: 'Disposition to defer to others, avoid conflict, and forgive.',
     descriptionId: 'Kecenderungan menghindari perselisihan dan mencari kompromi.',
+    descriptionEs: 'Disposición a conciliar, evitar conflictos y buscar acuerdos.',
     highDescEn: 'Hates conflict, seeks win-win compromises.',
     lowDescEn: 'Competitive, willing to argue to prove a point.'
   },
   A5: {
-    id: 'A5', domain: 'A', nameEn: 'Modesty', nameId: 'Kerendahan Hati',
+    id: 'A5', domain: 'A', nameEn: 'Modesty', nameId: 'Kerendahan Hati', nameEs: 'Modestia y Humildad',
     descriptionEn: 'Humility and reluctance to claim superiority over others.',
     descriptionId: 'Sikap tidak menonjolkan diri atau menyombongkan kelebihan.',
+    descriptionEs: 'Humildad y reticencia a presumir superioridad sobre otros.',
     highDescEn: 'Humble, unobtrusive, dislikes bragging.',
     lowDescEn: 'Self-confident, considers self superior or special.'
   },
   A6: {
-    id: 'A6', domain: 'A', nameEn: 'Sympathy', nameId: 'Empati & Bela Rasa',
+    id: 'A6', domain: 'A', nameEn: 'Sympathy', nameId: 'Empati & Bela Rasa', nameEs: 'Empatía y Compasión',
     descriptionEn: 'Compassion and concern for the vulnerable and less fortunate.',
     descriptionId: 'Rasa iba dan kelembutan hati terhadap mereka yang menderita.',
+    descriptionEs: 'Compasión y sensibilidad hacia los menos afortunados o que sufren.',
     highDescEn: 'Deeply empathetic toward human suffering.',
     lowDescEn: 'Objective, tough-minded, less swayed by emotion.'
   },
 
   // Conscientiousness
   C1: {
-    id: 'C1', domain: 'C', nameEn: 'Self-Efficacy', nameId: 'Efikasi Diri',
+    id: 'C1', domain: 'C', nameEn: 'Self-Efficacy', nameId: 'Efikasi Diri', nameEs: 'Autoeficacia',
     descriptionEn: 'Confidence in one\'s capability to accomplish tasks successfully.',
     descriptionId: 'Keyakinan pada kemampuan diri menyelesaikan tugas dengan baik.',
+    descriptionEs: 'Confianza en la propia capacidad para completar tareas con éxito.',
     highDescEn: 'Feels competent, capable, and effective.',
     lowDescEn: 'Doubts own abilities, feels unprepared.'
   },
   C2: {
-    id: 'C2', domain: 'C', nameEn: 'Orderliness', nameId: 'Keteraturan & Kerapian',
+    id: 'C2', domain: 'C', nameEn: 'Orderliness', nameId: 'Keteraturan & Kerapian', nameEs: 'Orden y Organización',
     descriptionEn: 'Personal organization, neatness, and systematic work habits.',
     descriptionId: 'Kerapian, pengorganisasian ruang, dan sistem kerja teratur.',
+    descriptionEs: 'Organización personal, limpieza y hábitos de trabajo sistemáticos.',
     highDescEn: 'Methodical, neat, clean, and organized.',
     lowDescEn: 'Unorganized, messy, comfortable with disorder.'
   },
   C3: {
-    id: 'C3', domain: 'C', nameEn: 'Dutifulness', nameId: 'Tanggung Jawab & Integritas',
+    id: 'C3', domain: 'C', nameEn: 'Dutifulness', nameId: 'Tanggung Jawab & Integritas', nameEs: 'Sentido del Deber',
     descriptionEn: 'Adherence to moral obligations, promises, and ethical rules.',
     descriptionId: 'Kepatuhan pada janji, aturan, dan standar etika.',
+    descriptionEs: 'Adhesión estricta a obligaciones morales, promesas y reglas éticas.',
     highDescEn: 'Strictly reliable, keeps promises, ethical.',
     lowDescEn: 'Casual about obligations and rules.'
   },
   C4: {
-    id: 'C4', domain: 'C', nameEn: 'Achievement-Striving', nameId: 'Orientasi Prestasi',
+    id: 'C4', domain: 'C', nameEn: 'Achievement-Striving', nameId: 'Orientasi Prestasi', nameEs: 'Orientación al Logro',
     descriptionEn: 'Drive for success, high aspirations, and hard work.',
     descriptionId: 'Ambisi mencapai hasil terbaik dan standar kualitas tinggi.',
+    descriptionEs: 'Impulso para alcanzar el éxito, altas aspiraciones y trabajo arduo.',
     highDescEn: 'Ambitious, hard-working, goal-driven.',
     lowDescEn: 'Content with minimal effort, easygoing.'
   },
   C5: {
-    id: 'C5', domain: 'C', nameEn: 'Self-Discipline', nameId: 'Kedisiplinan Diri',
+    id: 'C5', domain: 'C', nameEn: 'Self-Discipline', nameId: 'Kedisiplinan Diri', nameEs: 'Autodisciplina',
     descriptionEn: 'Ability to persist at tedious or difficult tasks until completed.',
     descriptionId: 'Kemampuan menyelesaikan tugas hingga tuntas meskipun membosankan.',
+    descriptionEs: 'Capacidad para perseverar en tareas difíciles hasta terminarlas.',
     highDescEn: 'Finishes what was started, avoids procrastination.',
     lowDescEn: 'Procrastinates, easily distracted from goals.'
   },
   C6: {
-    id: 'C6', domain: 'C', nameEn: 'Cautiousness', nameId: 'Kehati-hatian Berpikir',
+    id: 'C6', domain: 'C', nameEn: 'Cautiousness', nameId: 'Kehati-hatian Berpikir', nameEs: 'Deliberación y Prudencia',
     descriptionEn: 'Tendency to think carefully before acting or speaking.',
     descriptionId: 'Pertimbangan matang sebelum mengambil keputusan atau beraksi.',
+    descriptionEs: 'Tendencia a pensar cuidadosamente antes de actuar o hablar.',
     highDescEn: 'Deliberate, careful, weighs consequences.',
     lowDescEn: 'Impulsive, acts on the spur of the moment.'
   }
 };
+
+export const SPANISH_ITEM_TEXTS: Record<number, string> = {
+  1: 'Preocuparme por las cosas.',
+  2: 'Hacer amigos fácilmente.',
+  3: 'Tener una imaginación vívida.',
+  4: 'Confiar en los demás.',
+  5: 'Completar las tareas con éxito.',
+  6: 'Enojarme fácilmente.',
+  7: 'Encantarme las fiestas grandes.',
+  8: 'Creer en la importancia del arte.',
+  9: 'Usar a los demás para mis propios fines.',
+  10: 'Gustarme mantener todo ordenado.',
+  11: 'Sentirme triste o decaído a menudo.',
+  12: 'Tomar el control en las situaciones.',
+  13: 'Experimentar mis emociones intensamente.',
+  14: 'Encantarme ayudar a los demás.',
+  15: 'Cumplir mis promesas.',
+  16: 'Encontrar difícil acercarme a otros.',
+  17: 'Estar siempre activo y en movimiento.',
+  18: 'Preferir la variedad a la rutina.',
+  19: 'Encantarme una buena discusión.',
+  20: 'Trabajar duro para lograr mis metas.',
+  21: 'Excederme en consumos o compras impulsivas.',
+  22: 'Buscar aventuras y emociones.',
+  23: 'Encantarme leer material desafiante.',
+  24: 'Creer que soy mejor que los demás.',
+  25: 'Estar siempre preparado.',
+  26: 'Entrar en pánico fácilmente.',
+  27: 'Irradiar alegría y positivismo.',
+  28: 'Tendencia a votar por ideas progresistas.',
+  29: 'Empatizar profundamente con los desfavorecidos.',
+  30: 'Lanzarme a las cosas sin pensar.',
+  31: 'Temer lo peor en cada situación.',
+  32: 'Sentirme cómodo rodeado de personas.',
+  33: 'Disfrutar de vuelos de fantasía libre.',
+  34: 'Creer que los demás tienen buenas intenciones.',
+  35: 'Destacar en todo lo que hago.',
+  36: 'Irritarme con facilidad.',
+  37: 'Hablar con muchas personas diferentes en fiestas.',
+  38: 'Ver belleza en cosas que otros pasan por alto.',
+  39: 'Engañar o hacer trampa para salir adelante.',
+  40: 'Dejar un desorden en mi habitación o trabajo.',
+  41: 'Sentirme insatisfecho conmigo mismo a veces.',
+  42: 'Intentar liderar a los demás.',
+  43: 'Sentir las emociones de los demás.',
+  44: 'Preocuparme por el bienestar de los demás.',
+  45: 'Decir siempre la verdad.',
+  46: 'Temer hacer lo incorrecto en público.',
+  47: 'Hacer muchas actividades en mi tiempo libre.',
+  48: 'Preferir apegarme a las cosas que conozco.',
+  49: 'Gritar a las personas cuando me enojo.',
+  50: 'Hacer más de lo que se espera de mí.',
+  51: 'Rara vez darme gustos excesivos.',
+  52: 'Disfrutar de actuar de forma arriesgada.',
+  53: 'Tener un vocabulario y léxico rico.',
+  54: 'Presumir de mis virtudes y logros.',
+  55: 'Llevar a cabo mis planes con constancia.',
+  56: 'Sentirme abrumado por los acontecimientos.',
+  57: 'Divertirme mucho y disfrutar la vida.',
+  58: 'Creer que no hay una verdad absoluta.',
+  59: 'Sentir compasión por los menos afortunados.',
+  60: 'Tomar decisiones apresuradas.',
+  61: 'Alterarme o perturbarme fácilmente.',
+  62: 'Entrar en confianza rápidamente con otros.',
+  63: 'No tener una imaginación muy abstracta.',
+  64: 'Confiar en que lo que la gente dice es verdad.',
+  65: 'Saber cómo hacer las cosas con eficiencia.',
+  66: 'Perder la paciencia ante la presión.',
+  67: 'Evitar las multitudes o lugares ruidosos.',
+  68: 'No gustarme la poesía o arte abstracto.',
+  69: 'Aprovecharme de la ingenuidad de otros.',
+  70: 'Dejar mis pertenencias tiradas.',
+  71: 'Estar lleno de dudas sobre mí mismo.',
+  72: 'Convencer a otros para hacer cosas.',
+  73: 'Rara vez notar mis reacciones emocionales.',
+  74: 'Ser indiferente a los sentimientos ajenos.',
+  75: 'Romper las reglas si me parecen ilógicas.',
+  76: 'Solo sentirme cómodo con amigos cercanos.',
+  77: 'Reaccionar rápidamente y con agilidad.',
+  78: 'Disgustarme los cambios repentinos de rutina.',
+  79: 'Insultar u ofender cuando me molesto.',
+  80: 'Establecer altos estándares para mí y mi equipo.',
+  81: 'Resistir fácilmente las tentaciones.',
+  82: 'Actuar de forma desenfadada con amigos.',
+  83: 'Disfrutar resolviendo problemas complejos.',
+  84: 'Saber y sentir que soy alguien extraordinario.',
+  85: 'Postergar mis deberes hasta el último minuto.',
+  86: 'Sentir que no soy capaz de manejar los problemas.',
+  87: 'Entretenerme y reírme con facilidad.',
+  88: 'Creer que las leyes deben aplicarse estrictamente.',
+  89: 'Sufrir o conmoverme por los dolores ajenos.',
+  90: 'Actuar precipitadamente sin tomar precauciones.',
+  91: 'Cambiar de humor muy a menudo.',
+  92: 'Demostrar mi gratitud y afecto.',
+  93: 'Soñar despierto con frecuencia.',
+  94: 'Desconfiar de las intenciones ocultas.',
+  95: 'Ser altamente efectivo en mi trabajo.',
+  96: 'Molestarme fácilmente por detalles menores.',
+  97: 'Preferir estar solo que en grupo.',
+  98: 'No disfrutar ir a museos de arte.',
+  99: 'Entorpecer u obstaculizar el paso a otros.',
+  100: 'Mantener mis cosas limpias y ordenadas.',
+  101: 'Sentirme desesperado o sin salida a veces.',
+  102: 'Reservarme mis opiniones para no llamar la atención.',
+  103: 'Notar los cambios emocionales a mi alrededor.',
+  104: 'Anticiparme a las necesidades de los demás.',
+  105: 'Seguir las instrucciones con cuidado y precisión.',
+  106: 'Avergonzarme o apenarme con facilidad.',
+  107: 'Gustarme tomarme las cosas con calma.',
+  108: 'Estar apegado a las formas convencionales.',
+  109: 'Tomar represalias si me siento herido.',
+  110: 'Esforzarme por alcanzar la excelencia.',
+  111: 'Ser capaz de controlar mis antojos e impulsos.',
+  112: 'Encantarme la emoción y la adrenalina.',
+  113: 'Disfrutar de discusiones teóricas y abstractas.',
+  114: 'Disgustarme hablar sobre mí mismo.',
+  115: 'Perder el tiempo en cosas sin importancia.',
+  116: 'Mantener la calma y compostura bajo presión.',
+  117: 'Ver el lado positivo de las situaciones.',
+  118: 'Creer que las tradiciones deben respetarse.',
+  119: 'Creer que todas las personas merecen compasión.',
+  120: 'Actuar sin investigar primero las consecuencias.',
+};
+
+export function getItemText(item: Item, lang: string): string {
+  if (lang === 'es') {
+    return item.textEs || SPANISH_ITEM_TEXTS[item.id] || item.textEn;
+  }
+  if (lang === 'en') {
+    return item.textEn;
+  }
+  return item.textId;
+}
 
 // 120 Official items from Johnson (2014) / IPIP-NEO-120 Pool
 export const IPIP_120_ITEMS: Item[] = [

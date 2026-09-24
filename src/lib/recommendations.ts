@@ -157,11 +157,16 @@ export function getCareerDevelopmentGuides(
   const recommendedBooks: { title: string; author: string; reason: string }[] = [];
 
   recommendedBooks.push({
-    title: 'Atomic Habits (Perubahan Kecil yang Memberikan Hasil Luar Biasa)',
+    title:
+      language === 'es'
+        ? 'Hábitos Atómicos'
+        : language === 'en'
+        ? 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones'
+        : 'Atomic Habits (Perubahan Kecil yang Memberikan Hasil Luar Biasa)',
     author: 'James Clear',
     reason:
       language === 'es'
-        ? 'Esencial para construir rutinas de trabajo altamente efectivas y mantener la disciplina sistemática.'
+        ? 'Esencial para construir rutinas de trabajo highly efectivas y mantener la disciplina sistemática.'
         : language === 'en'
         ? 'Essential for building highly effective daily workplace systems and sustainable career discipline.'
         : 'Sangat krusial untuk membangun sistem kebiasaan harian yang konsisten dan eksekusi kerja yang disiplin.',
@@ -169,7 +174,12 @@ export function getCareerDevelopmentGuides(
 
   if (top1 === 'C' || top2 === 'C') {
     recommendedBooks.push({
-      title: 'Deep Work (Aturan untuk Meraih Sukses di Dunia yang Penuh Gangguan)',
+      title:
+        language === 'es'
+          ? 'Trabajo Profundo (Deep Work)'
+          : language === 'en'
+          ? 'Deep Work: Rules for Focused Success in a Distracted World'
+          : 'Deep Work (Aturan untuk Meraih Sukses di Dunia yang Penuh Gangguan)',
       author: 'Cal Newport',
       reason:
         language === 'es'
@@ -182,7 +192,12 @@ export function getCareerDevelopmentGuides(
 
   if (top1 === 'E' || top2 === 'E') {
     recommendedBooks.push({
-      title: 'How to Win Friends and Influence People (Cara Mencari Kawan dan Memengaruhi Orang Lain)',
+      title:
+        language === 'es'
+          ? 'Cómo ganar amigos e influir sobre las personas'
+          : language === 'en'
+          ? 'How to Win Friends and Influence People'
+          : 'How to Win Friends and Influence People (Cara Mencari Kawan dan Memengaruhi Orang Lain)',
       author: 'Dale Carnegie',
       reason:
         language === 'es'
@@ -193,7 +208,12 @@ export function getCareerDevelopmentGuides(
     });
   } else {
     recommendedBooks.push({
-      title: 'Quiet: The Power of Introverts in a World That Can\'t Stop Talking',
+      title:
+        language === 'es'
+          ? 'El poder de los introvertidos (Quiet)'
+          : language === 'en'
+          ? 'Quiet: The Power of Introverts in a World That Can\'t Stop Talking'
+          : 'Quiet: The Power of Introverts in a World That Can\'t Stop Talking',
       author: 'Susan Cain',
       reason:
         language === 'es'
@@ -206,7 +226,12 @@ export function getCareerDevelopmentGuides(
 
   if (top1 === 'O' || top2 === 'O') {
     recommendedBooks.push({
-      title: 'Thinking, Fast and Slow (Berpikir, Cepat dan Lambat)',
+      title:
+        language === 'es'
+          ? 'Pensar rápido, pensar despacio'
+          : language === 'en'
+          ? 'Thinking, Fast and Slow'
+          : 'Thinking, Fast and Slow (Berpikir, Cepat dan Lambat)',
       author: 'Daniel Kahneman',
       reason:
         language === 'es'
@@ -219,7 +244,12 @@ export function getCareerDevelopmentGuides(
 
   if (top1 === 'A' || top2 === 'A') {
     recommendedBooks.push({
-      title: 'Crucial Conversations (Percakapan Krusial Saat Taruhan Tinggi)',
+      title:
+        language === 'es'
+          ? 'Conversaciones Cruciales'
+          : language === 'en'
+          ? 'Crucial Conversations: Tools for Talking When Stakes Are High'
+          : 'Crucial Conversations (Percakapan Krusial Saat Taruhan Tinggi)',
       author: 'Kerry Patterson et al.',
       reason:
         language === 'es'
@@ -373,14 +403,14 @@ export function getFutureCareerProjections(
     roles.push({
       title:
         language === 'es'
-          ? 'Especialista en Operaciones ESG y Ketahanan Cadena de Suministro'
+          ? 'Especialista en Operaciones ESG y Resiliencia de Cadena de Suministro'
           : language === 'en'
           ? 'ESG & Sustainable Supply Chain Operations Architect'
           : 'ESG & Sustainable Supply Chain Specialist',
       field: language === 'es' ? 'Sostenibilidad y Cadena de Suministro' : language === 'en' ? 'Sustainability & Supply Chain' : 'Operasional & Keberlanjutan (ESG)',
       description:
         language === 'es'
-          ? 'Asegura que la cadena de producción global sea verde, responda a regulaciones de huella de carbono y mantenga la eficiencia operatif.'
+          ? 'Asegura que la cadena de producción global sea sostenible, responda a regulaciones de huella de carbono y mantenga la eficiencia operativa.'
           : language === 'en'
           ? 'Orchestrates eco-friendly global supply chains, tracking carbon footprints and maintaining operational resilience.'
           : 'Mengelola rantai pasok global yang ramah lingkungan (ESG), memantau jejak karbon, serta mengoptimalkan ketahanan operasional.',

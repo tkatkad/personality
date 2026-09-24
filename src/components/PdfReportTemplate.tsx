@@ -345,7 +345,7 @@ export const PdfReportTemplate: React.FC<PdfReportTemplateProps> = ({ result, la
 
               <div className="flex items-center gap-2 pt-1 border-t border-slate-200">
                 <span className="text-[11px] font-bold text-slate-600">
-                  {language === 'es' ? 'Keahlian Kunci:' : language === 'en' ? 'Key Skills:' : 'Keahlian Utama:'}
+                  {language === 'es' ? 'Habilidades Clave:' : language === 'en' ? 'Key Skills:' : 'Keahlian Utama:'}
                 </span>
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {role.keySkills.map((sk, skIdx) => (
@@ -489,13 +489,21 @@ export const PdfReportTemplate: React.FC<PdfReportTemplateProps> = ({ result, la
       {/* PDF Footer */}
       <div className="border-t-2 border-slate-300 pt-4 text-center text-xs text-slate-600 space-y-1">
         <p className="font-bold text-slate-800">
-          Job.Web.ID — Portal Kerja Indonesia & Psychometric Career Assessment
+          {language === 'es'
+            ? 'Job.Web.ID — Evaluación Psicométrica y de Carrera IPIP-NEO-120'
+            : language === 'en'
+            ? 'Job.Web.ID — IPIP-NEO-120 Psychometric & Career Assessment'
+            : 'Job.Web.ID — Portal Kerja Indonesia & Psychometric Career Assessment'}
         </p>
         <p className="font-mono text-[11px] text-indigo-700">
           https://personality-test.job.web.id/result/{result.id}
         </p>
         <p className="text-[10px] text-slate-500">
-          Formato de alta legibilidad optimizado para lectura clara impreso en A4.
+          {language === 'es'
+            ? 'Formato de alta legibilidad optimizado para impresión clara en A4.'
+            : language === 'en'
+            ? 'High-legibility layout optimized for clear A4 printing.'
+            : 'Format keterbacaan tinggi dioptimalkan untuk cetak jelas pada A4.'}
         </p>
       </div>
     </div>
