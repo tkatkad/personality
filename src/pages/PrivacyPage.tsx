@@ -2,6 +2,7 @@ import React from 'react';
 import { ShieldCheck, Lock, EyeOff, FileText, CheckCircle2 } from 'lucide-react';
 import { useTestStore } from '../stores/testStore';
 import { SEO } from '../components/SEO';
+import { AdSenseSlot } from '../components/AdSenseSlot';
 
 export const PrivacyPage: React.FC = () => {
   const { language } = useTestStore();
@@ -104,6 +105,9 @@ export const PrivacyPage: React.FC = () => {
               : 'Jawaban tes disimpan secara otomatis di local storage browser Anda untuk fitur save-progress. Saat menyelesaikan tes dengan persetujuan (consent), vektor skor numerik anonim dikirimkan secara aman ke database cloud terenkripsi.'}
           </p>
         </div>
+
+        {/* Ad Placement: Between Section 2 & Section 3 */}
+        <AdSenseSlot slot="4001" className="my-6" />
 
         {/* Section 3 */}
         <div className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4">

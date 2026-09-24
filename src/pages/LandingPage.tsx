@@ -23,6 +23,7 @@ import {
 import { useTestStore } from '../stores/testStore';
 import { DOMAIN_METADATA, getDomainName, getDomainTagline, getShortDomainName } from '../data/ipip-neo-120';
 import { DomainKey } from '../types';
+import { AdSenseSlot } from '../components/AdSenseSlot';
 import { SEO } from '../components/SEO';
 
 export const LandingPage: React.FC = () => {
@@ -512,6 +513,9 @@ export const LandingPage: React.FC = () => {
           </p>
         </div>
       </section>
+
+      {/* Non-intrusive Ad Placement between major sections */}
+      <AdSenseSlot slot="1001" className="my-8" />
 
       {/* The Big Five Domains & 30 Facets Grid */}
       <section className="space-y-6">

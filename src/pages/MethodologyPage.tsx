@@ -2,6 +2,7 @@ import React from 'react';
 import { BookOpen, ShieldCheck, ExternalLink, BarChart2, Layers, CheckCircle2 } from 'lucide-react';
 import { useTestStore } from '../stores/testStore';
 import { SEO } from '../components/SEO';
+import { AdSenseSlot } from '../components/AdSenseSlot';
 
 export const MethodologyPage: React.FC = () => {
   const { language } = useTestStore();
@@ -197,6 +198,9 @@ export const MethodologyPage: React.FC = () => {
           </table>
         </div>
       </section>
+
+      {/* Ad Placement: Between Reliability Table and Academic Citations */}
+      <AdSenseSlot slot="3001" className="my-6" />
 
       {/* Section 3: Academic Citations */}
       <section className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-5">

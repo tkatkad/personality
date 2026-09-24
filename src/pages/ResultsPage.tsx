@@ -28,6 +28,8 @@ import { SkeletonLoader } from '../components/SkeletonLoader';
 import { downloadJSON, copyShareLink, formatDate } from '../lib/utils';
 import { SEO } from '../components/SEO';
 import { PdfReportTemplate } from '../components/PdfReportTemplate';
+import { AdSenseSlot } from '../components/AdSenseSlot';
+import { ShopeeAffiliateCard } from '../components/ShopeeAffiliateCard';
 import { getCareerDevelopmentGuides, getFutureCareerProjections } from '../lib/recommendations';
 
 export const ResultsPage: React.FC = () => {
@@ -332,6 +334,9 @@ export const ResultsPage: React.FC = () => {
           <RadarChartComponent domains={result.domains} />
         </section>
 
+        {/* Ad Placement 1: Between Overview Radar & Career Guidance */}
+        <AdSenseSlot slot="2001" className="my-6" />
+
         {/* Section 1.5: Job Seeker Career & Interview Insights */}
         <section className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 text-white shadow-md border border-indigo-900/60 space-y-5">
           <div className="flex items-center gap-3 border-b border-indigo-800/60 pb-4">
@@ -544,6 +549,9 @@ export const ResultsPage: React.FC = () => {
                   </ul>
                 </div>
               </div>
+
+              {/* Shopee Affiliate Recommended Product Banner */}
+              <ShopeeAffiliateCard className="mt-4" />
             </section>
           );
         })()}
@@ -679,6 +687,9 @@ export const ResultsPage: React.FC = () => {
             })}
           </div>
         </section>
+
+        {/* Ad Placement 2: Before 30 Facets Breakdown */}
+        <AdSenseSlot slot="2002" className="my-6" />
 
         {/* Section 3: 30 Facets Breakdown */}
         <section className="space-y-6">
