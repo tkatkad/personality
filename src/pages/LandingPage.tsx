@@ -168,8 +168,8 @@ export const LandingPage: React.FC = () => {
         <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="max-w-3xl space-y-6 relative z-10">
-          {/* Header Row: Badge & Prominent Hero Language Switcher */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          {/* Header Row: Badge */}
+          <div className="flex items-center justify-between gap-3">
             {/* Friendly Job Seeker Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
@@ -180,50 +180,6 @@ export const LandingPage: React.FC = () => {
                   ? 'Job Seeker Self-Assessment'
                   : 'Self-Assessment Karir Pencari Kerja Online'}
               </span>
-            </div>
-
-            {/* Standing Out Hero Language Switcher */}
-            <div className="inline-flex flex-wrap items-center p-1 rounded-2xl bg-slate-800/90 border border-indigo-400/40 shadow-lg backdrop-blur-md gap-1">
-              <span className="text-[11px] font-bold text-indigo-200 px-1.5 sm:px-2 flex items-center gap-1">
-                <Globe className="w-3.5 h-3.5 text-amber-300" />
-                <span className="hidden sm:inline">
-                  {language === 'es' ? 'Idioma:' : language === 'en' ? 'Language:' : 'Bahasa:'}
-                </span>
-              </span>
-              <button
-                onClick={() => setLanguage('id')}
-                className={`px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
-                  language === 'id'
-                    ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
-                }`}
-              >
-                <span className="hidden sm:inline">🇮🇩</span>
-                <span>ID</span>
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
-                  language === 'en'
-                    ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
-                }`}
-              >
-                <span className="hidden sm:inline">🇬🇧</span>
-                <span>EN</span>
-              </button>
-              <button
-                onClick={() => setLanguage('es')}
-                className={`px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
-                  language === 'es'
-                    ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
-                }`}
-              >
-                <span className="hidden sm:inline">🇪🇸</span>
-                <span className="sm:hidden">ES</span>
-                <span className="hidden sm:inline">Español</span>
-              </button>
             </div>
           </div>
 
@@ -276,7 +232,7 @@ export const LandingPage: React.FC = () => {
             </Link>
           </div>
 
-          {/* Key Trust Signals (No fear, user friendly) */}
+          {/* Key Trust Signals */}
           <div className="pt-4 flex flex-wrap items-center gap-y-2.5 gap-x-6 text-xs text-slate-300 border-t border-slate-800/80">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
@@ -307,6 +263,56 @@ export const LandingPage: React.FC = () => {
                   ? 'Instant Career PDF Report'
                   : 'Laporan Karir & PDF Instan'}
               </span>
+            </div>
+          </div>
+
+          {/* Hero Bottom Language Switcher Row */}
+          <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="text-xs text-slate-400 font-medium flex items-center gap-1.5">
+              <Globe className="w-3.5 h-3.5 text-amber-300" />
+              <span>
+                {language === 'es'
+                  ? 'Seleccionar idioma de la evaluación:'
+                  : language === 'en'
+                  ? 'Select assessment language:'
+                  : 'Pilihan bahasa pengerjaan tes:'}
+              </span>
+            </div>
+            <div className="inline-flex flex-wrap items-center p-1 rounded-2xl bg-slate-800/90 border border-indigo-400/40 shadow-lg backdrop-blur-md gap-1">
+              <button
+                onClick={() => setLanguage('id')}
+                className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
+                  language === 'id'
+                    ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
+                }`}
+              >
+                <span className="hidden sm:inline">🇮🇩</span>
+                <span>ID</span>
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
+                  language === 'en'
+                    ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
+                }`}
+              >
+                <span className="hidden sm:inline">🇬🇧</span>
+                <span>EN</span>
+              </button>
+              <button
+                onClick={() => setLanguage('es')}
+                className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
+                  language === 'es'
+                    ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
+                }`}
+              >
+                <span className="hidden sm:inline">🇪🇸</span>
+                <span className="sm:hidden">ES</span>
+                <span className="hidden sm:inline">Español</span>
+              </button>
             </div>
           </div>
         </div>

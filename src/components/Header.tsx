@@ -146,6 +146,29 @@ export const Header: React.FC = () => {
       {/* Mobile Menu Dropdown with distinct background color */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-b-2 border-indigo-500/60 bg-slate-900 text-slate-100 px-4 py-4 space-y-3.5 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+          {/* Mobile Theme Toggle Row */}
+          <div className="flex items-center justify-between p-2.5 rounded-2xl bg-slate-800/90 border border-slate-700/80">
+            <span className="text-xs font-bold text-slate-300">
+              {language === 'es' ? 'Modo de Tema' : language === 'en' ? 'Theme Mode' : 'Mode Tampilan'}
+            </span>
+            <button
+              onClick={toggleDarkMode}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-700 text-slate-100 hover:bg-slate-600 text-xs font-bold transition-colors"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-400" />
+                  <span>{language === 'es' ? 'Claro' : language === 'en' ? 'Light' : 'Terang'}</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-indigo-300" />
+                  <span>{language === 'es' ? 'Oscuro' : language === 'en' ? 'Dark' : 'Gelap'}</span>
+                </>
+              )}
+            </button>
+          </div>
+
           {/* Streamlined Language Selector for Mobile Menu */}
           <div className="p-2.5 rounded-2xl bg-slate-800/90 border border-slate-700/80 space-y-2">
             <div className="text-[11px] font-bold text-slate-300 flex items-center justify-between px-1">
