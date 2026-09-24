@@ -184,7 +184,7 @@ export const LandingPage: React.FC = () => {
 
             {/* Standing Out Hero Language Switcher */}
             <div className="inline-flex flex-wrap items-center p-1 rounded-2xl bg-slate-800/90 border border-indigo-400/40 shadow-lg backdrop-blur-md gap-1">
-              <span className="text-[11px] font-bold text-indigo-200 px-2 flex items-center gap-1">
+              <span className="text-[11px] font-bold text-indigo-200 px-1.5 sm:px-2 flex items-center gap-1">
                 <Globe className="w-3.5 h-3.5 text-amber-300" />
                 <span className="hidden sm:inline">
                   {language === 'es' ? 'Idioma:' : language === 'en' ? 'Language:' : 'Bahasa:'}
@@ -192,36 +192,37 @@ export const LandingPage: React.FC = () => {
               </span>
               <button
                 onClick={() => setLanguage('id')}
-                className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
+                className={`px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
                   language === 'id'
                     ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
                     : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
                 }`}
               >
-                <span>🇮🇩</span>
+                <span className="hidden sm:inline">🇮🇩</span>
                 <span>ID</span>
               </button>
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
+                className={`px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
                   language === 'en'
                     ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
                     : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
                 }`}
               >
-                <span>🇬🇧</span>
+                <span className="hidden sm:inline">🇬🇧</span>
                 <span>EN</span>
               </button>
               <button
                 onClick={() => setLanguage('es')}
-                className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
+                className={`px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
                   language === 'es'
                     ? 'bg-indigo-500 text-white shadow-md ring-2 ring-indigo-300'
                     : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
                 }`}
               >
-                <span>🇪🇸</span>
-                <span>Español</span>
+                <span className="hidden sm:inline">🇪🇸</span>
+                <span className="sm:hidden">ES</span>
+                <span className="hidden sm:inline">Español</span>
               </button>
             </div>
           </div>

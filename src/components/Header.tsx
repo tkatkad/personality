@@ -25,19 +25,19 @@ export const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Zone 1: Co-branded Logo Lockup with Job.Web.ID */}
+        {/* Zone 1: Co-branded Boxed Logo Lockup */}
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href="https://job.web.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 font-display font-extrabold text-lg sm:text-xl text-indigo-600 dark:text-indigo-400 tracking-tight hover:opacity-90 transition-opacity"
+            className="flex items-center hover:opacity-90 transition-opacity"
             title="Job.Web.ID - Portal Kerja Indonesia"
           >
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 dark:bg-indigo-500 text-white flex items-center justify-center shadow-sm font-black text-xs">
-              JOB
+            <div className="w-9 h-9 rounded-xl bg-indigo-600 dark:bg-indigo-500 text-white flex flex-col items-center justify-center shadow-md font-black leading-none shrink-0">
+              <span className="text-[11px] font-black tracking-tight leading-none">JOB</span>
+              <span className="text-[7.5px] font-extrabold tracking-wider text-amber-300 leading-none mt-0.5">WEB</span>
             </div>
-            <span>Job.Web.ID</span>
           </a>
           <span className="text-slate-300 dark:text-slate-700 font-light text-lg">/</span>
           <Link
@@ -75,7 +75,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center p-0.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-inner">
             <button
               onClick={() => setLanguage('id')}
-              className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
                 language === 'id'
                   ? 'bg-indigo-600 text-white shadow-sm scale-[1.02]'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -83,12 +83,12 @@ export const Header: React.FC = () => {
               title="Bahasa Indonesia"
               aria-label="Bahasa Indonesia"
             >
-              <span>🇮🇩</span>
+              <span className="hidden sm:inline">🇮🇩</span>
               <span>ID</span>
             </button>
             <button
               onClick={() => setLanguage('en')}
-              className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
                 language === 'en'
                   ? 'bg-indigo-600 text-white shadow-sm scale-[1.02]'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -96,12 +96,12 @@ export const Header: React.FC = () => {
               title="English Language"
               aria-label="English Language"
             >
-              <span>🇬🇧</span>
+              <span className="hidden sm:inline">🇬🇧</span>
               <span>EN</span>
             </button>
             <button
               onClick={() => setLanguage('es')}
-              className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
                 language === 'es'
                   ? 'bg-indigo-600 text-white shadow-sm scale-[1.02]'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -109,7 +109,7 @@ export const Header: React.FC = () => {
               title="Idioma Español"
               aria-label="Idioma Español"
             >
-              <span>🇪🇸</span>
+              <span className="hidden sm:inline">🇪🇸</span>
               <span>ES</span>
             </button>
           </div>
@@ -146,11 +146,11 @@ export const Header: React.FC = () => {
       {/* Mobile Menu Dropdown with distinct background color */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-b-2 border-indigo-500/60 bg-slate-900 text-slate-100 px-4 py-4 space-y-3.5 shadow-2xl animate-in slide-in-from-top-2 duration-200">
-          {/* Prominent Language Selector Card for Mobile */}
-          <div className="p-3 rounded-2xl bg-slate-800/90 border border-slate-700/80 space-y-2">
-            <div className="text-xs font-bold text-slate-300 flex items-center justify-between">
-              <span>{language === 'es' ? 'Seleccionar idioma:' : language === 'en' ? 'Select Language:' : 'Pilih Bahasa:'}</span>
-              <Globe className="w-4 h-4 text-amber-300" />
+          {/* Streamlined Language Selector for Mobile Menu */}
+          <div className="p-2.5 rounded-2xl bg-slate-800/90 border border-slate-700/80 space-y-2">
+            <div className="text-[11px] font-bold text-slate-300 flex items-center justify-between px-1">
+              <span>{language === 'es' ? 'Idioma' : language === 'en' ? 'Language' : 'Bahasa'}</span>
+              <Globe className="w-3.5 h-3.5 text-amber-300" />
             </div>
             <div className="grid grid-cols-3 gap-1.5">
               <button
@@ -158,42 +158,39 @@ export const Header: React.FC = () => {
                   setLanguage('id');
                   setMobileMenuOpen(false);
                 }}
-                className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
+                className={`py-2 px-2 rounded-xl text-xs font-black flex items-center justify-center transition-all ${
                   language === 'id'
-                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-md ring-2 ring-indigo-400'
-                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                    ? 'bg-indigo-600 text-white shadow-md ring-1 ring-indigo-400'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
                 }`}
               >
-                <span>🇮🇩</span>
-                <span>ID</span>
+                ID
               </button>
               <button
                 onClick={() => {
                   setLanguage('en');
                   setMobileMenuOpen(false);
                 }}
-                className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
+                className={`py-2 px-2 rounded-xl text-xs font-black flex items-center justify-center transition-all ${
                   language === 'en'
-                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-md ring-2 ring-indigo-400'
-                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                    ? 'bg-indigo-600 text-white shadow-md ring-1 ring-indigo-400'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
                 }`}
               >
-                <span>🇬🇧</span>
-                <span>EN</span>
+                EN
               </button>
               <button
                 onClick={() => {
                   setLanguage('es');
                   setMobileMenuOpen(false);
                 }}
-                className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
+                className={`py-2 px-2 rounded-xl text-xs font-black flex items-center justify-center transition-all ${
                   language === 'es'
-                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-md ring-2 ring-indigo-400'
-                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                    ? 'bg-indigo-600 text-white shadow-md ring-1 ring-indigo-400'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
                 }`}
               >
-                <span>🇪🇸</span>
-                <span>ES</span>
+                ES
               </button>
             </div>
           </div>
@@ -203,15 +200,21 @@ export const Header: React.FC = () => {
             href="https://job.web.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 font-bold text-sm text-indigo-300"
+            className="flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 font-bold text-sm text-slate-100 transition-colors"
           >
-            <span>
-              {language === 'es'
-                ? '🌐 Job.Web.ID (Portal Principal)'
-                : language === 'en'
-                ? '🌐 Job.Web.ID (Main Portal)'
-                : '🌐 Job.Web.ID (Portal Kerja Utama)'}
-            </span>
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex flex-col items-center justify-center font-black leading-none shrink-0 shadow-sm">
+                <span className="text-[8.5px] font-black tracking-tight leading-none">JOB</span>
+                <span className="text-[6px] font-extrabold tracking-wider text-amber-300 leading-none mt-0.5">WEB</span>
+              </div>
+              <span className="text-xs font-bold text-slate-200">
+                {language === 'es'
+                  ? 'Portal Principal Job.Web.ID'
+                  : language === 'en'
+                  ? 'Job.Web.ID Main Portal'
+                  : 'Portal Kerja Utama Job.Web.ID'}
+              </span>
+            </div>
             <ExternalLink className="w-4 h-4 text-indigo-400" />
           </a>
 
