@@ -10,8 +10,14 @@ export interface SEOProps {
   jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const DEFAULT_DOMAIN = 'https://personality-test.job.web.id';
-const DEFAULT_IMAGE = `${DEFAULT_DOMAIN}/og-image.png`;
+const getOrigin = () => {
+  if (typeof window !== 'undefined' && window.location && window.location.origin) {
+    return window.location.origin;
+  }
+  return 'https://personality-test.job.web.id';
+};
+
+const DEFAULT_IMAGE = `https://personality-test.job.web.id/og-image.png`;
 
 export const SEO: React.FC<SEOProps> = ({
   title,
@@ -22,7 +28,8 @@ export const SEO: React.FC<SEOProps> = ({
   jsonLd,
 }) => {
   const { language } = useTestStore();
-  const currentUrl = `${DEFAULT_DOMAIN}${path}`;
+  const domain = getOrigin();
+  const currentUrl = `${domain}${path}`;
 
   useEffect(() => {
     // 1. Update Document Title & Html Lang
@@ -66,14 +73,14 @@ export const SEO: React.FC<SEOProps> = ({
         const link = document.createElement('link');
         link.setAttribute('rel', 'alternate');
         link.setAttribute('hreflang', hreflang);
-        link.setAttribute('href', `${DEFAULT_DOMAIN}${basePath}?lang=${code}`);
+        link.setAttribute('href', `${domain}${basePath}?lang=${code}`);
         document.head.appendChild(link);
 
         // Also add short ISO code hreflang
         const shortLink = document.createElement('link');
         shortLink.setAttribute('rel', 'alternate');
         shortLink.setAttribute('hreflang', code);
-        shortLink.setAttribute('href', `${DEFAULT_DOMAIN}${basePath}?lang=${code}`);
+        shortLink.setAttribute('href', `${domain}${basePath}?lang=${code}`);
         document.head.appendChild(shortLink);
       });
 
@@ -81,7 +88,7 @@ export const SEO: React.FC<SEOProps> = ({
       const defaultLink = document.createElement('link');
       defaultLink.setAttribute('rel', 'alternate');
       defaultLink.setAttribute('hreflang', 'x-default');
-      defaultLink.setAttribute('href', `${DEFAULT_DOMAIN}${basePath}`);
+      defaultLink.setAttribute('href', `${domain}${basePath}`);
       document.head.appendChild(defaultLink);
     };
 

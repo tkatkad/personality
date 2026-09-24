@@ -72,7 +72,7 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
                 >
                   {opt.val}
                 </span>
-                <span className="text-xs font-semibold leading-snug">
+                <span className="text-sm sm:text-base font-semibold leading-snug">
                   {language === 'en' ? opt.labelEn : opt.labelId}
                 </span>
               </div>
@@ -80,8 +80,8 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
           );
         })}
       </div>
-      <div className="text-[11px] text-center text-slate-400 dark:text-slate-500 pt-1 hidden sm:block">
-        Tip: Press numbers <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-[10px]">1</kbd>–<kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-[10px]">5</kbd> on your keyboard to quickly answer.
+      <div className="text-xs sm:text-sm text-center text-slate-500 dark:text-slate-400 pt-1.5 hidden sm:block">
+        Tip: Press numbers <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-xs">1</kbd>–<kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border text-xs">5</kbd> on your keyboard to quickly answer.
       </div>
     </div>
   );

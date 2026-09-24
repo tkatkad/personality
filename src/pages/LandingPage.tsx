@@ -144,7 +144,7 @@ export const LandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-16 py-8">
+    <div className="space-y-20 md:space-y-28 py-12 md:py-20">
       <SEO
         title={
           language === 'es'
@@ -164,15 +164,15 @@ export const LandingPage: React.FC = () => {
         jsonLd={jsonLdData}
       />
       {/* Hero Banner Section tailored for Job Seekers */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 text-white p-8 sm:p-12 md:p-16 shadow-xl border border-indigo-900/50">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 text-white p-8 sm:p-12 md:p-16 lg:p-20 shadow-xl border border-indigo-900/40">
         <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
         
-        <div className="max-w-3xl space-y-6 relative z-10">
+        <div className="max-w-3xl space-y-8 relative z-10">
           {/* Header Row: Badge */}
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center justify-between gap-4">
             {/* Friendly Job Seeker Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold backdrop-blur-sm">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 text-amber-300" />
               <span>
                 {language === 'es'
                   ? 'Autoevaluación de Carrera para Solicitantes de Empleo'
@@ -184,7 +184,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight sm:leading-snug">
             {language === 'es'
               ? 'Descubre tus fortalezas y tu estilo de trabajo ideal'
               : language === 'en'
@@ -192,8 +192,8 @@ export const LandingPage: React.FC = () => {
               : 'Kenali Potensi Kepribadian & Kekuatan Karir Terbaikmu'}
           </h1>
 
-          {/* Description stating explicit reasons */}
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl">
+          {/* Description stating explicit reasons with max-w-2xl constraint & relaxed leading */}
+          <p className="text-slate-300 text-base sm:text-lg leading-relaxed sm:leading-loose max-w-2xl">
             {language === 'es'
               ? 'A través del mapeo psicométrico validado de 5 dominios y 30 sub-facetas Big Five (IPIP-NEO-120), esta evaluación proporciona datos objetivos sobre tus tendencias conductuales. Un perfil preciso te permite estructurar tu estilo de trabajo, elegir palabras clave para tu CV y responder entrevistas con confianza.'
               : language === 'en'
@@ -201,11 +201,11 @@ export const LandingPage: React.FC = () => {
               : 'Melalui pemetaan 5 domain utama dan 30 faset kepribadian Big Five (IPIP-NEO-120) yang tervalidasi secara psikometri, tes ini memberikan analisis obyektif tentang kecenderungan perilakumu. Hasil skor yang presisi mempermudahmu mengidentifikasi gaya kerja dominan, memilih kata kunci karakter yang tepat untuk deskripsi CV profesional, serta menyusun jawaban wawancara HRD yang otentik dan percaya diri.'}
           </p>
 
-          {/* Primary Action & Friendly CTAs */}
-          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Primary Action & Friendly CTAs with generous button spacing (gap-4 sm:gap-6) & padding */}
+          <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
             <Link
               to="/consent"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm transition-all shadow-lg hover:shadow-indigo-500/25 active:scale-[0.99]"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm sm:text-base transition-all shadow-lg hover:shadow-indigo-500/25 active:scale-[0.99]"
             >
               <span>
                 {language === 'es'
@@ -214,12 +214,12 @@ export const LandingPage: React.FC = () => {
                   ? 'Start Free Career Test (10–15 Mins)'
                   : 'Mulai Tes Karir Sekarang (10–15 Menit)'}
               </span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5" />
             </Link>
 
             <Link
               to="/retest"
-              className="inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-medium text-xs transition-colors"
+              className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-medium text-xs sm:text-sm transition-colors"
             >
               <RotateCcw className="w-4 h-4 text-amber-400" />
               <span>
@@ -233,7 +233,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Key Trust Signals */}
-          <div className="pt-4 flex flex-wrap items-center gap-y-2.5 gap-x-6 text-xs text-slate-300 border-t border-slate-800/80">
+          <div className="pt-6 flex flex-wrap items-center gap-y-3 gap-x-6 sm:gap-x-8 text-xs sm:text-sm text-slate-300 border-t border-slate-800/80">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               <span>
@@ -319,10 +319,10 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* 4 Pillars for Job Seekers */}
-      <section className="space-y-6">
-        <div className="text-center space-y-2 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
-            <CheckCircle2 className="w-3.5 h-3.5" />
+      <section className="space-y-8">
+        <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-900/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
+            <CheckCircle2 className="w-4 h-4" />
             <span>
               {language === 'es'
                 ? 'Diseñado para Solicitantes de Empleo'
@@ -331,14 +331,14 @@ export const LandingPage: React.FC = () => {
                 : 'Manfaat Langsung Untuk Pencari Kerja'}
             </span>
           </div>
-          <h2 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white">
+          <h2 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white leading-tight">
             {language === 'es'
               ? '¿Cómo impulsa esta evaluación tu búsqueda de empleo?'
               : language === 'en'
               ? 'How This Assessment Helps Your Job Search'
               : 'Bagaimana Tes Ini Membantu Karir & Lamaran Kerjamu?'}
           </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto">
             {language === 'es'
               ? 'Obtén información objetiva para destacar en tu CV, preparar entrevistas de RRHH y ganar confianza laboral.'
               : language === 'en'
@@ -347,19 +347,19 @@ export const LandingPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 hover:border-indigo-300 dark:hover:border-indigo-800 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4 hover:border-indigo-300 dark:hover:border-indigo-800 transition-all">
+            <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl">
               🎯
             </div>
-            <h3 className="font-bold text-base text-slate-900 dark:text-white">
+            <h3 className="font-bold text-base text-slate-900 dark:text-white leading-snug">
               {language === 'es'
                 ? '1. Refuerza tu Perfil de CV'
                 : language === 'en'
                 ? '1. Strengthen Your CV Profile'
                 : '1. Menonjolkan Kekuatan di CV'}
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               {language === 'es'
                 ? 'Identifica tus rasgos de personalidad clave (p. ej. orientada a los detalles, alta adaptabilidad) para redactar un resumen profesional auténtico.'
                 : language === 'en'
@@ -368,18 +368,18 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 hover:border-emerald-300 dark:hover:border-emerald-800 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-lg">
+          <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4 hover:border-emerald-300 dark:hover:border-emerald-800 transition-all">
+            <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xl">
               💬
             </div>
-            <h3 className="font-bold text-base text-slate-900 dark:text-white">
+            <h3 className="font-bold text-base text-slate-900 dark:text-white leading-snug">
               {language === 'es'
                 ? '2. Preparación para Entrevistas'
                 : language === 'en'
                 ? '2. HR Interview Preparation'
                 : '2. Siap Pertanyaan Interview'}
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               {language === 'es'
                 ? 'Aprende a describir tu estilo de trabajo y enfoque de resolución de problemas con soltura ante reclutadores.'
                 : language === 'en'
@@ -388,18 +388,18 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 hover:border-amber-300 dark:hover:border-amber-800 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-lg">
+          <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4 hover:border-amber-300 dark:hover:border-amber-800 transition-all">
+            <div className="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xl">
               🏢
             </div>
-            <h3 className="font-bold text-base text-slate-900 dark:text-white">
+            <h3 className="font-bold text-base text-slate-900 dark:text-white leading-snug">
               {language === 'es'
                 ? '3. Cultura de Trabajo Ideal'
                 : language === 'en'
                 ? '3. Ideal Work Culture Fit'
                 : '3. Menemukan Budaya Kerja Cocok'}
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               {language === 'es'
                 ? 'Descubre si rindes mejor en startups ágiles, corporaciones estructuradas o entornos colaborativos.'
                 : language === 'en'
@@ -408,18 +408,18 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 hover:border-purple-300 dark:hover:border-purple-800 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-lg">
+          <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4 hover:border-purple-300 dark:hover:border-purple-800 transition-all">
+            <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-xl">
               📈
             </div>
-            <h3 className="font-bold text-base text-slate-900 dark:text-white">
+            <h3 className="font-bold text-base text-slate-900 dark:text-white leading-snug">
               {language === 'es'
                 ? '4. Plan de Desarrollo Personal'
                 : language === 'en'
                 ? '4. Personal Growth Plan'
                 : '4. Rencana Pengembangan Diri'}
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               {language === 'es'
                 ? 'Anticipa pequeñas áreas de mejora para fortalecer tu resiliencia y hábitos profesionales.'
                 : language === 'en'
@@ -554,12 +554,12 @@ export const LandingPage: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   {getDomainTagline(key, language)}
                 </p>
 
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">
                     {language === 'es' ? '6 Sub-facetas:' : language === 'en' ? '6 Sub-Facets:' : '6 Sub-Faset:'}
                   </span>{' '}
                   {key === 'N' && (language === 'es' ? 'Ansiedad, Ira, Depresión, Timidez, Inmoderación, Vulnerabilidad' : 'Anxiety, Anger, Depression, Self-Consciousness, Immoderation, Vulnerability')}
@@ -585,7 +585,7 @@ export const LandingPage: React.FC = () => {
                     : 'Studi Reliabilitas Retest'}
                 </span>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 {language === 'es'
                   ? '¿Has realizado esta evaluación anteriormente? Ingresa tu código de resultado anterior para participar en nuestro estudio de estabilidad temporal.'
                   : language === 'en'

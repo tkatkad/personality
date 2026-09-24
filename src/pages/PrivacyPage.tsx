@@ -45,7 +45,7 @@ export const PrivacyPage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto py-8 space-y-8">
+    <div className="max-w-3xl mx-auto py-12 md:py-20 space-y-10">
       <SEO
         title={
           language === 'es'
@@ -65,24 +65,24 @@ export const PrivacyPage: React.FC = () => {
         jsonLd={jsonLdData}
       />
       {/* Title Header */}
-      <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
-          <ShieldCheck className="w-3.5 h-3.5" />
+      <div className="space-y-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-900/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
+          <ShieldCheck className="w-4 h-4" />
           <span>{language === 'en' ? 'Anonymous & Ethical Data Standard' : 'Standar Etika Data Anonim'}</span>
         </div>
-        <h1 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white">
+        <h1 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white leading-tight">
           {language === 'en' ? 'Privacy Policy & Data Ethics' : 'Kebijakan Privasi & Etika Penggunaan Data'}
         </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-400">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
           Last updated: September 2024 · IPIP-NEO-120 Assessment Engine
         </p>
       </div>
 
-      <div className="space-y-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+      <div className="space-y-6 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed sm:leading-loose">
         {/* Section 1 */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <h2 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
-            <EyeOff className="w-5 h-5 text-indigo-600" />
+        <div className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4">
+          <h2 className="font-bold text-slate-900 dark:text-white text-base sm:text-lg flex items-center gap-2.5">
+            <EyeOff className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             <span>1. Zero Personally Identifiable Information (PII)</span>
           </h2>
           <p>
@@ -93,9 +93,9 @@ export const PrivacyPage: React.FC = () => {
         </div>
 
         {/* Section 2 */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <h2 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
-            <Lock className="w-5 h-5 text-indigo-600" />
+        <div className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4">
+          <h2 className="font-bold text-slate-900 dark:text-white text-base sm:text-lg flex items-center gap-2.5">
+            <Lock className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             <span>2. Local Storage & Database Storage</span>
           </h2>
           <p>
@@ -106,12 +106,12 @@ export const PrivacyPage: React.FC = () => {
         </div>
 
         {/* Section 3 */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <h2 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
-            <FileText className="w-5 h-5 text-amber-600" />
+        <div className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-4">
+          <h2 className="font-bold text-slate-900 dark:text-white text-base sm:text-lg flex items-center gap-2.5">
+            <FileText className="w-5 h-5 text-amber-600 dark:text-amber-400" />
             <span>3. Clinical Disclaimer</span>
           </h2>
-          <p className="text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-3.5 rounded-xl border border-amber-200 dark:border-amber-900 text-xs">
+          <p className="text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-4 rounded-2xl border border-amber-200/80 dark:border-amber-900/60 text-xs sm:text-sm leading-relaxed">
             {language === 'en'
               ? 'This tool is NOT a clinical diagnostic instrument. It is designed solely for self-exploration and academic psychometric research. If you need clinical assessment or mental health support, please consult a licensed professional.'
               : 'Alat ini BUKAN instrumen diagnosis medis/klinis. Tes ini dirancang murni untuk eksplorasi diri dan riset akademis psikometri. Jika Anda membutuhkan dukungan kesehatan mental, silakan berkonsultasi dengan profesional lisensi.'}

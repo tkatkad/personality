@@ -53,7 +53,7 @@ export const ConsentDemographicsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8 space-y-8">
+    <div className="max-w-2xl mx-auto py-12 md:py-20 space-y-10">
       <SEO
         title={
           language === 'es'
@@ -73,15 +73,15 @@ export const ConsentDemographicsPage: React.FC = () => {
         jsonLd={jsonLdData}
       />
       {/* Title Header */}
-      <div className="space-y-2 text-center sm:text-left">
-        <h1 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white">
+      <div className="space-y-3 text-center sm:text-left max-w-xl">
+        <h1 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white leading-tight">
           {language === 'es'
             ? 'Configuración Rápida Antes de tu Test'
             : language === 'en'
             ? 'Quick Setup Before Your Test'
             : 'Persiapan Singkat Sebelum Tes Karir'}
         </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-400">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
           {language === 'es'
             ? '¡Relájate! No hay respuestas correctas o incorrectas. Simplemente responde según tus hábitos y sensaciones habituales.'
             : language === 'en'
@@ -90,11 +90,11 @@ export const ConsentDemographicsPage: React.FC = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-8">
         {/* UUID Card */}
-        <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2.5">
-            <Key className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
+        <div className="p-5 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-900/60 flex items-center justify-between text-xs sm:text-sm">
+          <div className="flex items-center gap-3">
+            <Key className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0" />
             <div>
               <span className="font-semibold text-slate-800 dark:text-slate-200">
                 {language === 'es'
@@ -108,14 +108,14 @@ export const ConsentDemographicsPage: React.FC = () => {
               </p>
             </div>
           </div>
-          <span className="text-[10px] text-slate-500 hidden sm:inline">
+          <span className="text-[11px] text-slate-500 hidden sm:inline font-medium">
             {language === 'es' ? 'Generado automáticamente' : 'Auto-generated'}
           </span>
         </div>
 
         {/* Consent Card */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-base border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-5">
+          <div className="flex items-center gap-2.5 text-slate-900 dark:text-white font-bold text-base sm:text-lg border-b border-slate-100 dark:border-slate-800/80 pb-4">
             <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             <span>
               {language === 'es'
@@ -126,7 +126,7 @@ export const ConsentDemographicsPage: React.FC = () => {
             </span>
           </div>
 
-          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed sm:leading-loose">
             {language === 'es'
               ? 'Al marcar esta casilla, aceptas que tus respuestas de 120 ítems e información demográfica opcional se almacenen de forma anónima en nuestra base de datos de investigación para evaluaciones psicométricas y estudios de confiabilidad test-retest basados en Johnson (2014).'
               : language === 'en'
@@ -134,14 +134,14 @@ export const ConsentDemographicsPage: React.FC = () => {
               : 'Dengan mencentang opsi ini, Anda menyetujui bahwa jawaban 120 soal dan data demografi opsional Anda disimpan secara anonim di database untuk riset psikometrik dan evaluasi reliabilitas test-retest.'}
           </p>
 
-          <label className="flex items-start gap-3 pt-2 cursor-pointer group">
+          <label className="flex items-start gap-3.5 pt-2 cursor-pointer group">
             <input
               type="checkbox"
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 w-4 h-4 text-indigo-600 rounded border-slate-300 dark:border-slate-700 focus:ring-indigo-500"
+              className="mt-1 w-4 h-4 text-indigo-600 rounded border-slate-300 dark:border-slate-700 focus:ring-indigo-500"
             />
-            <span className="text-xs font-medium text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+            <span className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-relaxed">
               {language === 'es'
                 ? 'Acepto la recopilación anónima de respuestas para fines de investigación.'
                 : language === 'en'
@@ -152,9 +152,9 @@ export const ConsentDemographicsPage: React.FC = () => {
         </div>
 
         {/* Optional Demographics */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-            <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-base">
+        <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-5">
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-4">
+            <div className="flex items-center gap-2.5 text-slate-900 dark:text-white font-bold text-base sm:text-lg">
               <UserCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <span>
                 {language === 'es'
@@ -164,14 +164,14 @@ export const ConsentDemographicsPage: React.FC = () => {
                   : 'Informasi Demografi'}
               </span>
             </div>
-            <span className="text-[11px] font-semibold text-slate-400">
+            <span className="text-xs font-semibold text-slate-400">
               {language === 'es' ? 'Opcional' : language === 'en' ? 'Optional' : 'Opsional'}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs sm:text-sm">
             {/* Age Field */}
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label className="font-semibold text-slate-700 dark:text-slate-300">
                 {language === 'es' ? 'Edad (Años)' : language === 'en' ? 'Age (Years)' : 'Usia (Tahun)'}
               </label>
@@ -182,19 +182,19 @@ export const ConsentDemographicsPage: React.FC = () => {
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 placeholder="e.g. 25"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
             {/* Gender Field */}
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label className="font-semibold text-slate-700 dark:text-slate-300">
                 {language === 'es' ? 'Género' : language === 'en' ? 'Gender' : 'Jenis Kelamin'}
               </label>
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="">
                   {language === 'es'
@@ -228,7 +228,7 @@ export const ConsentDemographicsPage: React.FC = () => {
         <div className="pt-2">
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg transition-all active:scale-[0.99]"
+            className="w-full flex items-center justify-center gap-3 py-4 px-8 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm sm:text-base shadow-lg transition-all active:scale-[0.99]"
           >
             <span>
               {language === 'es'
@@ -237,7 +237,7 @@ export const ConsentDemographicsPage: React.FC = () => {
                 ? 'Start 120-Item Assessment'
                 : 'Mulai Pengerjaan 120 Soal'}
             </span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-5 h-5" />
           </button>
         </div>
       </form>

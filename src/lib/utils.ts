@@ -1,5 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { TestResult } from '../types';
+import { buildTestResult } from './scoring';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -36,10 +38,51 @@ export function downloadJSON(data: unknown, filename: string) {
 }
 
 /**
- * Copies a shareable result link to clipboard
+ * Encodes a TestResult into a lightweight, URL-safe base64 string
  */
-export async function copyShareLink(resultId: string): Promise<boolean> {
-  const shareUrl = `${window.location.origin}/result/${resultId}`;
+export function encodeResultToUrlParam(result: TestResult): string {
+  try {
+    const compact = {
+      i: result.id,
+      t: result.createdAt,
+      d: result.demographics,
+      a: result.answers || {},
+      r: result.retestOf,
+    };
+    const jsonStr = JSON.stringify(compact);
+    return encodeURIComponent(btoa(unescape(encodeURIComponent(jsonStr))));
+  } catch (err) {
+    console.error('Failed to encode result:', err);
+    return '';
+  }
+}
+
+/**
+ * Decodes compressed URL string back into a full TestResult object
+ */
+export function decodeResultFromUrlParam(encodedParam: string): TestResult | null {
+  try {
+    const jsonStr = decodeURIComponent(escape(atob(decodeURIComponent(encodedParam))));
+    const compact = JSON.parse(jsonStr);
+    if (!compact || !compact.i || !compact.a) return null;
+
+    const result = buildTestResult(compact.i, compact.a, compact.d || {});
+    if (compact.t) result.createdAt = compact.t;
+    if (compact.r) result.retestOf = compact.r;
+    return result;
+  } catch (err) {
+    console.error('Failed to decode result parameter:', err);
+    return null;
+  }
+}
+
+/**
+ * Copies a self-contained, domain-agnostic shareable result link to clipboard
+ */
+export async function copyShareLink(result: TestResult, overrideOrigin?: string): Promise<boolean> {
+  const origin = overrideOrigin || (typeof window !== 'undefined' ? window.location.origin : 'https://personality-test.job.web.id');
+  const encoded = encodeResultToUrlParam(result);
+  const shareUrl = `${origin}/result/${result.id}${encoded ? `?res=${encoded}` : ''}`;
   try {
     await navigator.clipboard.writeText(shareUrl);
     return true;

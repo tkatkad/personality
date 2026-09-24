@@ -27,12 +27,15 @@ import { FacetBarChart } from '../components/FacetBarChart';
 import { SkeletonLoader } from '../components/SkeletonLoader';
 import { downloadJSON, copyShareLink, formatDate } from '../lib/utils';
 import { SEO } from '../components/SEO';
+import { PdfReportTemplate } from '../components/PdfReportTemplate';
+import { getCareerDevelopmentGuides, getFutureCareerProjections } from '../lib/recommendations';
 
 export const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
   const { currentResult, language, startRetest } = useTestStore();
+  const pdfTemplateRef = useRef<HTMLDivElement>(null);
 
   const jsonLdData = [
     {
@@ -115,7 +118,7 @@ export const ResultsPage: React.FC = () => {
 
   const handleCopyLink = async () => {
     if (!result) return;
-    const ok = await copyShareLink(result.id);
+    const ok = await copyShareLink(result);
     if (ok) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -123,20 +126,39 @@ export const ResultsPage: React.FC = () => {
   };
 
   const handleDownloadPDF = async () => {
-    if (!reportRef.current) return;
+    const targetEl = pdfTemplateRef.current || reportRef.current;
+    if (!targetEl) return;
     try {
-      const canvas = await html2canvas(reportRef.current, {
+      const canvas = await html2canvas(targetEl, {
         scale: 2,
         useCORS: true,
         logging: false,
-        windowWidth: 1024,
+        width: 750,
       });
+
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pageWidth = pdf.internal.pageSize.getWidth(); // 210 mm
+      const pageHeight = pdf.internal.pageSize.getHeight(); // 297 mm
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // Page 1
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Subsequent pages if long
+      while (heightLeft > 0) {
+        position -= pageHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
       pdf.save(`IPIP-NEO-120-Result-${result?.id.slice(0, 8)}.pdf`);
     } catch (err) {
       console.error('PDF export failed:', err);
@@ -187,7 +209,7 @@ export const ResultsPage: React.FC = () => {
   const topName2 = getDomainName(topDomain2, language);
 
   return (
-    <div className="max-w-4xl mx-auto py-8 space-y-8">
+    <div className="max-w-4xl mx-auto py-12 md:py-20 space-y-10">
       <SEO
         title={
           language === 'es'
@@ -207,12 +229,12 @@ export const ResultsPage: React.FC = () => {
         jsonLd={jsonLdData}
       />
       {/* Action Toolbar Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-2xl shadow-sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 p-6 sm:p-7 rounded-3xl shadow-sm">
         <div>
           <span className="text-[10px] font-semibold tracking-wider uppercase text-indigo-600 dark:text-indigo-400">
             {language === 'es' ? 'Informe Psicométrico' : language === 'en' ? 'Psychometric Report' : 'Laporan Psikometrik'}
           </span>
-          <h1 className="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white">
+          <h1 className="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white leading-tight">
             {language === 'es'
               ? 'Informe de Personalidad IPIP-NEO-120'
               : language === 'en'
@@ -225,10 +247,10 @@ export const ResultsPage: React.FC = () => {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto">
           <button
             onClick={handleCopyLink}
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-semibold text-xs hover:bg-indigo-100 transition-colors"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 font-semibold text-xs sm:text-sm hover:bg-indigo-100 transition-colors"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Share2 className="w-4 h-4" />}
             <span>
@@ -291,7 +313,7 @@ export const ResultsPage: React.FC = () => {
                   ? 'Big Five Domain Radar Overview'
                   : 'Radar Profil Big Five'}
               </h2>
-              <p className="text-xs text-slate-500">
+              <p className="text-sm text-slate-600 dark:text-slate-300">
                 {language === 'es'
                   ? 'Las puntuaciones brutas de cada dominio varían de 24 (mín) a 120 (máx).'
                   : language === 'en'
@@ -324,7 +346,7 @@ export const ResultsPage: React.FC = () => {
                   ? 'Job Seeker Career & Interview Strategy'
                   : 'Panduan Karir & Tips Wawancara Kerja'}
               </h2>
-              <p className="text-xs text-indigo-200">
+              <p className="text-sm text-indigo-100">
                 {language === 'es'
                   ? 'Consejos personalizados para la redacción del CV, entrevistas y cultura laboral.'
                   : language === 'en'
@@ -334,10 +356,10 @@ export const ResultsPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm sm:text-base leading-relaxed">
             {/* Box 1: Highlights for CV */}
             <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
-              <span className="font-bold text-indigo-300 text-sm flex items-center gap-1.5">
+              <span className="font-bold text-indigo-300 text-base flex items-center gap-1.5">
                 <span>🎯</span>{' '}
                 {language === 'es'
                   ? 'Fortalezas clave para el perfil de tu CV'
@@ -345,7 +367,7 @@ export const ResultsPage: React.FC = () => {
                   ? 'Key Strengths for Your CV Profile'
                   : 'Kekuatan Utama Untuk Ditulis di CV'}
               </span>
-              <p className="text-slate-300">
+              <p className="text-slate-200 leading-relaxed">
                 {language === 'es'
                   ? `Tu perfil muestra las mayores puntuaciones en ${topName1} (${result.domains[topDomain1].totalScore}/120) y ${topName2} (${result.domains[topDomain2].totalScore}/120). Destaca tu confiabilidad, atención al detalle y trabajo en equipo en el resumen de tu CV.`
                   : language === 'en'
@@ -356,7 +378,7 @@ export const ResultsPage: React.FC = () => {
 
             {/* Box 2: Interview Tips */}
             <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
-              <span className="font-bold text-emerald-300 text-sm flex items-center gap-1.5">
+              <span className="font-bold text-emerald-300 text-base flex items-center gap-1.5">
                 <span>💬</span>{' '}
                 {language === 'es'
                   ? 'Estrategia para Responder en Entrevistas de RRHH'
@@ -364,7 +386,7 @@ export const ResultsPage: React.FC = () => {
                   ? 'HR Interview Answering Strategy'
                   : 'Tips Menjawab Pertanyaan Interview HRD'}
               </span>
-              <p className="text-slate-300">
+              <p className="text-slate-200 leading-relaxed">
                 {language === 'es'
                   ? 'Cuando te pregunten sobre tu estilo de trabajo, proporciona ejemplos concretos de cómo priorizas tareas, te comunicas con el equipo bajo presión y aprendes nuevas herramientas.'
                   : language === 'en'
@@ -375,7 +397,7 @@ export const ResultsPage: React.FC = () => {
 
             {/* Box 3: Ideal Work Culture */}
             <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
-              <span className="font-bold text-amber-300 text-sm flex items-center gap-1.5">
+              <span className="font-bold text-amber-300 text-base flex items-center gap-1.5">
                 <span>🏢</span>{' '}
                 {language === 'es'
                   ? 'Entorno de Trabajo Ideal'
@@ -383,7 +405,7 @@ export const ResultsPage: React.FC = () => {
                   ? 'Ideal Workplace Environment'
                   : 'Lingkungan Kerja Yang Cocok'}
               </span>
-              <p className="text-slate-300">
+              <p className="text-slate-200 leading-relaxed">
                 {language === 'es'
                   ? 'Prosperas mejor en entornos con objetivos claros, comunicación de equipo constructiva y oportunidades para tomar la iniciativa.'
                   : language === 'en'
@@ -394,7 +416,7 @@ export const ResultsPage: React.FC = () => {
 
             {/* Box 4: Self Growth Note */}
             <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
-              <span className="font-bold text-purple-300 text-sm flex items-center gap-1.5">
+              <span className="font-bold text-purple-300 text-base flex items-center gap-1.5">
                 <span>📈</span>{' '}
                 {language === 'es'
                   ? 'Consejo de Desarrollo Personal'
@@ -402,7 +424,7 @@ export const ResultsPage: React.FC = () => {
                   ? 'Personal Development Tip'
                   : 'Area Pengembangan Diri'}
               </span>
-              <p className="text-slate-300">
+              <p className="text-slate-200 leading-relaxed">
                 {language === 'es'
                   ? 'Mantén un equilibrio saludable entre el trabajo y la vida personal, y practica técnicas de resiliencia ante plazos ajustados.'
                   : language === 'en'
@@ -412,6 +434,182 @@ export const ResultsPage: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Section 1.8: Personal & Career Development Roadmap */}
+        {(() => {
+          const guides = getCareerDevelopmentGuides(result.domains, language);
+          return (
+            <section className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                <div>
+                  <h2 className="font-display font-bold text-xl text-slate-900 dark:text-white flex items-center gap-2">
+                    <span>🚀</span>
+                    <span>
+                      {language === 'es'
+                        ? 'Hoja de Ruta de Desarrollo Personal y Profesional'
+                        : language === 'en'
+                        ? 'Personal & Career Development Roadmap'
+                        : 'Rencana Pengembangan Diri, Studi Lanjutan & Rekomendasi Buku'}
+                    </span>
+                  </h2>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 pt-1">
+                    {language === 'es'
+                      ? 'Recomendaciones personalizadas basadas en tus rasgos de personalidad dominantes.'
+                      : language === 'en'
+                      ? 'Tailored actionable recommendations calculated from your unique Big Five trait profile.'
+                      : 'Rekomendasi tindakan nyata yang disesuaikan secara khusus dengan profil kepribadian Big Five Anda.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Box A: Further Studies */}
+                <div className="p-5 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900 space-y-3">
+                  <h3 className="font-bold text-indigo-900 dark:text-indigo-200 text-sm flex items-center gap-2">
+                    <span className="p-1.5 rounded-lg bg-indigo-600 text-white text-xs">🎓</span>
+                    <span>
+                      {language === 'es'
+                        ? 'Estudios Avanzados y Certificaciones'
+                        : language === 'en'
+                        ? 'Further Studies & Certifications'
+                        : 'Rekomendasi Studi Lanjutan & Sertifikasi'}
+                    </span>
+                  </h3>
+                  <ul className="space-y-2 text-sm sm:text-base text-slate-700 dark:text-slate-200 list-disc list-inside leading-relaxed font-medium">
+                    {guides.furtherStudies.map((study, idx) => (
+                      <li key={idx}>{study}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Box B: Recommended Courses */}
+                <div className="p-5 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 space-y-3">
+                  <h3 className="font-bold text-emerald-900 dark:text-emerald-200 text-sm flex items-center gap-2">
+                    <span className="p-1.5 rounded-lg bg-emerald-600 text-white text-xs">💻</span>
+                    <span>
+                      {language === 'es'
+                        ? 'Cursos y Capacitación'
+                        : language === 'en'
+                        ? 'Recommended Courses & Training'
+                        : 'Kursus & Pelatihan Keahlian'}
+                    </span>
+                  </h3>
+                  <ul className="space-y-2 text-sm sm:text-base text-slate-700 dark:text-slate-200 list-disc list-inside leading-relaxed font-medium">
+                    {guides.recommendedCourses.map((course, idx) => (
+                      <li key={idx}>{course}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Box C: Recommended Books */}
+                <div className="p-5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 space-y-3">
+                  <h3 className="font-bold text-amber-900 dark:text-amber-200 text-sm flex items-center gap-2">
+                    <span className="p-1.5 rounded-lg bg-amber-600 text-white text-xs">📚</span>
+                    <span>
+                      {language === 'es'
+                        ? 'Lista de Lecturas Recomendadas'
+                        : language === 'en'
+                        ? 'Recommended Reading List'
+                        : 'Daftar Buku Wajib Baca'}
+                    </span>
+                  </h3>
+                  <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
+                    {guides.recommendedBooks.map((book, idx) => (
+                      <div key={idx} className="border-b border-amber-200/60 dark:border-amber-900/60 pb-2 last:border-none">
+                        <p className="font-bold text-slate-900 dark:text-slate-100">
+                          "{book.title}" <span className="font-normal text-slate-500">— {book.author}</span>
+                        </p>
+                        <p className="text-[11px] text-slate-600 dark:text-slate-400 italic mt-0.5">{book.reason}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Box D: Daily Exercises */}
+                <div className="p-5 rounded-2xl bg-purple-50/60 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900 space-y-3">
+                  <h3 className="font-bold text-purple-900 dark:text-purple-200 text-sm flex items-center gap-2">
+                    <span className="p-1.5 rounded-lg bg-purple-600 text-white text-xs">🏋️‍♂️</span>
+                    <span>
+                      {language === 'es'
+                        ? 'Ejercicios y Hábitos Diarios'
+                        : language === 'en'
+                        ? 'Daily Practice Exercises & Habits'
+                        : 'Latihan Harian & Kebiasaan Praktis'}
+                    </span>
+                  </h3>
+                  <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300 list-disc list-inside leading-relaxed font-medium">
+                    {guides.dailyExercises.map((exercise, idx) => (
+                      <li key={idx}>{exercise}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </section>
+          );
+        })()}
+
+        {/* Section 1.9: Future Emerging Professions & Roles (2026-2036) */}
+        {(() => {
+          const futureRoles = getFutureCareerProjections(result.domains, language);
+          return (
+            <section className="p-6 sm:p-8 rounded-3xl bg-slate-900 text-white border border-slate-800 shadow-xl space-y-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-mono font-bold border border-indigo-500/30 mb-1">
+                    <span>🔮</span> 2026–2036 Career Horizon
+                  </div>
+                  <h2 className="font-display font-bold text-xl text-white">
+                    {language === 'es'
+                      ? 'Proyección de Profesiología y Lapangan Kerja Masa Depan'
+                      : language === 'en'
+                      ? 'Emerging Future Professions & Career Roles (10-Year Horizon)'
+                      : 'Proyeksi Profesi Masa Depan & Lapangan Kerja (10 Tahun Ke Depan)'}
+                  </h2>
+                  <p className="text-sm text-slate-300 pt-1">
+                    {language === 'es'
+                      ? 'Nuevas profesiones que surgirán por la aceleración tecnológica y cambios globales adaptadas a tu kepribadian.'
+                      : language === 'en'
+                      ? 'Concrete emerging jobs driven by AI adoption, sustainability, and digital economy tailored to your Big Five profile.'
+                      : 'Contoh konkret profesi masa depan yang akan tumbuh pesat akibat perkembangan AI, otomatisasi, dan transformasi digital yang sangat cocok dengan karakteristik kepribadian Anda.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {futureRoles.map((role, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 space-y-2.5 flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-indigo-300 bg-indigo-950/80 border border-indigo-800/80 px-2.5 py-0.5 rounded-full">
+                          {role.field}
+                        </span>
+                        <span className="text-xs font-extrabold text-emerald-300 bg-emerald-950/80 border border-emerald-800/80 px-2.5 py-0.5 rounded-full">
+                          {role.growthTag}
+                        </span>
+                      </div>
+
+                      <h3 className="font-bold text-base sm:text-lg text-white">{role.title}</h3>
+                      <p className="text-sm sm:text-base text-slate-200 leading-relaxed">{role.description}</p>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-700/60 flex items-center gap-2 flex-wrap">
+                      <span className="text-xs sm:text-sm font-bold text-indigo-300 shrink-0">
+                        {language === 'es' ? 'Keahlian:' : language === 'en' ? 'Key Skills:' : 'Keahlian Kunci:'}
+                      </span>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {role.keySkills.map((sk, skIdx) => (
+                          <span key={skIdx} className="text-xs font-mono font-semibold bg-slate-900 text-slate-200 px-2 py-0.5 rounded border border-slate-700">
+                            {sk}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* Section 2: 5 Domain Cards Breakdown */}
         <section className="space-y-6">
@@ -449,7 +647,7 @@ export const ResultsPage: React.FC = () => {
                         <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white">
                           {domName}
                         </h3>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                        <p className="text-sm text-slate-600 dark:text-slate-300">
                           {domTagline}
                         </p>
                       </div>
@@ -460,7 +658,7 @@ export const ResultsPage: React.FC = () => {
                         {dom.totalScore} <span className="text-xs text-slate-400 font-normal">/ 120</span>
                       </div>
                       <span
-                        className={`inline-block px-2 py-0.5 rounded text-[11px] font-semibold ${
+                        className={`inline-block px-2.5 py-1 rounded text-xs font-semibold ${
                           dom.level === 'High'
                             ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300'
                             : dom.level === 'Low'
@@ -473,7 +671,7 @@ export const ResultsPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-300 pt-1 border-t border-slate-100 dark:border-slate-800">
+                  <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-200 pt-1 border-t border-slate-100 dark:border-slate-800">
                     {domDesc}
                   </p>
                 </div>
@@ -493,7 +691,7 @@ export const ResultsPage: React.FC = () => {
                   ? '30 Facet Breakdown'
                   : 'Rincian 30 Sub-Faset Kepribadian'}
               </h2>
-              <p className="text-xs text-slate-500">
+              <p className="text-sm text-slate-600 dark:text-slate-300">
                 {language === 'es'
                   ? 'Cada faceta se evalúa en una escala de 4 a 20 basada en 4 ítems.'
                   : language === 'en'
@@ -503,7 +701,7 @@ export const ResultsPage: React.FC = () => {
             </div>
 
             {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-1 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-medium">
+            <div className="flex flex-wrap gap-1 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs sm:text-sm font-medium">
               <button
                 onClick={() => setSelectedDomainTab('ALL')}
                 className={`px-3 py-1.5 rounded-lg transition-colors ${
@@ -534,9 +732,9 @@ export const ResultsPage: React.FC = () => {
         </section>
 
         {/* Section 4: Methodology & Citations Summary */}
-        <section className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs space-y-3">
-          <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white text-sm">
-            <BookOpen className="w-4 h-4 text-indigo-600" />
+        <section className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm sm:text-base space-y-3">
+          <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white text-base">
+            <BookOpen className="w-5 h-5 text-indigo-600" />
             <span>
               {language === 'es'
                 ? 'Resumen de Metodología y Citas'
@@ -546,7 +744,7 @@ export const ResultsPage: React.FC = () => {
             </span>
           </div>
 
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+          <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
             {language === 'es'
               ? 'Este informe fue generado utilizando el motor de puntuación puro en TypeScript de IPIP-NEO-120. Las respuestas ponderadas (+/-) se mapean automáticamente a escalas invertidas, produciendo 30 puntuaciones de facetas (rango 4-20) y 5 totales de dominio (rango 24-120).'
               : language === 'en'
@@ -554,7 +752,7 @@ export const ResultsPage: React.FC = () => {
               : 'Laporan ini dihitung menggunakan scoring engine murni IPIP-NEO-120. Item berskor terbalik (+/-) dikonversi secara otomatis untuk menghasilkan 30 skor faset (skala 4-20) dan 5 total domain (skala 24-120).'}
           </p>
 
-          <div className="pt-2 border-t border-slate-200 dark:border-slate-800 font-mono text-[11px] text-slate-500">
+          <div className="pt-2 border-t border-slate-200 dark:border-slate-800 font-mono text-xs sm:text-sm text-slate-500">
             Citation: Johnson, J. A. (2014). Journal of Research in Personality, 51, 78–89.
           </div>
         </section>
@@ -563,14 +761,14 @@ export const ResultsPage: React.FC = () => {
       {/* Retest CTA Card */}
       <div className="p-6 rounded-2xl bg-indigo-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
         <div className="space-y-1 text-center sm:text-left">
-          <h3 className="font-bold text-base">
+          <h3 className="font-bold text-base sm:text-lg">
             {language === 'es'
               ? 'Participar en la Sesión de Test-Retest'
               : language === 'en'
               ? 'Participate in Test-Retest Study'
               : 'Ikuti Sesi Test-Retest Ulang'}
           </h3>
-          <p className="text-xs text-indigo-200">
+          <p className="text-sm text-indigo-100">
             {language === 'es'
               ? '¿Deseas probar la estabilidad de tus rasgos después de 2 semanas o 1 mes?'
               : language === 'en'
@@ -595,6 +793,13 @@ export const ResultsPage: React.FC = () => {
               : 'Mulai Sesi Retest'}
           </span>
         </button>
+      </div>
+
+      {/* Off-screen High-Legibility PDF Template Container */}
+      <div style={{ position: 'absolute', left: '-9999px', top: '0', pointerEvents: 'none' }}>
+        <div ref={pdfTemplateRef}>
+          <PdfReportTemplate result={result} language={language} />
+        </div>
       </div>
     </div>
   );

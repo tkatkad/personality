@@ -41,7 +41,7 @@ export const App: React.FC = () => {
       <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-200 selection:bg-indigo-500 selection:text-white">
         <Header />
         
-        <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6">
+        <main className="flex-1 max-w-6xl w-full mx-auto px-6 sm:px-8 md:px-12">
           <ErrorBoundary>
             <Routes>
               <Route path="/" element={<LandingPage />} />

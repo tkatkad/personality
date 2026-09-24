@@ -7,13 +7,13 @@ export const Footer: React.FC = () => {
   const { language } = useTestStore();
 
   return (
-    <footer className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 text-xs py-10 transition-colors">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+    <footer className="border-t border-slate-200/80 dark:border-slate-800/80 bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 text-sm sm:text-base py-16 md:py-20 transition-colors">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 space-y-12">
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {/* Col 1: Scientific Citation */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100 text-sm">
+            <div className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100 text-base">
               <BookOpen className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               <span>
                 {language === 'es'
@@ -23,18 +23,18 @@ export const Footer: React.FC = () => {
                   : 'Sitasi Ilmiah Utama'}
               </span>
             </div>
-            <p className="leading-relaxed text-slate-500 dark:text-slate-400 italic">
+            <p className="leading-relaxed text-slate-600 dark:text-slate-300 text-sm italic">
               Johnson, J. A. (2014). Measuring thirty facets of the Five Factor Model with a 120-item public domain inventory: Development of the IPIP-NEO-120. 
-              <span className="font-semibold text-slate-700 dark:text-slate-300"> Journal of Research in Personality</span>, 51, 78–89.
+              <span className="font-semibold text-slate-800 dark:text-slate-200"> Journal of Research in Personality</span>, 51, 78–89.
             </p>
-            <div className="pt-1 flex flex-wrap gap-3">
+            <div className="pt-1 flex flex-wrap gap-3 text-xs sm:text-sm">
               <a
                 href="https://ipip.ori.org/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
               >
-                IPIP Repository (ipip.ori.org) <ExternalLink className="w-3 h-3" />
+                IPIP Repository (ipip.ori.org) <ExternalLink className="w-3.5 h-3.5" />
               </a>
               <a
                 href="https://doi.org/10.1016/j.jrp.2014.05.003"
@@ -42,14 +42,14 @@ export const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
               >
-                DOI Paper <ExternalLink className="w-3 h-3" />
+                DOI Paper <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
 
           {/* Col 2: Clinical Disclaimer */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 font-semibold text-amber-700 dark:text-amber-400 text-sm">
+            <div className="flex items-center gap-2 font-semibold text-amber-700 dark:text-amber-400 text-base">
               <ShieldAlert className="w-4 h-4 text-amber-500" />
               <span>
                 {language === 'es'
@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
                   : 'Disclaimer Klinis Penting'}
               </span>
             </div>
-            <p className="leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="leading-relaxed text-slate-600 dark:text-slate-300 text-sm">
               {language === 'es'
                 ? 'Esta evaluación se proporciona únicamente con fines educativos, de autoexploración y de investigación académica. NO es un instrumento de diagnóstico clínico ni una herramienta de evaluación psiquiátrica. Para asesoramiento psicológico, consulte a un profesional de la salud mental.'
                 : language === 'en'
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Research & Open Source */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100 text-sm">
+            <div className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100 text-base">
               <HeartHandshake className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>
                 {language === 'es'
@@ -80,14 +80,14 @@ export const Footer: React.FC = () => {
                   : 'Riset Terbuka & Etika'}
               </span>
             </div>
-            <p className="leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="leading-relaxed text-slate-600 dark:text-slate-300 text-sm">
               {language === 'es'
                 ? 'Los datos se recopilan de forma anónima con consentimiento para análisis psicométricos y estudios de fiabilidad test-retest de acuerdo con los estándares éticos de la APA.'
                 : language === 'en'
                 ? 'Data is collected anonymously with consent for psychometric analysis and test-retest reliability studies in accordance with APA ethical standards.'
                 : 'Data disimpan secara anonim dengan persetujuan (consent) untuk analisis psikometrik dan studi reliabilitas test-retest sesuai standar etika ilmiah.'}
             </p>
-            <div className="pt-2 flex items-center gap-4 text-slate-500">
+            <div className="pt-2 flex items-center gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium">
               <Link to="/methodology" className="hover:text-indigo-600 dark:hover:text-indigo-400 underline">
                 {language === 'es'
                   ? 'Metodología y Fiabilidad'
@@ -108,20 +108,21 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Parent Website Co-branding Banner */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <div className="p-4 sm:p-5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <div className="flex items-center gap-3 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center text-xs shrink-0 shadow-sm">
-              JOB
+            <div className="w-10 h-10 rounded-xl bg-indigo-600 dark:bg-indigo-500 text-white flex flex-col items-center justify-center shadow-md font-black leading-none shrink-0">
+              <span className="text-[12px] font-black tracking-tight leading-none text-white">JOB</span>
+              <span className="text-[8px] font-extrabold tracking-wider text-amber-300 leading-none mt-0.5">WEB</span>
             </div>
             <div>
-              <span className="font-extrabold text-slate-900 dark:text-white text-sm">
+              <span className="font-extrabold text-slate-900 dark:text-white text-base">
                 {language === 'es'
                   ? 'Job.Web.ID — Portal de Empleo y Desarrollo Profesional'
                   : language === 'en'
                   ? 'Job.Web.ID — Job Vacancy & Career Development Portal'
                   : 'Job.Web.ID — Portal Lowongan Kerja & Pengembangan Karir Indonesia'}
               </span>
-              <p className="text-slate-600 dark:text-slate-400 text-xs">
+              <p className="text-slate-600 dark:text-slate-300 text-sm">
                 {language === 'es'
                   ? 'Plataforma principal para ofertas de trabajo, herramientas de evaluación de carrera y orientación profesional.'
                   : language === 'en'
@@ -134,7 +135,7 @@ export const Footer: React.FC = () => {
             href="https://job.web.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs inline-flex items-center gap-1.5 shrink-0 transition-colors shadow-sm"
+            className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm inline-flex items-center gap-1.5 shrink-0 transition-colors shadow-sm"
           >
             <span>
               {language === 'es'
@@ -143,7 +144,7 @@ export const Footer: React.FC = () => {
                 ? 'Visit Job.Web.ID'
                 : 'Kunjungi Job.Web.ID'}
             </span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-4 h-4" />
           </a>
         </div>
 

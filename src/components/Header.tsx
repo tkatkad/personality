@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md transition-colors duration-200">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 h-16 flex items-center justify-between">
         {/* Zone 1: Co-branded Boxed Logo Lockup */}
         <div className="flex items-center gap-2 sm:gap-3">
           <a
@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
             title="Job.Web.ID - Portal Kerja Indonesia"
           >
             <div className="w-9 h-9 rounded-xl bg-indigo-600 dark:bg-indigo-500 text-white flex flex-col items-center justify-center shadow-md font-black leading-none shrink-0">
-              <span className="text-[11px] font-black tracking-tight leading-none">JOB</span>
+              <span className="text-[11px] font-black tracking-tight leading-none text-white">JOB</span>
               <span className="text-[7.5px] font-extrabold tracking-wider text-amber-300 leading-none mt-0.5">WEB</span>
             </div>
           </a>

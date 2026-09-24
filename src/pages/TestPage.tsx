@@ -127,7 +127,7 @@ export const TestPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-6 space-y-6">
+    <div className="max-w-2xl mx-auto py-8 sm:py-12 space-y-8">
       <SEO
         title={
           language === 'es'
@@ -147,12 +147,12 @@ export const TestPage: React.FC = () => {
         jsonLd={jsonLdData}
       />
       {/* Top Header & Viewport Mode Controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-sm">
-        <div>
-          <h1 className="font-display font-bold text-lg text-slate-900 dark:text-white">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm">
+        <div className="space-y-1">
+          <h1 className="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">
             {language === 'en' ? 'IPIP-NEO-120 Assessment' : 'Tes Kepribadian IPIP-NEO-120'}
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
             {language === 'en'
               ? 'Rate how accurately each statement describes you.'
               : 'Pilih seberapa akurat setiap pernyataan menggambarkan diri Anda.'}
@@ -160,14 +160,14 @@ export const TestPage: React.FC = () => {
         </div>
 
         {/* View mode toggle (1 item vs 3 items per view) */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <span className="text-xs text-slate-500 hidden sm:inline">
             {language === 'en' ? 'View mode:' : 'Tampilan:'}
           </span>
           <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
             <button
               onClick={() => setPageSize(1)}
-              className={`px-3 py-1 rounded-lg transition-colors ${
+              className={`px-3.5 py-1.5 rounded-lg transition-colors ${
                 pageSize === 1
                   ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
@@ -177,7 +177,7 @@ export const TestPage: React.FC = () => {
             </button>
             <button
               onClick={() => setPageSize(3)}
-              className={`px-3 py-1 rounded-lg transition-colors hidden sm:block ${
+              className={`px-3.5 py-1.5 rounded-lg transition-colors hidden sm:block ${
                 pageSize === 3
                   ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
@@ -193,7 +193,7 @@ export const TestPage: React.FC = () => {
       <ProgressBar onOpenItemDrawer={() => setDrawerOpen(true)} />
 
       {/* Questions List */}
-      <div className="space-y-6">
+      <div className="space-y-6 sm:space-y-8">
         {currentItems.map((item) => {
           const itemAnswer = answers[item.id];
           const domainMeta = DOMAIN_METADATA[item.domain];
@@ -201,11 +201,11 @@ export const TestPage: React.FC = () => {
           return (
             <div
               key={item.id}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-all"
+              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-5 transition-all"
             >
               {/* Question Item Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 dark:border-slate-800/80">
+                <div className="flex items-center gap-2.5">
                   <span className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-mono font-bold text-xs flex items-center justify-center">
                     #{item.id}
                   </span>
@@ -215,7 +215,7 @@ export const TestPage: React.FC = () => {
                 </div>
 
                 {itemAnswer && (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-200/60 dark:border-emerald-900/60">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     {language === 'en' ? 'Answered' : 'Terjawab'}
                   </span>
@@ -223,8 +223,8 @@ export const TestPage: React.FC = () => {
               </div>
 
               {/* Question Text */}
-              <div className="py-2 space-y-1">
-                <p className="font-display font-semibold text-lg sm:text-xl text-slate-900 dark:text-white leading-relaxed">
+              <div className="py-2 space-y-1.5">
+                <p className="font-display font-semibold text-lg sm:text-xl text-slate-900 dark:text-white leading-relaxed sm:leading-relaxed">
                   "{language === 'en' ? item.textEn : item.textId}"
                 </p>
                 {language === 'en' && item.textId && (
@@ -250,13 +250,13 @@ export const TestPage: React.FC = () => {
         })}
       </div>
 
-      {/* Navigation Controls Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-        <div className="flex items-center gap-2 w-full sm:w-auto">
+      {/* Navigation Controls Bar with gap-4 sm:gap-6 */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 pt-6 border-t border-slate-200/80 dark:border-slate-800/80">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
             onClick={prevQuestion}
             disabled={currentQuestionIndex === 0}
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs transition-colors"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>{language === 'en' ? 'Previous' : 'Sebelumnya'}</span>
@@ -265,14 +265,14 @@ export const TestPage: React.FC = () => {
           <button
             onClick={nextQuestion}
             disabled={currentQuestionIndex + pageSize >= totalItems}
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs transition-colors"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm transition-colors"
           >
             <span>{language === 'en' ? 'Next' : 'Selanjutnya'}</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
             onClick={() => {
               saveForLater();
@@ -282,17 +282,17 @@ export const TestPage: React.FC = () => {
                   : 'Progres jawaban Anda telah tersimpan di browser! Anda dapat melanjutkan kapan saja.'
               );
             }}
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-xs transition-colors"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-xs sm:text-sm transition-colors"
           >
             <Save className="w-4 h-4 text-slate-500" />
-            <span>{language === 'en' ? 'Save & Continue Later' : 'Simpan & Lanjut Nanti'}</span>
+            <span>{language === 'en' ? 'Save & Continue' : 'Simpan Progres'}</span>
           </button>
 
           {/* Submit Button */}
           <button
             onClick={handleFinish}
             disabled={!isAllAnswered || isSubmitting}
-            className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all ${
               isAllAnswered
                 ? 'bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer ring-2 ring-emerald-400'
                 : 'bg-slate-300 dark:bg-slate-800 text-slate-500 dark:text-slate-500 cursor-not-allowed'
