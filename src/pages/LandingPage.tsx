@@ -170,15 +170,15 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-3xl space-y-6 relative z-10">
           {/* Header Row: Badge & Prominent Hero Language Switcher */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            {/* Friendly Youth Job Seeker Badge */}
+            {/* Friendly Job Seeker Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               <span>
                 {language === 'es'
-                  ? 'Autoevaluación de Carrera para Jóvenes (20–30 Años)'
+                  ? 'Autoevaluación de Carrera para Solicitantes de Empleo'
                   : language === 'en'
-                  ? 'Job Seeker Self-Assessment · Ages 20–30'
-                  : 'Self-Assessment Karir Pencari Kerja Online (Usia 20–30 Tahun)'}
+                  ? 'Job Seeker Self-Assessment'
+                  : 'Self-Assessment Karir Pencari Kerja Online'}
               </span>
             </div>
 
@@ -311,7 +311,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4 Pillars for Job Seekers (Usia 20-30 Tahun) */}
+      {/* 4 Pillars for Job Seekers */}
       <section className="space-y-6">
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
@@ -756,8 +756,8 @@ export const LandingPage: React.FC = () => {
                         ? language === 'es'
                           ? 'Profesional analítico y estructurado con alta puntuación en Responsabilidad (94/120). Orientado al detalle, gestión de proyectos con plazos rigurosos y altos estándares de calidad.'
                           : language === 'en'
-                          ? 'Analytical and structured young professional with high Conscientiousness (94/120). Proven track record in detailed task management, systematic scheduling, and delivering error-free output on deadline.'
-                          : 'Profesional muda yang analitis dan terstruktur dengan skor Conscientiousness tinggi (94/120). Terbiasa bekerja dengan ketelitian tinggi, mengelola jadwal proyek secara teratur, dan memastikan kepatuhan pada standar kualitas tanpa mengorbankan kecepatan.'
+                          ? 'Analytical and structured professional with high Conscientiousness (94/120). Proven track record in detailed task management, systematic scheduling, and delivering error-free output on deadline.'
+                          : 'Profesional yang analitis dan terstruktur dengan skor Conscientiousness tinggi (94/120). Terbiasa bekerja dengan ketelitian tinggi, mengelola jadwal proyek secara teratur, dan memastikan kepatuhan pada standar kualitas tanpa mengorbankan kecepatan.'
                         : language === 'es'
                         ? 'Profesional dinámico y comunicativo con alta Extraversión (92/120) y Amabilidad (88/120). Hábil en trabajo en equipo, colaboración multifuncional y relaciones con clientes.'
                         : language === 'en'
@@ -781,8 +781,8 @@ export const LandingPage: React.FC = () => {
                   ? (language === 'es'
                       ? '"Profesional analítico y estructurado con alta puntuación en Responsabilidad (94/120). Orientado al detalle, gestión de proyectos con plazos rigurosos y altos estándares de calidad."'
                       : language === 'en'
-                      ? '"An analytical and structured young professional with high Conscientiousness (94/120). Proven track record in detailed task management, systematic scheduling, and delivering error-free output on deadline."'
-                      : '"Profesional muda yang analitis dan terstruktur dengan skor Conscientiousness tinggi (94/120). Terbiasa bekerja dengan ketelitian tinggi, mengelola jadwal proyek secara teratur, dan memastikan kepatuhan pada standar kualitas tanpa mengorbankan kecepatan."')
+                      ? '"An analytical and structured professional with high Conscientiousness (94/120). Proven track record in detailed task management, systematic scheduling, and delivering error-free output on deadline."'
+                      : '"Profesional yang analitis dan terstruktur dengan skor Conscientiousness tinggi (94/120). Terbiasa bekerja dengan ketelitian tinggi, mengelola jadwal proyek secara teratur, dan memastikan kepatuhan pada standar kualitas tanpa mengorbankan kecepatan."')
                   : (language === 'es'
                       ? '"Profesional dinámico y comunicativo con alta Extraversión (92/120) y Amabilidad (88/120). Hábil en trabajo en equipo, colaboración multifuncional y relaciones con clientes."'
                       : language === 'en'
