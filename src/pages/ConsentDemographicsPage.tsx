@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, UserCheck, ArrowRight, Info, Key, FileText } from 'lucide-react';
 import { useTestStore } from '../stores/testStore';
+import { SEO } from '../components/SEO';
 
 export const ConsentDemographicsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -10,6 +11,34 @@ export const ConsentDemographicsPage: React.FC = () => {
   const [age, setAge] = useState<string>(demographics.age ? String(demographics.age) : '');
   const [gender, setGender] = useState<string>(demographics.gender || '');
   const [consent, setConsent] = useState<boolean>(demographics.consent !== false);
+
+  const jsonLdData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Persetujuan Etika & Data Demografi – IPIP-NEO-120',
+      url: 'https://personality-test.job.web.id/consent',
+      description: 'Halaman persetujuan etika riset anonim dan pengisian data demografi opsional sebelum memulai tes kepribadian IPIP-NEO-120.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://personality-test.job.web.id/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Persetujuan Etika',
+          item: 'https://personality-test.job.web.id/consent',
+        },
+      ],
+    },
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,15 +54,39 @@ export const ConsentDemographicsPage: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto py-8 space-y-8">
+      <SEO
+        title={
+          language === 'es'
+            ? 'Consentimiento Ético y Demografía – IPIP-NEO-120'
+            : language === 'en'
+            ? 'Ethics Consent & Demographics – IPIP-NEO-120 Personality Test'
+            : 'Persetujuan Etika & Demografi – IPIP-NEO-120 Personality Test'
+        }
+        description={
+          language === 'es'
+            ? 'Confirmación de consentimiento ético anónimo e información demográfica opcional antes de iniciar la prueba de personalidad IPIP-NEO-120.'
+            : language === 'en'
+            ? 'Ethics consent confirmation and optional demographics before starting the IPIP-NEO-120 personality assessment.'
+            : 'Konfirmasi persetujuan etika riset anonim dan pengisian data demografi opsional sebelum memulai tes kepribadian IPIP-NEO-120.'
+        }
+        path="/consent"
+        jsonLd={jsonLdData}
+      />
       {/* Title Header */}
       <div className="space-y-2 text-center sm:text-left">
         <h1 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white">
-          {language === 'en' ? 'Consent & Optional Demographics' : 'Persetujuan (Consent) & Demografi'}
+          {language === 'es'
+            ? 'Configuración Rápida Antes de tu Test'
+            : language === 'en'
+            ? 'Quick Setup Before Your Test'
+            : 'Persiapan Singkat Sebelum Tes Karir'}
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          {language === 'en'
-            ? 'Before beginning the 120-item test, please review research consent guidelines.'
-            : 'Sebelum memulai tes 120-item, silakan tinjau informasi persetujuan partisipasi.'}
+          {language === 'es'
+            ? '¡Relájate! No hay respuestas correctas o incorrectas. Simplemente responde según tus hábitos y sensaciones habituales.'
+            : language === 'en'
+            ? 'Relax! There are no right or wrong answers. Just answer based on how you usually feel and act.'
+            : 'Santai saja! Tidak ada jawaban salah atau benar. Isilah pertanyaan sesuai dengan kebiasaan dan kondisi aslimu.'}
         </p>
       </div>
 
@@ -44,27 +97,41 @@ export const ConsentDemographicsPage: React.FC = () => {
             <Key className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
             <div>
               <span className="font-semibold text-slate-800 dark:text-slate-200">
-                {language === 'en' ? 'Your Anonymous Participant UUID:' : 'UUID Responden Anonim Anda:'}
+                {language === 'es'
+                  ? 'Tu UUID Anónimo de Participante:'
+                  : language === 'en'
+                  ? 'Your Anonymous Participant UUID:'
+                  : 'UUID Responden Anonim Anda:'}
               </span>
               <p className="font-mono text-indigo-700 dark:text-indigo-300 font-bold select-all">
                 {uuid}
               </p>
             </div>
           </div>
-          <span className="text-[10px] text-slate-500 hidden sm:inline">Auto-generated</span>
+          <span className="text-[10px] text-slate-500 hidden sm:inline">
+            {language === 'es' ? 'Generado automáticamente' : 'Auto-generated'}
+          </span>
         </div>
 
         {/* Consent Card */}
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-base border-b border-slate-100 dark:border-slate-800 pb-3">
             <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-            <span>{language === 'en' ? 'Research Data Consent' : 'Persetujuan Pengumpulan Data Anonim'}</span>
+            <span>
+              {language === 'es'
+                ? 'Consentimiento de Datos de Investigación'
+                : language === 'en'
+                ? 'Research Data Consent'
+                : 'Persetujuan Pengumpulan Data Anonim'}
+            </span>
           </div>
 
           <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-            {language === 'en'
-              ? 'By checking this box, you agree that your 120 item responses and optional demographic information will be stored anonymously in our Cloudflare D1 research database for psychometric evaluation and test-retest reliability studies based on Johnson (2014).'
-              : 'Dengan mencentang opsi ini, Anda menyetujui bahwa jawaban 120 soal dan data demografi opsional Anda disimpan secara anonim di database Cloudflare D1 untuk riset psikometrik dan evaluasi reliabilitas test-retest.'}
+            {language === 'es'
+              ? 'Al marcar esta casilla, aceptas que tus respuestas de 120 ítems e información demográfica opcional se almacenen de forma anónima en nuestra base de datos de investigación para evaluaciones psicométricas y estudios de confiabilidad test-retest basados en Johnson (2014).'
+              : language === 'en'
+              ? 'By checking this box, you agree that your 120 item responses and optional demographic information will be stored anonymously in our research database for psychometric evaluation and test-retest reliability studies based on Johnson (2014).'
+              : 'Dengan mencentang opsi ini, Anda menyetujui bahwa jawaban 120 soal dan data demografi opsional Anda disimpan secara anonim di database untuk riset psikometrik dan evaluasi reliabilitas test-retest.'}
           </p>
 
           <label className="flex items-start gap-3 pt-2 cursor-pointer group">
@@ -75,7 +142,9 @@ export const ConsentDemographicsPage: React.FC = () => {
               className="mt-0.5 w-4 h-4 text-indigo-600 rounded border-slate-300 dark:border-slate-700 focus:ring-indigo-500"
             />
             <span className="text-xs font-medium text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-              {language === 'en'
+              {language === 'es'
+                ? 'Acepto la recopilación anónima de respuestas para fines de investigación.'
+                : language === 'en'
                 ? 'I consent to anonymous response data collection for research purposes.'
                 : 'Saya setuju data jawaban disimpan secara anonim untuk keperluan penelitian.'}
             </span>
@@ -87,10 +156,16 @@ export const ConsentDemographicsPage: React.FC = () => {
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
             <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-base">
               <UserCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-              <span>{language === 'en' ? 'Demographic Information' : 'Informasi Demografi'}</span>
+              <span>
+                {language === 'es'
+                  ? 'Información Demográfica'
+                  : language === 'en'
+                  ? 'Demographic Information'
+                  : 'Informasi Demografi'}
+              </span>
             </div>
             <span className="text-[11px] font-semibold text-slate-400">
-              {language === 'en' ? 'Optional' : 'Opsional'}
+              {language === 'es' ? 'Opcional' : language === 'en' ? 'Optional' : 'Opsional'}
             </span>
           </div>
 
@@ -98,7 +173,7 @@ export const ConsentDemographicsPage: React.FC = () => {
             {/* Age Field */}
             <div className="space-y-1.5">
               <label className="font-semibold text-slate-700 dark:text-slate-300">
-                {language === 'en' ? 'Age (Years)' : 'Usia (Tahun)'}
+                {language === 'es' ? 'Edad (Años)' : language === 'en' ? 'Age (Years)' : 'Usia (Tahun)'}
               </label>
               <input
                 type="number"
@@ -114,18 +189,36 @@ export const ConsentDemographicsPage: React.FC = () => {
             {/* Gender Field */}
             <div className="space-y-1.5">
               <label className="font-semibold text-slate-700 dark:text-slate-300">
-                {language === 'en' ? 'Gender' : 'Jenis Kelamin'}
+                {language === 'es' ? 'Género' : language === 'en' ? 'Gender' : 'Jenis Kelamin'}
               </label>
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                <option value="">{language === 'en' ? '-- Select (Optional) --' : '-- Pilih (Opsional) --'}</option>
-                <option value="male">{language === 'en' ? 'Male' : 'Laki-laki'}</option>
-                <option value="female">{language === 'en' ? 'Female' : 'Perempuan'}</option>
-                <option value="non-binary">Non-binary</option>
-                <option value="prefer-not-to-say">{language === 'en' ? 'Prefer not to say' : 'Tidak ingin menyebutkan'}</option>
+                <option value="">
+                  {language === 'es'
+                    ? '-- Seleccionar (Opcional) --'
+                    : language === 'en'
+                    ? '-- Select (Optional) --'
+                    : '-- Pilih (Opsional) --'}
+                </option>
+                <option value="male">
+                  {language === 'es' ? 'Masculino' : language === 'en' ? 'Male' : 'Laki-laki'}
+                </option>
+                <option value="female">
+                  {language === 'es' ? 'Femenino' : language === 'en' ? 'Female' : 'Perempuan'}
+                </option>
+                <option value="non-binary">
+                  {language === 'es' ? 'No binario' : 'Non-binary'}
+                </option>
+                <option value="prefer-not-to-say">
+                  {language === 'es'
+                    ? 'Prefiero no decirlo'
+                    : language === 'en'
+                    ? 'Prefer not to say'
+                    : 'Tidak ingin menyebutkan'}
+                </option>
               </select>
             </div>
           </div>
@@ -137,7 +230,13 @@ export const ConsentDemographicsPage: React.FC = () => {
             type="submit"
             className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg transition-all active:scale-[0.99]"
           >
-            <span>{language === 'en' ? 'Start 120-Item Assessment' : 'Mulai Pengerjaan 120 Soal'}</span>
+            <span>
+              {language === 'es'
+                ? 'Comenzar Evaluación de 120 Ítems'
+                : language === 'en'
+                ? 'Start 120-Item Assessment'
+                : 'Mulai Pengerjaan 120 Soal'}
+            </span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

@@ -108,3 +108,39 @@ CREATE INDEX IF NOT EXISTS idx_responses_retest ON responses(retest_of);
 ### 3. Ketahanan & Resiliensi API
 - **Dukungan CORS**: Konfigurasi header CORS untuk interaksi aman.
 - **Fallback Client-Side**: Jika backend D1 atau Worker tidak dapat diakses (misal saat mode luring), aplikasi secara otomatis membaca dan menyimpan hasil dari Zustand / `localStorage` tanpa mengganggu pengalaman pengguna.
+
+---
+
+## 🔍 METADATA & SCHEMA JSON-LD UNTUK SETIAP HALAMAN
+
+Setiap halaman web diinjeksi secara dinamis dengan **Schema.org Structured Data (JSON-LD)** untuk mengoptimalkan SEO dan tampilan rich snippets pada mesin pencari (Google, Bing, dll.):
+
+1. **Halaman Utam / Landing Page (`/`)**:
+   - `WebApplication`: Menyebutkan nama aplikasi, kategori `EducationalApplication`, operasional gratis (`Offer`), serta pencipta Dr. John A. Johnson (2014).
+   - `FAQPage`: Menjawab pertanyaan umum (IPIP-NEO-120, durasi tes 10-15 menit, gratis tanpa pendaftaran).
+   - `BreadcrumbList`: Struktur navigasi hirarkis.
+
+2. **Halaman Consent & Demografi (`/consent`)**:
+   - `WebPage`: Deskripsi etika riset anonim dan demografi.
+   - `BreadcrumbList`: Home > Persetujuan Etika.
+
+3. **Halaman Kuesioner Tes 120 Soal (`/test`)**:
+   - `Quiz` / `Assessment`: Properti tes evaluasi psikometri 120 item skala Likert.
+   - `BreadcrumbList`: Home > Kuesioner Tes.
+
+4. **Halaman Hasil Laporan Psikometri (`/result/:id`)**:
+   - `ItemPage` & `MedicalWebPage`: Laporan analisis kepribadian Big Five & 30 sub-faset.
+   - `BreadcrumbList`: Home > Hasil Laporan.
+
+5. **Halaman Metodologi Ilmiah (`/methodology`)**:
+   - `ScholarlyArticle`: Penjelasan validitas psikometri, Cronbach’s Alpha, korelasi item-total, dan sitasi DOI Johnson (2014).
+   - `BreadcrumbList`: Home > Metodologi.
+
+6. **Halaman Studi Test-Retest (`/retest`)**:
+   - `MedicalWebPage`: Protokol pengujian stabilitas kepribadian dari waktu ke waktu.
+   - `BreadcrumbList`: Home > Studi Test-Retest.
+
+7. **Halaman Kebijakan Privasi (`/privacy`)**:
+   - `WebPage`: Jaminan Zero PII & keamanan data anonim.
+   - `BreadcrumbList`: Home > Kebijakan Privasi.
+

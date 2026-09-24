@@ -16,9 +16,43 @@ import { useTestStore } from '../stores/testStore';
 import { IPIP_120_ITEMS, DOMAIN_METADATA } from '../data/ipip-neo-120';
 import { LikertScale } from '../components/LikertScale';
 import { ProgressBar } from '../components/ProgressBar';
+import { SEO } from '../components/SEO';
 
 export const TestPage: React.FC = () => {
   const navigate = useNavigate();
+
+  const jsonLdData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Quiz',
+      name: 'Kuesioner IPIP-NEO-120 Big Five Personality Test',
+      url: 'https://personality-test.job.web.id/test',
+      description: 'Kuesioner 120 item pertanyaan skala Likert untuk mengukur Neuroticism, Extraversion, Openness, Agreeableness, dan Conscientiousness.',
+      educationalUse: 'Assessment',
+      about: {
+        '@type': 'Thing',
+        name: 'Big Five personality traits',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://personality-test.job.web.id/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Kuesioner Tes',
+          item: 'https://personality-test.job.web.id/test',
+        },
+      ],
+    },
+  ];
   const {
     answers,
     setAnswer,
@@ -83,6 +117,12 @@ export const TestPage: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
+      <SEO
+        title="Kuesioner Tes Kepribadian IPIP-NEO-120"
+        description="Jawab 120 item pertanyaan tes kepribadian IPIP-NEO-120 secara online. Dilengkapi keyboard navigation, auto-save, dan progress bar."
+        path="/test"
+        jsonLd={jsonLdData}
+      />
       {/* Top Header & Viewport Mode Controls */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-sm">
         <div>

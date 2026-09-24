@@ -8,7 +8,7 @@ interface TestState {
   // Test Session Identifiers & Preferences
   uuid: string;
   theme: 'dark' | 'light';
-  language: 'en' | 'id';
+  language: 'en' | 'id' | 'es';
   pageSize: number; // 1 for mobile, 3-5 for desktop
 
   // User Demographics & Session State
@@ -23,7 +23,7 @@ interface TestState {
   // Actions
   setTheme: (theme: 'dark' | 'light') => void;
   toggleDarkMode: () => void;
-  setLanguage: (lang: 'en' | 'id') => void;
+  setLanguage: (lang: 'en' | 'id' | 'es') => void;
   setPageSize: (size: number) => void;
   setDemographics: (demographics: Partial<Demographics>) => void;
   setAnswer: (itemId: number, value: number) => void;

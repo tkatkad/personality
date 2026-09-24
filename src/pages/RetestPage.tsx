@@ -3,10 +3,39 @@ import { useNavigate } from 'react-router-dom';
 import { RotateCcw, ArrowRight, ShieldCheck, Key, Search, AlertCircle } from 'lucide-react';
 import { useTestStore } from '../stores/testStore';
 import { fetchResultById } from '../lib/api';
+import { SEO } from '../components/SEO';
 
 export const RetestPage: React.FC = () => {
   const navigate = useNavigate();
   const { language, startRetest } = useTestStore();
+
+  const jsonLdData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'MedicalWebPage',
+      name: 'Studi Test-Retest Stabilitas Kepribadian IPIP-NEO-120',
+      url: 'https://personality-test.job.web.id/retest',
+      description: 'Protokol riset psikometri untuk mengukur stabilitas dan ketahanan profil kepribadian dari waktu ke waktu berbasis UUID terikat.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://personality-test.job.web.id/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Studi Test-Retest',
+          item: 'https://personality-test.job.web.id/retest',
+        },
+      ],
+    },
+  ];
 
   const [originalIdInput, setOriginalIdInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -50,6 +79,12 @@ export const RetestPage: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto py-8 space-y-8">
+      <SEO
+        title="Studi Test-Retest – IPIP-NEO-120 Personality Test"
+        description="Protokol riset psikometri untuk mengukur stabilitas dan ketahanan profil kepribadian Big Five dari waktu ke waktu berbasis UUID terikat."
+        path="/retest"
+        jsonLd={jsonLdData}
+      />
       {/* Title Header */}
       <div className="space-y-2 text-center sm:text-left">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-900 text-amber-700 dark:text-amber-300 text-xs font-semibold">

@@ -5,8 +5,10 @@ export interface FacetDefinition {
   domain: DomainKey;
   nameEn: string;
   nameId: string;
+  nameEs?: string;
   descriptionEn: string;
   descriptionId: string;
+  descriptionEs?: string;
   highDescEn: string;
   lowDescEn: string;
 }
@@ -15,6 +17,7 @@ export interface Item {
   id: number; // 1 to 120
   textEn: string;
   textId: string;
+  textEs?: string;
   domain: DomainKey;
   facet: string; // e.g., 'N1'
   keyed: '+' | '-';
@@ -28,7 +31,7 @@ export interface Demographics {
   consent: boolean;
   isRetest: boolean;
   retestOfId?: string;
-  language: 'en' | 'id';
+  language: 'en' | 'id' | 'es';
 }
 
 export interface FacetScore {

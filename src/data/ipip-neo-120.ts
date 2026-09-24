@@ -3,70 +3,112 @@ import { DomainKey, FacetDefinition, Item } from '../types';
 export const DOMAIN_METADATA: Record<DomainKey, {
   nameEn: string;
   nameId: string;
+  nameEs: string;
   taglineEn: string;
   taglineId: string;
+  taglineEs: string;
   color: string;
   darkColor: string;
   bgLight: string;
   descriptionEn: string;
   descriptionId: string;
+  descriptionEs: string;
 }> = {
   N: {
     nameEn: 'Neuroticism',
     nameId: 'Neurotisitis (Stabilitas Emosi)',
+    nameEs: 'Neuroticismo (Estabilidad Emocional)',
     taglineEn: 'Tendency to experience negative emotions such as anxiety, anger, and depression.',
     taglineId: 'Kecenderungan mengalami emosi negatif seperti kecemasan, kemarahan, dan depresi.',
+    taglineEs: 'Tendencia a experimentar emociones negativas como ansiedad, ira y depresión.',
     color: '#ef4444',
     darkColor: '#f87171',
     bgLight: 'bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300 border-red-200 dark:border-red-900',
     descriptionEn: 'Neuroticism refers to the tendency to experience distressing emotions easily. High scorers are prone to anxiety, mood swings, and emotional reactivity under stress, whereas low scorers (emotionally stable) tend to remain calm, balanced, and resilient.',
     descriptionId: 'Neurotisitis merujuk pada kecenderungan mengalami emosi yang bergejolak. Skor tinggi cenderung lebih cemas, peka terhadap stres, dan mengalami perubahan suasana hati, sedangkan skor rendah (stabil secara emosional) cenderung tenang dan tenang saat menghadapi kendala.',
+    descriptionEs: 'El neuroticismo se refiere a la tendencia a experimentar emociones angustiosas fácilmente. Las puntuaciones altas son propensas a la ansiedad y cambios de humor, mientras que las bajas son emocionalmente estables y serenas.',
   },
   E: {
     nameEn: 'Extraversion',
     nameId: 'Ekstraversi',
+    nameEs: 'Extraversión',
     taglineEn: 'Engagement with the external social world, energy, and positive emotionality.',
     taglineId: 'Keterlibatan dengan dunia sosial, tingkat energi, dan antusiasme emosional.',
+    taglineEs: 'Interacción con el mundo social externo, energía y emocionalidad positiva.',
     color: '#f59e0b',
     darkColor: '#fbbf24',
     bgLight: 'bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-900',
     descriptionEn: 'Extraversion reflects orientation toward social stimulation and positive energy. High scorers enjoy social interaction, assertiveness, and active environments, while low scorers (introverts) prefer quiet environments and solitude to recharge.',
     descriptionId: 'Ekstraversi mencerminkan antusiasme terhadap interaksi sosial dan aktivitas luar. Skor tinggi menyukai lingkungan yang ramai, sosial, dan penuh energi, sementara skor rendah (introvert) lebih nyaman dalam suasana tenang dan mandiri.',
+    descriptionEs: 'La extraversión refleja la orientación hacia la estimulación social y la energía positiva. Las puntuaciones altas disfrutan de la interacción social, mientras que las personas introvertidas prefieren ambientes tranquilos.',
   },
   O: {
     nameEn: 'Openness to Experience',
     nameId: 'Keterbukaan terhadap Pengalaman',
+    nameEs: 'Apertura a la Experiencia',
     taglineEn: 'Intellectual curiosity, creative imagination, and appreciation for novelty.',
     taglineId: 'Keingintahuan intelektual, imajinasi kreatif, dan keterbukaan pada ide baru.',
+    taglineEs: 'Curiosidad intelectual, imaginación creativa y aprecio por la novedad.',
     color: '#3b82f6',
     darkColor: '#60a5fa',
     bgLight: 'bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-900',
     descriptionEn: 'Openness describes a person\'s cognitive flexibility, aesthetic sensitivity, and desire for variety. High scorers are imaginative, open-minded, and intellectually curious. Low scorers tend to be practical, conventional, and prefer familiar routines.',
     descriptionId: 'Keterbukaan menggambarkan fleksibilitas berpikir, kepekaan seni, dan ketertarikan pada hal baru. Skor tinggi imajinatif dan suka bereksplorasi, sedangkan skor rendah lebih praktis, realistis, dan menyukai rutinitas terstruktur.',
+    descriptionEs: 'La apertura describe la flexibilidad cognitiva, la sensibilidad estética y el deseo de variedad. Puntuaciones altas son imaginativas y curiosas; las bajas son prácticas y convencionales.',
   },
   A: {
     nameEn: 'Agreeableness',
     nameId: 'Keresponsifan Sosial (Agreeableness)',
+    nameEs: 'Amabilidad (Agreeableness)',
     taglineEn: 'Prosocial orientation, empathy, cooperation, and concern for social harmony.',
     taglineId: 'Kepedulian sosial, empati, kerja sama, dan keinginan menjaga keharmonisan.',
+    taglineEs: 'Orientación prosocial, empatía, cooperación y armonía social.',
     color: '#10b981',
     darkColor: '#34d399',
     bgLight: 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900',
     descriptionEn: 'Agreeableness reflects interpersonal tone and orientation toward helping others. High scorers are trustworthy, empathetic, considerate, and cooperative. Low scorers tend to be competitive, skeptical, and candid.',
     descriptionId: 'Agreeableness mencerminkan kehangatan antarpribadi dan komitmen membantu orang lain. Skor tinggi jujur, peka emosional, dan kooperatif, sedangkan skor rendah lebih kritis, independen, dan kompetitif.',
+    descriptionEs: 'La amabilidad refleja la orientación hacia la ayuda y cooperación con los demás. Puntuaciones altas son empáticas y confiables; las bajas son más competitivas e independientes.',
   },
   C: {
     nameEn: 'Conscientiousness',
     nameId: 'Kehati-hatian (Conscientiousness)',
+    nameEs: 'Responsabilidad (Conscientiousness)',
     taglineEn: 'Self-discipline, organization, goal-directed behavior, and dependability.',
     taglineId: 'Kedisiplinan diri, keteraturan, komitmen tujuan, dan keandalan.',
+    taglineEs: 'Autodisciplina, organización, comportamiento orientado a metas y fiabilidad.',
     color: '#8b5cf6',
     darkColor: '#a78bfa',
     bgLight: 'bg-purple-50 dark:bg-purple-950/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-900',
     descriptionEn: 'Conscientiousness involves the regulation and direction of impulses. High scorers are methodical, reliable, organized, and focused on achievement. Low scorers are more spontaneous, flexible, and relaxed about rules.',
     descriptionId: 'Kehati-hatian berkaitan dengan kendali impuls dan keteraturan kerja. Skor tinggi terencana, teratur, gigih, dan tepat waktu, sementara skor rendah lebih spontan, fleksibel, dan santai terhadap struktur.',
+    descriptionEs: 'La responsabilidad implica la regulación de impulsos y la autodisciplina. Puntuaciones altas son metódicas, organizadas y confiables; las bajas son más espontáneas.',
   },
 };
+
+export function getDomainName(domainKey: DomainKey, lang: string): string {
+  const meta = DOMAIN_METADATA[domainKey];
+  if (!meta) return '';
+  if (lang === 'es') return meta.nameEs || meta.nameEn;
+  if (lang === 'en') return meta.nameEn;
+  return meta.nameId;
+}
+
+export function getDomainTagline(domainKey: DomainKey, lang: string): string {
+  const meta = DOMAIN_METADATA[domainKey];
+  if (!meta) return '';
+  if (lang === 'es') return meta.taglineEs || meta.taglineEn;
+  if (lang === 'en') return meta.taglineEn;
+  return meta.taglineId;
+}
+
+export function getDomainDescription(domainKey: DomainKey, lang: string): string {
+  const meta = DOMAIN_METADATA[domainKey];
+  if (!meta) return '';
+  if (lang === 'es') return meta.descriptionEs || meta.descriptionEn;
+  if (lang === 'en') return meta.descriptionEn;
+  return meta.descriptionId;
+}
 
 export const FACETS_METADATA: Record<string, FacetDefinition> = {
   // Neuroticism

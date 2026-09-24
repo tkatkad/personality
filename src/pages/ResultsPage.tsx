@@ -26,10 +26,44 @@ import { RadarChartComponent } from '../components/RadarChartComponent';
 import { FacetBarChart } from '../components/FacetBarChart';
 import { SkeletonLoader } from '../components/SkeletonLoader';
 import { downloadJSON, copyShareLink, formatDate } from '../lib/utils';
+import { SEO } from '../components/SEO';
 
 export const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+
+  const jsonLdData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemPage',
+      name: 'Laporan Hasil Psikometrik IPIP-NEO-120',
+      description: 'Laporan profil kepribadian Big Five (5 domain utama & 30 sub-faset) berdasarkan normasi Johnson (2014).',
+      url: `https://personality-test.job.web.id/result/${id || ''}`,
+      mainEntity: {
+        '@type': 'MedicalWebPage',
+        name: 'Laporan Psikometri Big Five Personality Assessment',
+        aspect: 'Psychometric Results',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://personality-test.job.web.id/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Hasil Laporan',
+          item: `https://personality-test.job.web.id/result/${id || ''}`,
+        },
+      ],
+    },
+  ];
   const { currentResult, language, startRetest } = useTestStore();
 
   const [result, setResult] = useState<TestResult | null>(null);
@@ -121,6 +155,12 @@ export const ResultsPage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-8 space-y-8">
+      <SEO
+        title={`Laporan Hasil Psikometri IPIP-NEO-120 – ${result?.id ? result.id.slice(0, 8) : 'Laporan'}`}
+        description="Hasil analisis psikometri kepribadian Big Five (5 domain utama & 30 sub-faset) berdasarkan normasi ilmiah Johnson (2014)."
+        path={`/result/${id || ''}`}
+        jsonLd={jsonLdData}
+      />
       {/* Action Toolbar Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-2xl shadow-sm">
         <div>
@@ -199,6 +239,75 @@ export const ResultsPage: React.FC = () => {
           </div>
 
           <RadarChartComponent domains={result.domains} />
+        </section>
+
+        {/* Section 1.5: Job Seeker Career & Interview Insights */}
+        <section className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 text-white shadow-md border border-indigo-900/60 space-y-5">
+          <div className="flex items-center gap-3 border-b border-indigo-800/60 pb-4">
+            <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-amber-300 flex items-center justify-center font-bold text-xl">
+              💡
+            </div>
+            <div>
+              <h2 className="font-display font-bold text-lg sm:text-xl text-white">
+                {language === 'en' ? 'Job Seeker Career & Interview Strategy' : 'Panduan Karir & Tips Wawancara Kerja'}
+              </h2>
+              <p className="text-xs text-indigo-200">
+                {language === 'en'
+                  ? 'Tailored advice for CV writing, HR interviews, and workplace environment fit.'
+                  : 'Rekomendasi khusus untuk deskripsi CV, jawaban interview HRD, dan kecocokan lingkungan kerja.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs leading-relaxed">
+            {/* Box 1: Highlights for CV */}
+            <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
+              <span className="font-bold text-indigo-300 text-sm flex items-center gap-1.5">
+                <span>🎯</span> {language === 'en' ? 'Key Strengths for Your CV Profile' : 'Kekuatan Utama Untuk Ditulis di CV'}
+              </span>
+              <p className="text-slate-300">
+                {language === 'en'
+                  ? `Your highest Big Five score is in Conscientiousness (${result.domains.C.totalScore}/120) and Agreeableness (${result.domains.A.totalScore}/120). Highlight your reliability, attention to detail, and strong team collaboration in your professional CV summary.`
+                  : `Profilmu menunjukkan kekuatan pada domain Conscientiousness (${result.domains.C.totalScore}/120) & Agreeableness (${result.domains.A.totalScore}/120). Tonjolkan keandalan, ketelitian, kerja sama tim, dan kepatuhan pada standar kualitas di ringkasan CV Anda.`}
+              </p>
+            </div>
+
+            {/* Box 2: Interview Tips */}
+            <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
+              <span className="font-bold text-emerald-300 text-sm flex items-center gap-1.5">
+                <span>💬</span> {language === 'en' ? 'HR Interview Answering Strategy' : 'Tips Menjawab Pertanyaan Interview HRD'}
+              </span>
+              <p className="text-slate-300">
+                {language === 'en'
+                  ? 'When asked about your working style, provide concrete examples of how you prioritize tasks, communicate with colleagues under pressure, and learn new industry tools quickly.'
+                  : 'Saat ditanya "Bagaimana gaya kerjamu?", jelaskan contoh nyata cara kamu mengorganisir tugas harian, berkomunikasi secara terbuka dengan tim, serta semangatmu untuk terus belajar hal baru.'}
+              </p>
+            </div>
+
+            {/* Box 3: Ideal Work Culture */}
+            <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
+              <span className="font-bold text-amber-300 text-sm flex items-center gap-1.5">
+                <span>🏢</span> {language === 'en' ? 'Ideal Workplace Environment' : 'Lingkungan Kerja Yang Cocok'}
+              </span>
+              <p className="text-slate-300">
+                {language === 'en'
+                  ? 'You flourish best in environments with clear goals, supportive team communication, and opportunities to take initiative while receiving constructive feedback.'
+                  : 'Kamu tumbuh paling optimal di perusahaan yang memiliki tujuan kerja jelas, budaya saling mendukung antar rekan kerja, serta memberikan ruang untuk berinisiatif dan belajar.'}
+              </p>
+            </div>
+
+            {/* Box 4: Self Growth Note */}
+            <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700/80 space-y-2">
+              <span className="font-bold text-purple-300 text-sm flex items-center gap-1.5">
+                <span>📈</span> {language === 'en' ? 'Personal Development Tip' : 'Area Pengembangan Diri'}
+              </span>
+              <p className="text-slate-300">
+                {language === 'en'
+                  ? 'Maintain a healthy work-life balance and practice stress resilience techniques when handling fast-paced workplace deadlines or unexpected role changes.'
+                  : 'Latih manajemen beban kerja dan teknik relaksasi saat menghadapi tenggat waktu (deadline) yang padat agar performa kerja tetap konsisten dan terjaga.'}
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* Section 2: 5 Domain Cards Breakdown */}

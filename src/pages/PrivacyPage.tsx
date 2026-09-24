@@ -1,12 +1,47 @@
 import React from 'react';
 import { ShieldCheck, Lock, EyeOff, FileText, CheckCircle2 } from 'lucide-react';
 import { useTestStore } from '../stores/testStore';
+import { SEO } from '../components/SEO';
 
 export const PrivacyPage: React.FC = () => {
   const { language } = useTestStore();
 
+  const jsonLdData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Kebijakan Privasi & Etika Data – IPIP-NEO-120',
+      url: 'https://personality-test.job.web.id/privacy',
+      description: 'Kebijakan privasi transparan: Zero PII (Personally Identifiable Information), enkripsi anonimitas data, dan etika riset psikometri.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://personality-test.job.web.id/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Kebijakan Privasi',
+          item: 'https://personality-test.job.web.id/privacy',
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="max-w-3xl mx-auto py-8 space-y-8">
+      <SEO
+        title="Kebijakan Privasi & Etika Data – IPIP-NEO-120"
+        description="Jaminan privasi anonim tanpa pengumpulan data PII (Zero PII). Penjelasan lengkap penyimpanan data lokal & enkripsi aman."
+        path="/privacy"
+        jsonLd={jsonLdData}
+      />
       {/* Title Header */}
       <div className="space-y-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
@@ -43,8 +78,8 @@ export const PrivacyPage: React.FC = () => {
           </h2>
           <p>
             {language === 'en'
-              ? 'Test answers are stored directly in your browser\'s local storage for real-time progress saving. When you complete a test with consent, anonymized numeric score vectors are transmitted securely to our Cloudflare D1 database.'
-              : 'Jawaban tes disimpan secara otomatis di local storage browser Anda untuk fitur save-progress. Saat menyelesaikan tes dengan persetujuan (consent), vektor skor numerik anonim dikirimkan ke database Cloudflare D1.'}
+              ? 'Test answers are stored directly in your browser\'s local storage for real-time progress saving. When you complete a test with consent, anonymized numeric score vectors are transmitted securely to our encrypted cloud database.'
+              : 'Jawaban tes disimpan secara otomatis di local storage browser Anda untuk fitur save-progress. Saat menyelesaikan tes dengan persetujuan (consent), vektor skor numerik anonim dikirimkan secara aman ke database cloud terenkripsi.'}
           </p>
         </div>
 
