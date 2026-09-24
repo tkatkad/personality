@@ -21,7 +21,7 @@ export const AdSenseSlot: React.FC<AdSenseSlotProps> = ({
   format = 'auto',
   responsive = true,
   className = '',
-  label = 'IKLAN / ADVERTISEMENT',
+  label = '',
 }) => {
   useEffect(() => {
     try {
@@ -36,10 +36,12 @@ export const AdSenseSlot: React.FC<AdSenseSlotProps> = ({
 
   return (
     <div className={`w-full my-6 flex flex-col items-center justify-center ${className}`}>
-      {/* Label Compliance */}
-      <span className="text-[10px] font-semibold tracking-wider text-slate-400 dark:text-slate-500 uppercase mb-1.5">
-        {label}
-      </span>
+      {/* Optional Label */}
+      {label && (
+        <span className="text-[10px] font-semibold tracking-wider text-slate-400 dark:text-slate-500 uppercase mb-1.5">
+          {label}
+        </span>
+      )}
 
       {/* Ad Container Box with Layout Shift Prevention */}
       <div className="w-full max-w-4xl min-h-[100px] sm:min-h-[120px] rounded-2xl bg-slate-100/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800/60 flex items-center justify-center overflow-hidden transition-all">

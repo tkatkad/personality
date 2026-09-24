@@ -67,18 +67,21 @@ export const RetestPage: React.FC = () => {
       navigate('/test');
     } else {
       // Allow proceeding even if original result is not found in server DB (client offline fallback)
-      if (
-        confirm(
-          language === 'en'
-            ? `Original result for UUID "${cleanId}" was not found on server DB. Do you still want to proceed with this ID for retest matching?`
-            : `Hasil asli dengan UUID "${cleanId}" tidak ditemukan di database server. Tetap lanjutkan retest dengan ID ini?`
-        )
-      ) {
+      const confirmMsg =
+        language === 'es'
+          ? `El resultado original para el UUID "${cleanId}" no se encontró en la base de datos del servidor. ¿Desea continuar con el retest usando este ID?`
+          : language === 'en'
+          ? `Original result for UUID "${cleanId}" was not found on server DB. Do you still want to proceed with this ID for retest matching?`
+          : `Hasil asli dengan UUID "${cleanId}" tidak ditemukan di database server. Tetap lanjutkan retest dengan ID ini?`;
+
+      if (confirm(confirmMsg)) {
         startRetest(cleanId);
         navigate('/test');
       } else {
         setError(
-          language === 'en'
+          language === 'es'
+            ? 'UUID original no encontrado. Por favor verifique la clave UUID ingresada.'
+            : language === 'en'
             ? 'Original UUID not found. Please double-check your UUID string.'
             : 'UUID lama tidak ditemukan. Harap periksa kembali string UUID Anda.'
         );
@@ -111,27 +114,70 @@ export const RetestPage: React.FC = () => {
       <div className="space-y-3 text-center sm:text-left max-w-xl">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/60 border border-amber-200/80 dark:border-amber-900/60 text-amber-700 dark:text-amber-300 text-xs font-semibold">
           <RotateCcw className="w-4 h-4" />
-          <span>{language === 'en' ? 'Psychometric Reliability Trial' : 'Uji Reliabilitas Psikometrik'}</span>
+          <span>
+            {language === 'es'
+              ? 'Prueba de Confiabilidad Psicométrica'
+              : language === 'en'
+              ? 'Psychometric Reliability Trial'
+              : 'Uji Reliabilitas Psikometrik'}
+          </span>
         </div>
         <h1 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white leading-tight">
-          {language === 'en' ? 'IPIP-NEO-120 Test-Retest Study' : 'Studi Test-Retest IPIP-NEO-120'}
+          {language === 'es'
+            ? 'Estudio Test-Retest IPIP-NEO-120'
+            : language === 'en'
+            ? 'IPIP-NEO-120 Test-Retest Study'
+            : 'Studi Test-Retest IPIP-NEO-120'}
         </h1>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-          {language === 'en'
-            ? 'Participate in research evaluating temporal stability and test-retest reliability coefficients ($r_{tt}$) across time intervals.'
-            : 'Ikuti riset evaluasi stabilitas waktu dan koefisien reliabilitas test-retest ($r_{tt}$) antar interval waktu.'}
+          {language === 'es' ? (
+            <>
+              Participe en la investigación evaluando la estabilidad temporal y los coeficientes de confiabilidad test-retest (
+              <span className="font-serif italic font-medium">r</span>
+              <sub className="text-[10px] font-mono">tt</sub>) a través de diferentes intervalos de tiempo.
+            </>
+          ) : language === 'en' ? (
+            <>
+              Participate in research evaluating temporal stability and test-retest reliability coefficients (
+              <span className="font-serif italic font-medium">r</span>
+              <sub className="text-[10px] font-mono">tt</sub>) across time intervals.
+            </>
+          ) : (
+            <>
+              Ikuti riset evaluasi stabilitas waktu dan koefisien reliabilitas test-retest (
+              <span className="font-serif italic font-medium">r</span>
+              <sub className="text-[10px] font-mono">tt</sub>) antar interval waktu.
+            </>
+          )}
         </p>
       </div>
 
       {/* Rationale Card */}
       <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-3 text-xs sm:text-sm leading-relaxed sm:leading-loose text-slate-600 dark:text-slate-300">
         <h2 className="font-bold text-slate-900 dark:text-white text-base">
-          {language === 'en' ? 'Why Participate in Test-Retest?' : 'Mengapa Perlu Mengikuti Test-Retest?'}
+          {language === 'es'
+            ? '¿Por qué participar en el Test-Retest?'
+            : language === 'en'
+            ? 'Why Participate in Test-Retest?'
+            : 'Mengapa Perlu Mengikuti Test-Retest?'}
         </h2>
         <p>
-          {language === 'en'
-            ? 'In psychometrics, test-retest reliability measures the consistency of test scores over time. High-quality personality inventories like the IPIP-NEO-120 expect strong temporal stability (typically $r \\ge 0.75$–$0.85$ across 2–4 weeks).'
-            : 'Dalam psikometri, reliabilitas test-retest mengukur konsistensi skor tes dari waktu ke waktu. Inventori kepribadian standar seperti IPIP-NEO-120 menuntut stabilitas waktu yang kuat (umumnya $r \\ge 0,75$–$0,85$ antar 2–4 minggu).'}
+          {language === 'es' ? (
+            <>
+              En psicometría, la confiabilidad test-retest mide la consistencia de las puntuaciones de un test a lo largo del tiempo. Inventarios de personalidad de alta calidad como el IPIP-NEO-120 requieren una sólida estabilidad temporal (típicamente{' '}
+              <span className="font-serif italic font-medium">r</span> ≥ 0,75 – 0,85 en un intervalo de 2 a 4 semanas).
+            </>
+          ) : language === 'en' ? (
+            <>
+              In psychometrics, test-retest reliability measures the consistency of test scores over time. High-quality personality inventories like the IPIP-NEO-120 expect strong temporal stability (typically{' '}
+              <span className="font-serif italic font-medium">r</span> ≥ 0.75 – 0.85 across 2–4 weeks).
+            </>
+          ) : (
+            <>
+              Dalam psikometri, reliabilitas test-retest mengukur konsistensi skor tes dari waktu ke waktu. Inventori kepribadian standar seperti IPIP-NEO-120 menuntut stabilitas waktu yang kuat (umumnya{' '}
+              <span className="font-serif italic font-medium">r</span> ≥ 0,75 – 0,85 antar 2–4 minggu).
+            </>
+          )}
         </p>
       </div>
 
@@ -140,10 +186,18 @@ export const RetestPage: React.FC = () => {
         <div className="space-y-2">
           <label className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2.5">
             <Key className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            <span>{language === 'en' ? 'Original Participant UUID' : 'UUID Responden Sesi Pertama'}</span>
+            <span>
+              {language === 'es'
+                ? 'UUID del Participante Original'
+                : language === 'en'
+                ? 'Original Participant UUID'
+                : 'UUID Responden Sesi Pertama'}
+            </span>
           </label>
           <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-            {language === 'en'
+            {language === 'es'
+              ? 'Ingrese el código UUID de su informe de evaluación anterior.'
+              : language === 'en'
               ? 'Enter the UUID from your previous assessment report.'
               : 'Masukkan UUID dari laporan tes pertama Anda.'}
           </p>
@@ -173,7 +227,19 @@ export const RetestPage: React.FC = () => {
           disabled={loading || !originalIdInput.trim()}
           className="w-full flex items-center justify-center gap-2.5 py-4 px-8 rounded-2xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold text-sm sm:text-base shadow-md transition-all"
         >
-          <span>{loading ? 'Verifying UUID...' : language === 'en' ? 'Begin Retest Session' : 'Mulai Sesi Retest'}</span>
+          <span>
+            {loading
+              ? language === 'es'
+                ? 'Verificando UUID...'
+                : language === 'en'
+                ? 'Verifying UUID...'
+                : 'Memverifikasi UUID...'
+              : language === 'es'
+              ? 'Comenzar Sesión de Retest'
+              : language === 'en'
+              ? 'Begin Retest Session'
+              : 'Mulai Sesi Retest'}
+          </span>
           <ArrowRight className="w-5 h-5" />
         </button>
       </form>

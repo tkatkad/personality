@@ -150,46 +150,79 @@ export const MethodologyPage: React.FC = () => {
         </h2>
 
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          Internal consistency coefficients (Cronbach’s $\alpha$) and convergent correlations with NEO PI-R across validation samples:
+          {language === 'es' ? (
+            <>
+              Coeficientes de consistencia interna (Alfa de Cronbach{' '}
+              <span className="font-serif italic font-bold">α</span>) y correlaciones convergentes con NEO PI-R a través de muestras de validación:
+            </>
+          ) : language === 'en' ? (
+            <>
+              Internal consistency coefficients (Cronbach’s{' '}
+              <span className="font-serif italic font-bold">α</span>) and convergent correlations with NEO PI-R across validation samples:
+            </>
+          ) : (
+            <>
+              Koefisien konsistensi internal (Alfa Cronbach{' '}
+              <span className="font-serif italic font-bold">α</span>) dan korelasi konvergen dengan NEO PI-R pada sampel validasi:
+            </>
+          )}
         </p>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-200">
-                <th className="p-3">Domain Trait</th>
-                <th className="p-3">Domain $\alpha$</th>
-                <th className="p-3">Facet Mean $\alpha$</th>
-                <th className="p-3">NEO PI-R Convergent $r$</th>
+                <th className="p-3">
+                  {language === 'es' ? 'Dominio / Rasgo' : language === 'en' ? 'Domain Trait' : 'Domain Trait'}
+                </th>
+                <th className="p-3">
+                  {language === 'es' ? 'Alfa Dominio (α)' : language === 'en' ? 'Domain α' : 'Alfa Domain (α)'}
+                </th>
+                <th className="p-3">
+                  {language === 'es' ? 'Media Alfa Facetas (α)' : language === 'en' ? 'Facet Mean α' : 'Rata-rata Alfa Faset (α)'}
+                </th>
+                <th className="p-3">
+                  {language === 'es' ? 'Correlación NEO PI-R (r)' : language === 'en' ? 'NEO PI-R Convergent r' : 'Korelasi NEO PI-R (r)'}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-300">
               <tr>
-                <td className="p-3 font-bold text-slate-900 dark:text-white">Neuroticism (N)</td>
+                <td className="p-3 font-bold text-slate-900 dark:text-white">
+                  {language === 'es' ? 'Neuroticismo (N)' : language === 'en' ? 'Neuroticism (N)' : 'Neuroticisme (N)'}
+                </td>
                 <td className="p-3">0.89</td>
                 <td className="p-3">0.73</td>
                 <td className="p-3">0.73</td>
               </tr>
               <tr>
-                <td className="p-3 font-bold text-slate-900 dark:text-white">Extraversion (E)</td>
+                <td className="p-3 font-bold text-slate-900 dark:text-white">
+                  {language === 'es' ? 'Extraversión (E)' : language === 'en' ? 'Extraversion (E)' : 'Ekstraversi (E)'}
+                </td>
                 <td className="p-3">0.86</td>
                 <td className="p-3">0.71</td>
                 <td className="p-3">0.70</td>
               </tr>
               <tr>
-                <td className="p-3 font-bold text-slate-900 dark:text-white">Openness (O)</td>
+                <td className="p-3 font-bold text-slate-900 dark:text-white">
+                  {language === 'es' ? 'Apertura (O)' : language === 'en' ? 'Openness (O)' : 'Keterbukaan / Openness (O)'}
+                </td>
                 <td className="p-3">0.81</td>
                 <td className="p-3">0.68</td>
                 <td className="p-3">0.66</td>
               </tr>
               <tr>
-                <td className="p-3 font-bold text-slate-900 dark:text-white">Agreeableness (A)</td>
+                <td className="p-3 font-bold text-slate-900 dark:text-white">
+                  {language === 'es' ? 'Amabilidad (A)' : language === 'en' ? 'Agreeableness (A)' : 'Keramahan / Agreeableness (A)'}
+                </td>
                 <td className="p-3">0.82</td>
                 <td className="p-3">0.69</td>
                 <td className="p-3">0.67</td>
               </tr>
               <tr>
-                <td className="p-3 font-bold text-slate-900 dark:text-white">Conscientiousness (C)</td>
+                <td className="p-3 font-bold text-slate-900 dark:text-white">
+                  {language === 'es' ? 'Responsabilidad (C)' : language === 'en' ? 'Conscientiousness (C)' : 'Ketelitian / Conscientiousness (C)'}
+                </td>
                 <td className="p-3">0.87</td>
                 <td className="p-3">0.72</td>
                 <td className="p-3">0.71</td>
