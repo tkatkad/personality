@@ -21,7 +21,7 @@ import {
   Globe,
 } from 'lucide-react';
 import { useTestStore } from '../stores/testStore';
-import { DOMAIN_METADATA, getDomainName, getDomainTagline } from '../data/ipip-neo-120';
+import { DOMAIN_METADATA, getDomainName, getDomainTagline, getShortDomainName } from '../data/ipip-neo-120';
 import { DomainKey } from '../types';
 import { SEO } from '../components/SEO';
 
@@ -700,37 +700,51 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Mini Domain Score Preview */}
-          <div className="grid grid-cols-5 gap-2 sm:gap-4 text-center">
-            <div className="p-2 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <span className="text-[10px] font-bold text-rose-500 block">N ({getDomainName('N', language)})</span>
-              <span className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">
-                {activeSample === 'profile1' ? '42' : '38'}<span className="text-[10px] text-slate-400 font-normal">/120</span>
-              </span>
-            </div>
-            <div className="p-2 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <span className="text-[10px] font-bold text-amber-500 block">E ({getDomainName('E', language)})</span>
-              <span className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">
-                {activeSample === 'profile1' ? '65' : '92'}<span className="text-[10px] text-slate-400 font-normal">/120</span>
-              </span>
-            </div>
-            <div className="p-2 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <span className="text-[10px] font-bold text-indigo-500 block">O ({getDomainName('O', language)})</span>
-              <span className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">
-                {activeSample === 'profile1' ? '88' : '80'}<span className="text-[10px] text-slate-400 font-normal">/120</span>
-              </span>
-            </div>
-            <div className="p-2 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <span className="text-[10px] font-bold text-emerald-500 block">A ({getDomainName('A', language)})</span>
-              <span className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">
-                {activeSample === 'profile1' ? '78' : '88'}<span className="text-[10px] text-slate-400 font-normal">/120</span>
-              </span>
-            </div>
-            <div className="p-2 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <span className="text-[10px] font-bold text-cyan-500 block">C ({getDomainName('C', language)})</span>
-              <span className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">
-                {activeSample === 'profile1' ? '94' : '76'}<span className="text-[10px] text-slate-400 font-normal">/120</span>
-              </span>
-            </div>
+          <div className="grid grid-cols-5 gap-1.5 sm:gap-4 text-center w-full max-w-full overflow-hidden">
+            {domainKeys.map((key) => {
+              const colorClass =
+                key === 'N'
+                  ? 'text-rose-500'
+                  : key === 'E'
+                  ? 'text-amber-500'
+                  : key === 'O'
+                  ? 'text-indigo-500'
+                  : key === 'A'
+                  ? 'text-emerald-500'
+                  : 'text-cyan-500';
+
+              const score =
+                key === 'N'
+                  ? activeSample === 'profile1' ? '42' : '38'
+                  : key === 'E'
+                  ? activeSample === 'profile1' ? '65' : '92'
+                  : key === 'O'
+                  ? activeSample === 'profile1' ? '88' : '80'
+                  : key === 'A'
+                  ? activeSample === 'profile1' ? '78' : '88'
+                  : activeSample === 'profile1' ? '94' : '76';
+
+              return (
+                <div
+                  key={key}
+                  className="p-1.5 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 min-w-0 overflow-hidden space-y-0.5"
+                >
+                  <span className={`text-xs sm:text-sm font-extrabold block ${colorClass}`}>
+                    {key}
+                  </span>
+                  <span
+                    className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-300 font-semibold block truncate px-0.5"
+                    title={getDomainName(key, language)}
+                  >
+                    {getShortDomainName(key, language)}
+                  </span>
+                  <span className="text-xs sm:text-base font-extrabold text-slate-800 dark:text-slate-100 block">
+                    {score}
+                    <span className="text-[9px] sm:text-[10px] text-slate-400 font-normal">/120</span>
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           {/* 3 Career Impact Demonstration Boxes */}

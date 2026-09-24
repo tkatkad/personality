@@ -143,14 +143,14 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown with distinct background color */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-3 space-y-3">
+        <div className="lg:hidden border-b-2 border-indigo-500/60 bg-slate-900 text-slate-100 px-4 py-4 space-y-3.5 shadow-2xl animate-in slide-in-from-top-2 duration-200">
           {/* Prominent Language Selector Card for Mobile */}
-          <div className="p-3 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/60 space-y-2">
-            <div className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+          <div className="p-3 rounded-2xl bg-slate-800/90 border border-slate-700/80 space-y-2">
+            <div className="text-xs font-bold text-slate-300 flex items-center justify-between">
               <span>{language === 'es' ? 'Seleccionar idioma:' : language === 'en' ? 'Select Language:' : 'Pilih Bahasa:'}</span>
-              <Globe className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              <Globe className="w-4 h-4 text-amber-300" />
             </div>
             <div className="grid grid-cols-3 gap-1.5">
               <button
@@ -160,8 +160,8 @@ export const Header: React.FC = () => {
                 }}
                 className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
                   language === 'id'
-                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
-                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800'
+                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-md ring-2 ring-indigo-400'
+                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
                 }`}
               >
                 <span>🇮🇩</span>
@@ -174,8 +174,8 @@ export const Header: React.FC = () => {
                 }}
                 className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
                   language === 'en'
-                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
-                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800'
+                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-md ring-2 ring-indigo-400'
+                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
                 }`}
               >
                 <span>🇬🇧</span>
@@ -188,8 +188,8 @@ export const Header: React.FC = () => {
                 }}
                 className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
                   language === 'es'
-                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
-                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800'
+                    ? 'bg-indigo-600 text-white border-indigo-500 shadow-md ring-2 ring-indigo-400'
+                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
                 }`}
               >
                 <span>🇪🇸</span>
@@ -203,7 +203,7 @@ export const Header: React.FC = () => {
             href="https://job.web.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-900 font-bold text-sm text-indigo-600 dark:text-indigo-400"
+            className="flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 font-bold text-sm text-indigo-300"
           >
             <span>
               {language === 'es'
@@ -212,30 +212,33 @@ export const Header: React.FC = () => {
                 ? '🌐 Job.Web.ID (Main Portal)'
                 : '🌐 Job.Web.ID (Portal Kerja Utama)'}
             </span>
-            <ExternalLink className="w-4 h-4" />
+            <ExternalLink className="w-4 h-4 text-indigo-400" />
           </a>
 
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400"
-            >
-              {getNavLinkLabel(link)}
-            </Link>
-          ))}
-          <div className="pt-2">
+          <div className="space-y-1 pt-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-slate-800/80 transition-colors"
+              >
+                {getNavLinkLabel(link)}
+              </Link>
+            ))}
+          </div>
+
+          <div className="pt-2 border-t border-slate-800">
             <Link
               to="/consent"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex justify-center items-center py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white"
+              className="w-full flex justify-center items-center py-3 text-sm font-bold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg transition-all"
             >
               {language === 'es'
-                ? 'Iniciar Test de 120 Items'
+                ? 'Iniciar Test de 120 Ítems'
                 : language === 'en'
                 ? 'Start 120-Item Test'
-                : 'Mulai Tes 120-Item'}
+                : 'Mulai Tes 120 Soal'}
             </Link>
           </div>
         </div>

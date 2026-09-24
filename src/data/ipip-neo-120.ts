@@ -94,6 +94,35 @@ export function getDomainName(domainKey: DomainKey, lang: string): string {
   return meta.nameId;
 }
 
+export function getShortDomainName(domainKey: DomainKey, lang: string): string {
+  if (lang === 'es') {
+    switch (domainKey) {
+      case 'N': return 'Neuroticismo';
+      case 'E': return 'Extraversión';
+      case 'O': return 'Apertura';
+      case 'A': return 'Amabilidad';
+      case 'C': return 'Responsabilidad';
+    }
+  }
+  if (lang === 'en') {
+    switch (domainKey) {
+      case 'N': return 'Neuroticism';
+      case 'E': return 'Extraversion';
+      case 'O': return 'Openness';
+      case 'A': return 'Agreeableness';
+      case 'C': return 'Conscientiousness';
+    }
+  }
+  switch (domainKey) {
+    case 'N': return 'Neurotisitis';
+    case 'E': return 'Ekstraversi';
+    case 'O': return 'Keterbukaan';
+    case 'A': return 'Agreeableness';
+    case 'C': return 'Kehati-hatian';
+  }
+  return domainKey;
+}
+
 export function getDomainTagline(domainKey: DomainKey, lang: string): string {
   const meta = DOMAIN_METADATA[domainKey];
   if (!meta) return '';
