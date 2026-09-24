@@ -56,15 +56,15 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
               key={opt.val}
               type="button"
               onClick={() => handleSelect(opt.val)}
-              className={`group relative flex sm:flex-col items-center justify-between sm:justify-center p-3.5 sm:p-4 rounded-xl text-left sm:text-center transition-all duration-150 border active:scale-[0.98] ${
+              className={`group relative flex sm:flex-col items-center justify-between sm:justify-center p-3 sm:py-3.5 sm:px-2 rounded-xl text-left sm:text-center transition-all duration-150 border active:scale-[0.98] ${
                 isSelected
                   ? 'bg-indigo-600 text-white border-indigo-600 shadow-md ring-2 ring-indigo-400 dark:ring-indigo-500'
                   : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700 hover:bg-slate-50 dark:hover:bg-slate-800/80'
               }`}
             >
-              <div className="flex items-center gap-3 sm:flex-col sm:gap-2">
+              <div className="flex items-center gap-3 sm:flex-col sm:gap-1.5 w-full">
                 <span
-                  className={`w-6 h-6 rounded-full flex items-center justify-center font-mono text-xs font-bold transition-colors ${
+                  className={`w-6 h-6 rounded-full flex items-center justify-center font-mono text-xs font-bold shrink-0 transition-colors ${
                     isSelected
                       ? 'bg-white text-indigo-700'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600'
@@ -72,7 +72,7 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
                 >
                   {opt.val}
                 </span>
-                <span className="text-sm sm:text-base font-semibold leading-snug">
+                <span className="text-xs sm:text-xs md:text-sm font-semibold leading-tight text-center break-words max-w-full px-0.5">
                   {language === 'es' ? opt.labelEs : language === 'en' ? opt.labelEn : opt.labelId}
                 </span>
               </div>
