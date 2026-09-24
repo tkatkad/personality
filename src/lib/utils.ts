@@ -52,10 +52,11 @@ export async function copyShareLink(resultId: string): Promise<boolean> {
 /**
  * Formats ISO date string nicely
  */
-export function formatDate(isoString: string): string {
+export function formatDate(isoString: string, lang: string = 'id'): string {
   try {
     const date = new Date(isoString);
-    return new Intl.DateTimeFormat('en-US', {
+    const locale = lang === 'es' ? 'es-ES' : lang === 'en' ? 'en-US' : 'id-ID';
+    return new Intl.DateTimeFormat(locale, {
       dateStyle: 'medium',
       timeStyle: 'short',
     }).format(date);

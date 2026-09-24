@@ -1,6 +1,6 @@
 import React from 'react';
 import { DomainKey, DomainScore } from '../types';
-import { DOMAIN_METADATA, FACETS_METADATA } from '../data/ipip-neo-120';
+import { DOMAIN_METADATA, FACETS_METADATA, getDomainName, getScoreLevelLabel } from '../data/ipip-neo-120';
 import { useTestStore } from '../stores/testStore';
 
 interface FacetBarChartProps {
@@ -34,11 +34,11 @@ export const FacetBarChart: React.FC<FacetBarChartProps> = ({ domains, selectedD
                   style={{ backgroundColor: meta.color }}
                 />
                 <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white">
-                  {language === 'en' ? meta.nameEn : meta.nameId}
+                  {getDomainName(domainKey, language)}
                 </h3>
               </div>
               <div className="text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                Total: {domain.totalScore} / 120 ({domain.level})
+                Total: {domain.totalScore} / 120 ({getScoreLevelLabel(domain.level, language)})
               </div>
             </div>
 
@@ -46,7 +46,20 @@ export const FacetBarChart: React.FC<FacetBarChartProps> = ({ domains, selectedD
             <div className="space-y-3.5 pt-1">
               {facets.map((facet) => {
                 const facetMeta = FACETS_METADATA[facet.facetKey];
-                const facetName = language === 'en' ? facetMeta.nameEn : facetMeta.nameId;
+                const facetName =
+                  language === 'en'
+                    ? facetMeta.nameEn
+                    : language === 'es'
+                    ? facetMeta.nameEs || facetMeta.nameEn
+                    : facetMeta.nameId;
+
+                const facetDesc =
+                  language === 'en'
+                    ? facetMeta.descriptionEn
+                    : language === 'es'
+                    ? facetMeta.descriptionEs || facetMeta.descriptionEn
+                    : facetMeta.descriptionId;
+
                 // Range 4 to 20 -> percentage = ((score - 4) / 16) * 100
                 const percent = Math.round(((facet.score - 4) / 16) * 100);
 
@@ -72,7 +85,7 @@ export const FacetBarChart: React.FC<FacetBarChartProps> = ({ domains, selectedD
                               : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                           }`}
                         >
-                          {facet.level}
+                          {getScoreLevelLabel(facet.level, language)}
                         </span>
                       </div>
                     </div>
@@ -89,7 +102,7 @@ export const FacetBarChart: React.FC<FacetBarChartProps> = ({ domains, selectedD
                     </div>
 
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight pt-0.5">
-                      {facet.description}
+                      {facetDesc}
                     </p>
                   </div>
                 );

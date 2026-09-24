@@ -139,6 +139,22 @@ export function getDomainDescription(domainKey: DomainKey, lang: string): string
   return meta.descriptionId;
 }
 
+export function getScoreLevelLabel(level: 'Low' | 'Average' | 'High', lang: string): string {
+  if (lang === 'es') {
+    if (level === 'High') return 'Alto';
+    if (level === 'Low') return 'Bajo';
+    return 'Medio';
+  }
+  if (lang === 'en') {
+    if (level === 'High') return 'High';
+    if (level === 'Low') return 'Low';
+    return 'Average';
+  }
+  if (level === 'High') return 'Tinggi';
+  if (level === 'Low') return 'Rendah';
+  return 'Rata-Rata';
+}
+
 export const FACETS_METADATA: Record<string, FacetDefinition> = {
   // Neuroticism
   N1: {
