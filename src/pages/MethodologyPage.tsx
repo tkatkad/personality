@@ -10,9 +10,19 @@ export const MethodologyPage: React.FC = () => {
     {
       '@context': 'https://schema.org',
       '@type': 'ScholarlyArticle',
-      headline: 'Metodologi Psikometrik & Validasi IPIP-NEO-120',
+      headline:
+        language === 'es'
+          ? 'Metodología Psicométrica y Validación IPIP-NEO-120'
+          : language === 'en'
+          ? 'IPIP-NEO-120 Psychometric Methodology & Validation'
+          : 'Metodologi Psikometrik & Validasi IPIP-NEO-120',
       url: 'https://personality-test.job.web.id/methodology',
-      description: 'Dokumentasi ilmiah reliabilitas Cronbach’s alpha, analisis korelasi item-total, dan validitas konvergen model IPIP-NEO-120 berdasarkan Johnson (2014).',
+      description:
+        language === 'es'
+          ? 'Documentación científica de la confiabilidad Alfa de Cronbach, correlaciones ítem-total y validez del modelo IPIP-NEO-120 de Johnson (2014).'
+          : language === 'en'
+          ? 'Scientific documentation of Cronbach’s alpha reliability, item-total correlation analysis, and validity of Johnson (2014) IPIP-NEO-120.'
+          : 'Dokumentasi ilmiah reliabilitas Cronbach’s alpha, analisis korelasi item-total, dan validitas konvergen model IPIP-NEO-120 berdasarkan Johnson (2014).',
       author: {
         '@type': 'Person',
         name: 'Dr. John A. Johnson',
@@ -33,13 +43,13 @@ export const MethodologyPage: React.FC = () => {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
+          name: language === 'es' ? 'Inicio' : language === 'en' ? 'Home' : 'Beranda',
           item: 'https://personality-test.job.web.id/',
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Metodologi',
+          name: language === 'es' ? 'Metodología' : language === 'en' ? 'Methodology' : 'Metodologi',
           item: 'https://personality-test.job.web.id/methodology',
         },
       ],

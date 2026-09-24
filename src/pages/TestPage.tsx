@@ -20,14 +20,38 @@ import { SEO } from '../components/SEO';
 
 export const TestPage: React.FC = () => {
   const navigate = useNavigate();
+  const {
+    answers,
+    setAnswer,
+    currentQuestionIndex,
+    setCurrentQuestionIndex,
+    nextQuestion,
+    prevQuestion,
+    pageSize,
+    setPageSize,
+    saveForLater,
+    completeTest,
+    language,
+    currentResult,
+  } = useTestStore();
 
   const jsonLdData = [
     {
       '@context': 'https://schema.org',
       '@type': 'Quiz',
-      name: 'Kuesioner IPIP-NEO-120 Big Five Personality Test',
+      name:
+        language === 'es'
+          ? 'Cuestionario de Test de Personalidad IPIP-NEO-120'
+          : language === 'en'
+          ? 'IPIP-NEO-120 Big Five Personality Test Questionnaire'
+          : 'Kuesioner IPIP-NEO-120 Big Five Personality Test',
       url: 'https://personality-test.job.web.id/test',
-      description: 'Kuesioner 120 item pertanyaan skala Likert untuk mengukur Neuroticism, Extraversion, Openness, Agreeableness, dan Conscientiousness.',
+      description:
+        language === 'es'
+          ? 'Cuestionario de 120 preguntas en escala Likert para medir Neuroticismo, Extraversión, Apertura, Amabilidad y Responsabilidad.'
+          : language === 'en'
+          ? '120-item Likert-scale questionnaire measuring Neuroticism, Extraversion, Openness, Agreeableness, and Conscientiousness.'
+          : 'Kuesioner 120 item pertanyaan skala Likert untuk mengukur Neuroticism, Extraversion, Openness, Agreeableness, dan Conscientiousness.',
       educationalUse: 'Assessment',
       about: {
         '@type': 'Thing',
@@ -41,31 +65,18 @@ export const TestPage: React.FC = () => {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
+          name: language === 'es' ? 'Inicio' : language === 'en' ? 'Home' : 'Beranda',
           item: 'https://personality-test.job.web.id/',
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Kuesioner Tes',
+          name: language === 'es' ? 'Cuestionario' : language === 'en' ? 'Test Assessment' : 'Kuesioner Tes',
           item: 'https://personality-test.job.web.id/test',
         },
       ],
     },
   ];
-  const {
-    answers,
-    setAnswer,
-    currentQuestionIndex,
-    setCurrentQuestionIndex,
-    nextQuestion,
-    prevQuestion,
-    pageSize,
-    setPageSize,
-    saveForLater,
-    completeTest,
-    language,
-  } = useTestStore();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -118,8 +129,20 @@ export const TestPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
       <SEO
-        title="Kuesioner Tes Kepribadian IPIP-NEO-120"
-        description="Jawab 120 item pertanyaan tes kepribadian IPIP-NEO-120 secara online. Dilengkapi keyboard navigation, auto-save, dan progress bar."
+        title={
+          language === 'es'
+            ? 'Cuestionario de Personalidad IPIP-NEO-120'
+            : language === 'en'
+            ? 'IPIP-NEO-120 Personality Assessment Questionnaire'
+            : 'Kuesioner Tes Kepribadian IPIP-NEO-120'
+        }
+        description={
+          language === 'es'
+            ? 'Responde las 120 preguntas de la prueba de personalidad IPIP-NEO-120 en línea. Incluye guardado automático y barra de progreso.'
+            : language === 'en'
+            ? 'Complete the 120 items online. Features auto-save, keyboard navigation, and real-time progress bar.'
+            : 'Jawab 120 item pertanyaan tes kepribadian IPIP-NEO-120 secara online. Dilengkapi keyboard navigation, auto-save, dan progress bar.'
+        }
         path="/test"
         jsonLd={jsonLdData}
       />

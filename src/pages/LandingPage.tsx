@@ -42,12 +42,22 @@ export const LandingPage: React.FC = () => {
     {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
-      name: 'IPIP-NEO-120 Free Personality Test',
+      name:
+        language === 'es'
+          ? 'Test de Personalidad Gratis IPIP-NEO-120'
+          : language === 'en'
+          ? 'IPIP-NEO-120 Free Personality Test'
+          : 'Tes Kepribadian Ilmiah 120 Soal IPIP-NEO-120',
       url: 'https://personality-test.job.web.id/',
       applicationCategory: 'EducationalApplication',
       operatingSystem: 'All',
-      inLanguage: ['en', 'id'],
-      description: 'Tes Kepribadian Ilmiah 120 Soal IPIP-NEO berbasis model Big Five Johnson (2014) untuk mengukur Neuroticism, Extraversion, Openness, Agreeableness, dan Conscientiousness.',
+      inLanguage: ['es', 'en', 'id'],
+      description:
+        language === 'es'
+          ? 'Prueba científica de personalidad de 120 preguntas basada en IPIP-NEO Johnson (2014) para medir Neuroticismo, Extraversión, Apertura, Amabilidad y Responsabilidad.'
+          : language === 'en'
+          ? 'Scientific 120-item IPIP-NEO personality test based on Johnson (2014) Big Five model measuring Neuroticism, Extraversion, Openness, Agreeableness, and Conscientiousness.'
+          : 'Tes Kepribadian Ilmiah 120 Soal IPIP-NEO berbasis model Big Five Johnson (2014) untuk mengukur Neuroticism, Extraversion, Openness, Agreeableness, dan Conscientiousness.',
       offers: {
         '@type': 'Offer',
         price: '0',
@@ -65,26 +75,56 @@ export const LandingPage: React.FC = () => {
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'Apa itu Tes Kepribadian IPIP-NEO-120?',
+          name:
+            language === 'es'
+              ? '¿Qué es el Test de Personalidad IPIP-NEO-120?'
+              : language === 'en'
+              ? 'What is the IPIP-NEO-120 Personality Test?'
+              : 'Apa itu Tes Kepribadian IPIP-NEO-120?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'IPIP-NEO-120 adalah instrumen psikometri ilmiah 120 item yang dikembangkan oleh Dr. John A. Johnson (2014) untuk mengukur 5 domain utama kepribadian (Big Five/OCEAN) dan 30 sub-faset kepribadian secara akurat.',
+            text:
+              language === 'es'
+                ? 'El IPIP-NEO-120 es un instrumento psicométrico científico de 120 ítems desarrollado por el Dr. John A. Johnson (2014) para medir con precisión los 5 dominios principales de la personalidad (Big Five/OCEAN) y 30 subfacetas.'
+                : language === 'en'
+                ? 'The IPIP-NEO-120 is a scientific 120-item psychometric instrument developed by Dr. John A. Johnson (2014) to measure the 5 major personality domains (Big Five/OCEAN) and 30 sub-facets.'
+                : 'IPIP-NEO-120 adalah instrumen psikometri ilmiah 120 item yang dikembangkan oleh Dr. John A. Johnson (2014) untuk mengukur 5 domain utama kepribadian (Big Five/OCEAN) dan 30 sub-faset kepribadian secara akurat.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Berapa lama waktu yang dibutuhkan untuk menyelesaikan tes?',
+          name:
+            language === 'es'
+              ? '¿Cuánto tiempo lleva completar la prueba?'
+              : language === 'en'
+              ? 'How long does it take to complete the test?'
+              : 'Berapa lama waktu yang dibutuhkan untuk menyelesaikan tes?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Pengisian 120 pertanyaan skala Likert biasanya membutuhkan waktu sekitar 10 hingga 15 menit.',
+            text:
+              language === 'es'
+                ? 'Responder a las 120 preguntas en escala Likert toma aproximadamente de 10 a 15 minutos.'
+                : language === 'en'
+                ? 'Completing the 120 Likert-scale items typically takes about 10 to 15 minutes.'
+                : 'Pengisian 120 pertanyaan skala Likert biasanya membutuhkan waktu sekitar 10 hingga 15 menit.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Apakah tes kepribadian IPIP-NEO-120 ini gratis?',
+          name:
+            language === 'es'
+              ? '¿Es gratuito este test de personalidad IPIP-NEO-120?'
+              : language === 'en'
+              ? 'Is this IPIP-NEO-120 personality test free?'
+              : 'Apakah tes kepribadian IPIP-NEO-120 ini gratis?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Ya, tes ini 100% gratis, tanpa pendaftaran wajib, dan memberikan laporan analisis psikometri instan yang dapat diunduh dalam format PDF.',
+            text:
+              language === 'es'
+                ? 'Sí, esta prueba es 100% gratuita, sin registro obligatorio, y proporciona un informe de análisis psicométrico instantáneo descargable en PDF.'
+                : language === 'en'
+                ? 'Yes, this test is 100% free, requires no sign-up, and provides an instant psychometric analysis report downloadable as PDF.'
+                : 'Ya, tes ini 100% gratis, tanpa pendaftaran wajib, dan memberikan laporan analisis psikometri instan yang dapat diunduh dalam format PDF.',
           },
         },
       ],
@@ -96,7 +136,7 @@ export const LandingPage: React.FC = () => {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
+          name: language === 'es' ? 'Inicio' : language === 'en' ? 'Home' : 'Beranda',
           item: 'https://personality-test.job.web.id/',
         },
       ],

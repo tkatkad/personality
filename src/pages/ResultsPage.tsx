@@ -32,16 +32,33 @@ export const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
+  const { currentResult, language, startRetest } = useTestStore();
+
   const jsonLdData = [
     {
       '@context': 'https://schema.org',
       '@type': 'ItemPage',
-      name: 'Laporan Hasil Psikometrik IPIP-NEO-120',
-      description: 'Laporan profil kepribadian Big Five (5 domain utama & 30 sub-faset) berdasarkan normasi Johnson (2014).',
+      name:
+        language === 'es'
+          ? 'Informe de Resultados Psicométricos IPIP-NEO-120'
+          : language === 'en'
+          ? 'IPIP-NEO-120 Psychometric Assessment Report'
+          : 'Laporan Hasil Psikometrik IPIP-NEO-120',
+      description:
+        language === 'es'
+          ? 'Informe del perfil de personalidad Big Five (5 dominios y 30 subfacetas) basado en las normas de Johnson (2014).'
+          : language === 'en'
+          ? 'Big Five personality profile report (5 main domains & 30 sub-facets) based on Johnson (2014) norming data.'
+          : 'Laporan profil kepribadian Big Five (5 domain utama & 30 sub-faset) berdasarkan normasi Johnson (2014).',
       url: `https://personality-test.job.web.id/result/${id || ''}`,
       mainEntity: {
         '@type': 'MedicalWebPage',
-        name: 'Laporan Psikometri Big Five Personality Assessment',
+        name:
+          language === 'es'
+            ? 'Informe Psicométrico de Evaluación de Personalidad Big Five'
+            : language === 'en'
+            ? 'Big Five Personality Assessment Psychometric Report'
+            : 'Laporan Psikometri Big Five Personality Assessment',
         aspect: 'Psychometric Results',
       },
     },
@@ -52,19 +69,18 @@ export const ResultsPage: React.FC = () => {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
+          name: language === 'es' ? 'Inicio' : language === 'en' ? 'Home' : 'Beranda',
           item: 'https://personality-test.job.web.id/',
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Hasil Laporan',
+          name: language === 'es' ? 'Resultados' : language === 'en' ? 'Report Results' : 'Hasil Laporan',
           item: `https://personality-test.job.web.id/result/${id || ''}`,
         },
       ],
     },
   ];
-  const { currentResult, language, startRetest } = useTestStore();
 
   const [result, setResult] = useState<TestResult | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -156,8 +172,20 @@ export const ResultsPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto py-8 space-y-8">
       <SEO
-        title={`Laporan Hasil Psikometri IPIP-NEO-120 – ${result?.id ? result.id.slice(0, 8) : 'Laporan'}`}
-        description="Hasil analisis psikometri kepribadian Big Five (5 domain utama & 30 sub-faset) berdasarkan normasi ilmiah Johnson (2014)."
+        title={
+          language === 'es'
+            ? `Informe Psicométrico IPIP-NEO-120 – ${result?.id ? result.id.slice(0, 8) : 'Informe'}`
+            : language === 'en'
+            ? `IPIP-NEO-120 Psychometric Report – ${result?.id ? result.id.slice(0, 8) : 'Report'}`
+            : `Laporan Hasil Psikometri IPIP-NEO-120 – ${result?.id ? result.id.slice(0, 8) : 'Laporan'}`
+        }
+        description={
+          language === 'es'
+            ? 'Resultados del análisis psicométrico de personalidad Big Five (5 dominios principales y 30 subfacetas) basados en las normas de Johnson (2014).'
+            : language === 'en'
+            ? 'Big Five psychometric personality analysis results (5 core domains & 30 sub-facets) based on Johnson (2014) scientific norming.'
+            : 'Hasil analisis psikometri kepribadian Big Five (5 domain utama & 30 sub-faset) berdasarkan normasi ilmiah Johnson (2014).'
+        }
         path={`/result/${id || ''}`}
         jsonLd={jsonLdData}
       />

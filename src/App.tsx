@@ -15,7 +15,18 @@ import { PrivacyPage } from './pages/PrivacyPage';
 import { useTestStore } from './stores/testStore';
 
 export const App: React.FC = () => {
-  const { theme } = useTestStore();
+  const { theme, language, setLanguage } = useTestStore();
+
+  useEffect(() => {
+    // Check URL query param for ?lang= (es, en, id)
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get('lang');
+    if (urlLang && (urlLang === 'es' || urlLang === 'en' || urlLang === 'id')) {
+      if (urlLang !== language) {
+        setLanguage(urlLang);
+      }
+    }
+  }, [language, setLanguage]);
 
   useEffect(() => {
     if (theme === 'dark') {

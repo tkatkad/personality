@@ -13,9 +13,19 @@ export const RetestPage: React.FC = () => {
     {
       '@context': 'https://schema.org',
       '@type': 'MedicalWebPage',
-      name: 'Studi Test-Retest Stabilitas Kepribadian IPIP-NEO-120',
+      name:
+        language === 'es'
+          ? 'Estudio Test-Retest de Estabilidad de Personalidad IPIP-NEO-120'
+          : language === 'en'
+          ? 'IPIP-NEO-120 Personality Stability Test-Retest Study'
+          : 'Studi Test-Retest Stabilitas Kepribadian IPIP-NEO-120',
       url: 'https://personality-test.job.web.id/retest',
-      description: 'Protokol riset psikometri untuk mengukur stabilitas dan ketahanan profil kepribadian dari waktu ke waktu berbasis UUID terikat.',
+      description:
+        language === 'es'
+          ? 'Protocolo de investigación psicométrica para evaluar la estabilidad temporal de los perfiles de personalidad Big Five.'
+          : language === 'en'
+          ? 'Psychometric research protocol measuring temporal stability and test-retest reliability of Big Five profiles.'
+          : 'Protokol riset psikometri untuk mengukur stabilitas dan ketahanan profil kepribadian dari waktu ke waktu berbasis UUID terikat.',
     },
     {
       '@context': 'https://schema.org',
@@ -24,13 +34,13 @@ export const RetestPage: React.FC = () => {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
+          name: language === 'es' ? 'Inicio' : language === 'en' ? 'Home' : 'Beranda',
           item: 'https://personality-test.job.web.id/',
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Studi Test-Retest',
+          name: language === 'es' ? 'Estudio Test-Retest' : language === 'en' ? 'Test-Retest Study' : 'Studi Test-Retest',
           item: 'https://personality-test.job.web.id/retest',
         },
       ],
@@ -80,8 +90,20 @@ export const RetestPage: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto py-8 space-y-8">
       <SEO
-        title="Studi Test-Retest – IPIP-NEO-120 Personality Test"
-        description="Protokol riset psikometri untuk mengukur stabilitas dan ketahanan profil kepribadian Big Five dari waktu ke waktu berbasis UUID terikat."
+        title={
+          language === 'es'
+            ? 'Estudio Test-Retest – Test de Personalidad IPIP-NEO-120'
+            : language === 'en'
+            ? 'Test-Retest Reliability Study – IPIP-NEO-120 Assessment'
+            : 'Studi Test-Retest – IPIP-NEO-120 Personality Test'
+        }
+        description={
+          language === 'es'
+            ? 'Protocolo de investigación psicométrica para medir la estabilidad de los perfiles Big Five a lo largo del tiempo.'
+            : language === 'en'
+            ? 'Psychometric research protocol evaluating Big Five personality temporal stability based on linked participant UUIDs.'
+            : 'Protokol riset psikometri untuk mengukur stabilitas dan ketahanan profil kepribadian Big Five dari waktu ke waktu berbasis UUID terikat.'
+        }
         path="/retest"
         jsonLd={jsonLdData}
       />

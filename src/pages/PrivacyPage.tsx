@@ -10,9 +10,19 @@ export const PrivacyPage: React.FC = () => {
     {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
-      name: 'Kebijakan Privasi & Etika Data – IPIP-NEO-120',
+      name:
+        language === 'es'
+          ? 'Política de Privacidad y Ética de Datos – IPIP-NEO-120'
+          : language === 'en'
+          ? 'Privacy Policy & Data Ethics – IPIP-NEO-120'
+          : 'Kebijakan Privasi & Etika Data – IPIP-NEO-120',
       url: 'https://personality-test.job.web.id/privacy',
-      description: 'Kebijakan privasi transparan: Zero PII (Personally Identifiable Information), enkripsi anonimitas data, dan etika riset psikometri.',
+      description:
+        language === 'es'
+          ? 'Política de privacidad transparente: Cero datos PII (información de identificación personal), anonimización y ética de investigación psicométrica.'
+          : language === 'en'
+          ? 'Transparent privacy policy: Zero PII (Personally Identifiable Information), anonymous encryption, and psychometric research ethics.'
+          : 'Kebijakan privasi transparan: Zero PII (Personally Identifiable Information), enkripsi anonimitas data, dan etika riset psikometri.',
     },
     {
       '@context': 'https://schema.org',
@@ -21,13 +31,13 @@ export const PrivacyPage: React.FC = () => {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
+          name: language === 'es' ? 'Inicio' : language === 'en' ? 'Home' : 'Beranda',
           item: 'https://personality-test.job.web.id/',
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Kebijakan Privasi',
+          name: language === 'es' ? 'Política de Privacidad' : language === 'en' ? 'Privacy Policy' : 'Kebijakan Privasi',
           item: 'https://personality-test.job.web.id/privacy',
         },
       ],
@@ -37,8 +47,20 @@ export const PrivacyPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto py-8 space-y-8">
       <SEO
-        title="Kebijakan Privasi & Etika Data – IPIP-NEO-120"
-        description="Jaminan privasi anonim tanpa pengumpulan data PII (Zero PII). Penjelasan lengkap penyimpanan data lokal & enkripsi aman."
+        title={
+          language === 'es'
+            ? 'Política de Privacidad y Ética – IPIP-NEO-120'
+            : language === 'en'
+            ? 'Privacy Policy & Data Ethics – IPIP-NEO-120'
+            : 'Kebijakan Privasi & Etika Data – IPIP-NEO-120'
+        }
+        description={
+          language === 'es'
+            ? 'Garantía de privacidad anónima sin recopilación de PII (Cero PII). Almacenamiento seguro y ético para evaluaciones de personalidad.'
+            : language === 'en'
+            ? 'Anonymous privacy guarantee without PII data collection (Zero PII). Full details on secure storage and psychometric data standards.'
+            : 'Jaminan privasi anonim tanpa pengumpulan data PII (Zero PII). Penjelasan lengkap penyimpanan data lokal & enkripsi aman.'
+        }
         path="/privacy"
         jsonLd={jsonLdData}
       />
